@@ -1,6 +1,7 @@
 ﻿using Modules.Customers.Domain.ValueObjects;
 using Shared.Domain.ValueObjects;
 using Shared.Domain;
+using Modules.Customers.Domain.Events;
 
 namespace Modules.Customers.Domain.Entities
 {
@@ -42,7 +43,11 @@ namespace Modules.Customers.Domain.Entities
                                       Address address,
                                       TelephoneNumber telephoneNumber)
         {
-            return new Customer(email, passwordHash, name, lastName, address, telephoneNumber);
+            var customer = new Customer(email, passwordHash, name, lastName, address, telephoneNumber);
+            customer.AddDomainEvent(new CustomerCreatedDomainEvent(customer));
+
+            return customer;
+
         }
 
         internal void SetAddress(Address address)

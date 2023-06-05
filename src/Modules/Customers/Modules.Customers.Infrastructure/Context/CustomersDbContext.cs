@@ -7,6 +7,11 @@ namespace Modules.Customers.Infrastructure.Context
     {
         public DbSet<Customer> Customers { get; set; }
 
+        public CustomersDbContext(DbContextOptions options)
+            : base(options)
+        {
+        }
+
         public async Task<int> SaveChangesAsync()
         {
             return await base.SaveChangesAsync();
