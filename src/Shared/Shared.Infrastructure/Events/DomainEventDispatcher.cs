@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Serilog;
 using Shared.Abstractions.Events;
+using Shared.Infrastructure.Context;
 
 namespace Shared.Infrastructure.Events
 {
