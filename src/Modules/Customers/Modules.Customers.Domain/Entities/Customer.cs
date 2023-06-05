@@ -1,11 +1,6 @@
 ﻿using Modules.Customers.Domain.ValueObjects;
 using Shared.Domain.ValueObjects;
 using Shared.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Modules.Customers.Domain.Entities
 {
@@ -18,7 +13,6 @@ namespace Modules.Customers.Domain.Entities
         public LastName LastName { get; private set; }
         public Address Address { get; private set; }
         public TelephoneNumber TelephoneNumber { get; private set; }
-
         public Roles Role { get; private set; } = Roles.customer;
 
         private Customer()
