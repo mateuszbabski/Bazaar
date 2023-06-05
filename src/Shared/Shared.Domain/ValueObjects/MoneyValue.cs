@@ -1,4 +1,6 @@
-﻿namespace Shared.Domain.ValueObjects
+﻿using Shared.Domain.Rules;
+
+namespace Shared.Domain.ValueObjects
 {
     public record MoneyValue
     {
@@ -15,12 +17,12 @@
         {
             if (new SystemMustAcceptsCurrencyRule(currency).IsBroken() || currency.Length != 3)
             {
-                throw new InvalidProductPriceException("Invalid currency.");
+                //throw new InvalidProductPriceException("Invalid currency.");
             }
 
             if (amount <= 0)
             {
-                throw new InvalidProductPriceException("Money amount value cannot be zero or negative.");
+                //throw new InvalidProductPriceException("Money amount value cannot be zero or negative.");
             }
 
             return new MoneyValue(amount, currency);
