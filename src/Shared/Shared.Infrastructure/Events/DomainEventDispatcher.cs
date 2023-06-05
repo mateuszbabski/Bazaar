@@ -1,16 +1,18 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Shared.Abstractions.Events;
+using Shared.Domain;
 using Shared.Infrastructure.Context;
 
 namespace Shared.Infrastructure.Events
 {
     internal sealed class DomainEventsDispatcher : IDomainEventsDispatcher
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly DbContext _dbContext;
         private readonly IMediator _mediator;
 
-        public DomainEventsDispatcher(ApplicationDbContext dbContext, IMediator mediator)
+        public DomainEventsDispatcher(DbContext dbContext, IMediator mediator)
         {
             _dbContext = dbContext;
             _mediator = mediator;
