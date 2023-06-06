@@ -6,14 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Middleware\" />
-    <Folder Include="Behaviors\" />
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Serilog" Version="2.12.0" />
   </ItemGroup>
 
 	<ItemGroup>
