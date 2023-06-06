@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.Abstractions\Shared.Abstractions.csproj" />
-    <ProjectReference Include="..\..\..\Shared\Shared.Infrastructure\Shared.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules.Customers.Application\Modules.Customers.Application.csproj" />
     <ProjectReference Include="..\Modules.Customers.Domain\Modules.Customers.Domain.csproj" />
   </ItemGroup>

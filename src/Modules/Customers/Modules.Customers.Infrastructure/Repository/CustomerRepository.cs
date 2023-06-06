@@ -17,7 +17,6 @@ namespace Modules.Customers.Infrastructure.Repository
         public async Task<Customer> Add(Customer customer)
         {
             await _dbContext.Customers.AddAsync(customer);
-            await _dbContext.SaveChangesAsync();
 
             return customer;
         }
