@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Shared.Abstractions.Context;
 
 namespace Shared.Infrastructure.Context
 {
@@ -10,6 +11,8 @@ namespace Shared.Infrastructure.Context
             where T : DbContext
         {
             services.AddDbContext<T>(x => x.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IApplicationDbContext>(options => options.GetRequiredService<ApplicationDbContext>());
 
             return services;
         }

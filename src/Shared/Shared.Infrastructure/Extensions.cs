@@ -10,6 +10,8 @@ using Shared.Abstractions.Time;
 using Shared.Infrastructure.Auth;
 using Shared.Infrastructure.Context;
 using Shared.Infrastructure.CurrencyConverters;
+using Shared.Infrastructure.DomainEvents;
+using Shared.Infrastructure.Events;
 using Shared.Infrastructure.Mediation;
 using Shared.Infrastructure.Time;
 using System.Text;
@@ -29,11 +31,12 @@ namespace Shared.Infrastructure
             services.AddSingleton<IHashingService, HashingService>();
 
             services.AddMediation(configuration);
+            services.AddEvents();
+            services.AddDomainEvents();
 
             services.AddHttpClient<ICurrencyConverter, CurrencyConverter>();
             
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IDomainEventsDispatcher, IDomainEventsDispatcher>();
 
             services.AddSqlServerContext<ApplicationDbContext>(configuration);
 
