@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -36,9 +37,9 @@ namespace Shared.Infrastructure
 
             services.AddHttpClient<ICurrencyConverter, CurrencyConverter>();
             
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSqlServerContext<DbContext>(configuration);
 
-            services.AddSqlServerContext<ApplicationDbContext>(configuration);
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAuthentication(opt =>
             {

@@ -12,7 +12,7 @@ namespace Shared.Infrastructure.Context
         {
             services.AddDbContext<T>(x => x.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IApplicationDbContext>(options => options.GetRequiredService<ApplicationDbContext>());
+            //services.AddScoped<IApplicationDbContext>(options => options.GetRequiredService<ApplicationDbContext>());
 
             return services;
         }

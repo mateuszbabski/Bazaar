@@ -9,7 +9,7 @@ namespace Shared.Infrastructure.Events
     {
         public static IServiceCollection AddEvents(this IServiceCollection services)
         {
-            services.AddSingleton<IEventDispatcher, EventDispatcher>();
+            services.AddScoped<IEventDispatcher, EventDispatcher>();
 
             services.Scan(s => s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
                 .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>)))

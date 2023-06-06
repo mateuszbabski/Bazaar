@@ -7,7 +7,8 @@ namespace Shared.Infrastructure.DomainEvents
     {
         public static IServiceCollection AddDomainEvents(this IServiceCollection services)
         {
-            services.AddSingleton<IDomainEventDispatcher, DomainEventDispatcher>();
+            services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
+            services.AddScoped<IDomainEventsAccessor, DomainEventsAccessor>();
 
             services.Scan(s => s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
             .AddClasses(c => c.AssignableTo(typeof(IDomainEventHandler<>)))
