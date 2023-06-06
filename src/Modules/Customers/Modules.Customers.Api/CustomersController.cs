@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Modules.Customers.Application.Commands.SignInCustomerCommand;
 using Modules.Customers.Application.Commands.SignUpCustomerCommand;
-using Shared.Abstractions.Mediation.Commands;
+using Shared.Abstractions.Dispatchers;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Modules.Customers.Api
@@ -11,11 +11,11 @@ namespace Modules.Customers.Api
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly ICommandDispatcher _commandDispatcher;
+        private readonly IDispatcher _dispatcher;
 
-        public CustomersController(ICommandDispatcher commandDispatcher)
+        public CustomersController(IDispatcher dispatcher)
         {
-            _commandDispatcher = commandDispatcher;
+            _dispatcher = dispatcher;
         }
 
         [HttpPost("sign-up")]
@@ -24,7 +24,7 @@ namespace Modules.Customers.Api
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> SignUpAsync([FromBody] SignUpCommand command)
         {
-            await _commandDispatcher.SendAsync(command);
+            await _dispatcher.SendAsync(command);
             return Ok();
         }
 
@@ -34,7 +34,7 @@ namespace Modules.Customers.Api
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> SignInAsync([FromBody] SignInCommand command)
         {
-            await _commandDispatcher.SendAsync(command);
+            await _dispatcher.SendAsync(command);
             return Ok();
         }
     }
