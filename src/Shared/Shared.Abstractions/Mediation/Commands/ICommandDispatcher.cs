@@ -1,6 +1,4 @@
-﻿using Shared.Abstractions.Mediation.Queries;
-
-namespace Shared.Abstractions.Mediation.Commands
+﻿namespace Shared.Abstractions.Mediation.Commands
 {
     public interface ICommandDispatcher
     {

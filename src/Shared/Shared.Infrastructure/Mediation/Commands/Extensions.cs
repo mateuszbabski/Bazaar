@@ -8,8 +8,10 @@ namespace Shared.Infrastructure.Mediation.Commands
         public static IServiceCollection AddCommands(this IServiceCollection services)
         {
             services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
-            services.Scan(s => s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
-                .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
+
+            // get from another assembly interface
+            services.Scan(s => s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies().ToList())
+                .AddClasses(c => c.AssignableToAny(typeof(ICommandHandler<>), typeof(ICommandHandler<,>)))
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 

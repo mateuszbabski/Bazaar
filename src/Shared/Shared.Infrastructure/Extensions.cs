@@ -6,11 +6,12 @@ using Microsoft.IdentityModel.Tokens;
 using Shared.Abstractions.Auth;
 using Shared.Abstractions.Context;
 using Shared.Abstractions.CurrencyConverters;
-using Shared.Abstractions.Events;
+using Shared.Abstractions.Dispatchers;
 using Shared.Abstractions.Time;
 using Shared.Infrastructure.Auth;
 using Shared.Infrastructure.Context;
 using Shared.Infrastructure.CurrencyConverters;
+using Shared.Infrastructure.Dispatchers;
 using Shared.Infrastructure.DomainEvents;
 using Shared.Infrastructure.Events;
 using Shared.Infrastructure.Mediation;
@@ -39,6 +40,7 @@ namespace Shared.Infrastructure
             
             services.AddSqlServerContext<DbContext>(configuration);
 
+            services.AddScoped<IDispatcher, Dispatcher>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAuthentication(opt =>
