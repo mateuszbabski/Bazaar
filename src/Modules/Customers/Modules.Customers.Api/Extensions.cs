@@ -10,7 +10,7 @@ namespace Modules.Customers.Api
         public static IServiceCollection AddCustomersModule(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddCustomersInfrastructure(configuration);
-            services.AddCustomersApplication(configuration);
+            services.AddCustomersApplication();
 
             return services;
         }
