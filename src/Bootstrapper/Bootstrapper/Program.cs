@@ -1,3 +1,4 @@
+using Bootstrapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -36,6 +37,7 @@ builder.Services.AddSwaggerGen((setup =>
     });
 }));
 
+builder.Services.AddModules(builder.Configuration);
 
 //builder.Host.UseSerilog((context, configuration) =>
 //    configuration.ReadFrom.Configuration(context.Configuration));

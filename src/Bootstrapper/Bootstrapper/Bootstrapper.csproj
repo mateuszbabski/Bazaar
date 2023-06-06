@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Modules\Customers\Modules.Customers.Api\Modules.Customers.Api.csproj" />
+    <ProjectReference Include="..\..\Modules\Customers\Modules.Customers.Application\Modules.Customers.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\Customers\Modules.Customers.Domain\Modules.Customers.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\Customers\Modules.Customers.Infrastructure\Modules.Customers.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Shared\Shared.Infrastructure\Shared.Infrastructure.csproj" />
   </ItemGroup>
 
