@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Customers.Application.Commands.SignInCustomerCommand;
 using Modules.Customers.Application.Commands.SignUpCustomerCommand;
 using Shared.Abstractions.Dispatchers;
+using Shared.Abstractions.Mediation.Commands;
+using Shared.Application.Auth;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Modules.Customers.Api
@@ -11,31 +14,31 @@ namespace Modules.Customers.Api
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly IDispatcher _dispatcher;
+        private readonly IMediator _mediator;
 
-        public CustomersController(IDispatcher dispatcher)
+        public CustomersController(IMediator mediator)
         {
-            _dispatcher = dispatcher;
+            _mediator = mediator;
         }
 
         [HttpPost("sign-up")]
         [SwaggerOperation("Sign up")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> SignUpAsync([FromBody] SignUpCommand command)
+        public async Task<ActionResult<AuthenticationResult>> SignUpAsync(SignUpCommand command)
         {
-            await _dispatcher.SendAsync(command);
-            return Ok();
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpPost("sign-in")]
         [SwaggerOperation("Sign in")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> SignInAsync([FromBody] SignInCommand command)
+        public async Task<ActionResult<AuthenticationResult>> SignInAsync(SignInCommand command)
         {
-            await _dispatcher.SendAsync(command);
-            return Ok();
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }

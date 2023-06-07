@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Modules.Customers.Domain.Repositories;
 using Modules.Customers.Infrastructure.Context;
 using Modules.Customers.Infrastructure.Repository;
+using Shared.Infrastructure.UnitOfWork;
 
 namespace Modules.Customers.Infrastructure
 {
@@ -17,6 +18,7 @@ namespace Modules.Customers.Infrastructure
             });
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddUnitOfWork<CustomersUnitOfWork>();
 
             return services;
         }

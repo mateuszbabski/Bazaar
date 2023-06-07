@@ -1,15 +1,15 @@
 ﻿using FluentValidation;
+using MediatR;
 using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
 using Shared.Abstractions.Auth;
-using Shared.Abstractions.Context;
-using Shared.Abstractions.Mediation.Commands;
+using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
 using Shared.Domain.ValueObjects;
 
 namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
 {
-    internal sealed class SignUpCommandHandler : ICommandHandler<SignUpCommand, AuthenticationResult>
+    internal sealed class SignUpCommandHandler : IRequestHandler<SignUpCommand, AuthenticationResult>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly ITokenManager _tokenManager;
@@ -27,16 +27,17 @@ namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<AuthenticationResult> HandleAsync(SignUpCommand command, CancellationToken cancellationToken)
+        public async Task<AuthenticationResult> Handle(SignUpCommand command, CancellationToken cancellationToken)
         {
-            var validator = new SignUpValidator();
-            validator.ValidateAndThrow(command);
-
-            var emailCheck = _customerRepository.GetCustomerByEmail(command.Email);
+            var emailCheck = await _customerRepository.GetCustomerByEmail(command.Email);
             if (emailCheck != null)
             {
                 throw new Exception("Email in use");
             }
+
+            var validator = new SignUpValidator();
+            validator.ValidateAndThrow(command);
+
             //await CheckIfEmailIsFreeToUse(command.Email);
 
             var passwordHash = _hashingService.GenerateHashPassword(command.Password);

@@ -11,7 +11,7 @@ namespace Modules.Customers.Api
         {
             services.AddCustomersInfrastructure(configuration);
             services.AddCustomersApplication();
-
+            
             return services;
         }
     }

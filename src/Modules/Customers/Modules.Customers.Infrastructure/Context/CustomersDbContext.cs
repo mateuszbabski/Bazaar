@@ -7,7 +7,7 @@ namespace Modules.Customers.Infrastructure.Context
     {
         public DbSet<Customer> Customers { get; set; }
 
-        public CustomersDbContext(DbContextOptions options)
+        public CustomersDbContext(DbContextOptions<CustomersDbContext> options)
             : base(options)
         {
         }
