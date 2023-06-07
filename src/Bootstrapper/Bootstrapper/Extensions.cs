@@ -1,17 +1,25 @@
 ﻿using Shared.Application;
 using Shared.Infrastructure;
 using Modules.Customers.Api;
+using Shared.Infrastructure.Modules;
+using System.Reflection;
 
 namespace Bootstrapper
 {
     public static class Extensions
     {
-        public static IServiceCollection AddModules(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddModules(this IServiceCollection services,
+                                                        IConfiguration configuration)
         {
-            services.AddCustomersModule(configuration);
+            var assemblies = ModuleLoader.LoadAssemblies(configuration, "Bazaar.Modules.");
+            var modules = ModuleLoader.LoadModules(assemblies);
 
-            services.AddSharedInfrastructure(configuration);
+            var arrayAssemblies = assemblies.ToArray<Assembly>();
+
+            services.AddSharedInfrastructure(configuration, arrayAssemblies);
             services.AddSharedApplication(configuration);   
+
+            services.AddCustomersModule(configuration);
 
             return services;
         }
