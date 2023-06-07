@@ -10,16 +10,17 @@ namespace Shared.Infrastructure.Mediation.Queries
         public QueryDispatcher(IServiceProvider serviceProvider)
             => _serviceProvider = serviceProvider;
 
+        //public async Task<TResult> QueryAsync<TQuery, TResult>(TQuery query, CancellationToken cancellationToken = default) 
+        //    where TQuery : IQuery<TResult>
+        //{
+        //    var handler = _serviceProvider.GetRequiredService<IQueryHandler<IQuery<TResult>, TResult>>();
+        //    return await handler.HandleAsync(query, cancellationToken);
+        //}
+
         public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken = default)
         {
-            using var scope = _serviceProvider.CreateScope();
-            var handlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResult));
-            var handler = scope.ServiceProvider.GetRequiredService(handlerType);
-            var method = handlerType.GetMethod(nameof(IQueryHandler<IQuery<TResult>, TResult>.HandleAsync)) 
-                ?? throw new InvalidOperationException($"Query handler for '{typeof(TResult).Name}' is invalid.");
-
-            // ReSharper disable once PossibleNullReferenceException
-            return await (Task<TResult>)method.Invoke(handler, new object[] { query, cancellationToken });
+            var handler = _serviceProvider.GetRequiredService<IQueryHandler<IQuery<TResult>, TResult>>();
+            return await handler.HandleAsync(query, cancellationToken);
         }
     }
 }

@@ -4,25 +4,25 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Abstractions.Auth;
-using Shared.Abstractions.Context;
 using Shared.Abstractions.CurrencyConverters;
-using Shared.Abstractions.Dispatchers;
 using Shared.Abstractions.Time;
+using Shared.Abstractions.UnitOfWork;
 using Shared.Infrastructure.Auth;
-using Shared.Infrastructure.Context;
 using Shared.Infrastructure.CurrencyConverters;
-using Shared.Infrastructure.Dispatchers;
 using Shared.Infrastructure.DomainEvents;
 using Shared.Infrastructure.Events;
-using Shared.Infrastructure.Mediation;
 using Shared.Infrastructure.Time;
+using Shared.Infrastructure.UnitOfWork;
+using System.Reflection;
 using System.Text;
 
 namespace Shared.Infrastructure
 {
     public static class Extensions
     {
-        public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services,
+                                                                 IConfiguration configuration,
+                                                                 params Assembly[] assemblies)
         {
             var jwtSettings = new JwtSettings();
             configuration.GetSection("JwtSettings").Bind(jwtSettings);
@@ -32,16 +32,26 @@ namespace Shared.Infrastructure
             services.AddSingleton<ITokenManager, TokenManager>();
             services.AddSingleton<IHashingService, HashingService>();
 
-            services.AddMediation(configuration);
-            services.AddEvents();
-            services.AddDomainEvents();
+            services.AddMediatR(configuration =>
+                configuration.RegisterServicesFromAssemblies(assemblies));
+
+            
+            //services.AddCommands();
+            //services.AddQueries();
+            services.AddEvents(assemblies);
+            services.AddDomainEvents(assemblies);
+            //services.TryAddSingleton<IDispatcher, Dispatcher>();
+
+            //services.AddDbContext<DbContext>(options =>
+            //{
+            //    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            //});
+
+            services.AddUnitOfWork();
+
+            services.AddSingleton(new UnitOfWorkTypeRegistry());
 
             services.AddHttpClient<ICurrencyConverter, CurrencyConverter>();
-            
-            services.AddSqlServerContext<DbContext>(configuration);
-
-            services.AddScoped<IDispatcher, Dispatcher>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAuthentication(opt =>
             {

@@ -1,10 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Shared.Abstractions.DomainEvents;
 using Shared.Domain;
-using static System.Formats.Asn1.AsnWriter;
-using System.Threading;
 
 namespace Shared.Infrastructure.DomainEvents
 {
@@ -39,6 +36,7 @@ namespace Shared.Infrastructure.DomainEvents
             _domainEventsAccessor.ClearAllDomainEvents();
 
             using var scope = _serviceProvider.CreateScope();
+
             foreach (var domainEvent in domainEvents)
             {
                 var handlerType = typeof(IDomainEventHandler<>).MakeGenericType(domainEvent.GetType());
@@ -47,6 +45,8 @@ namespace Shared.Infrastructure.DomainEvents
                 var tasks = handlers.Select(x => (Task)handlerType
                 .GetMethod(nameof(IDomainEventHandler<IDomainEvent>.HandleAsync))
                     ?.Invoke(x, new object[] { domainEvent, cancellationToken }));
+
+                Log.Information("Domain event: {@event}", domainEvent);
 
                 await Task.WhenAll(tasks);
             }    

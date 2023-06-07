@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shared.Abstractions.Context;
 using Shared.Abstractions.DomainEvents;
-using Shared.Abstractions.Events;
+using Shared.Abstractions.UnitOfWork;
 
-namespace Shared.Infrastructure.Context
+namespace Shared.Infrastructure.UnitOfWork
 {
-    internal sealed class UnitOfWork : IUnitOfWork
+    internal class UnitOfWork : IUnitOfWork
     {
         private readonly DbContext _dbContext;
         private readonly IDomainEventDispatcher _domainEventDispatcher;

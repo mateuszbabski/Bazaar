@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shared.Abstractions.Mediation.Commands;
 
 namespace Shared.Infrastructure.Mediation.Commands
@@ -7,13 +8,18 @@ namespace Shared.Infrastructure.Mediation.Commands
     {
         public static IServiceCollection AddCommands(this IServiceCollection services)
         {
-            services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
+            services.TryAddSingleton<ICommandDispatcher, CommandDispatcher>();
 
-            // get from another assembly interface
-            services.Scan(s => s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies().ToList())
-                .AddClasses(c => c.AssignableToAny(typeof(ICommandHandler<>), typeof(ICommandHandler<,>)))
-                .AsImplementedInterfaces()
-                .WithScopedLifetime());
+            services.Scan(selector =>
+            {
+                selector.FromCallingAssembly()
+                        .AddClasses(filter =>
+                        {
+                            filter.AssignableTo(typeof(ICommandHandler<,>));
+                        })
+                        .AsImplementedInterfaces()
+                        .WithSingletonLifetime();
+            });
 
             return services;
         }
