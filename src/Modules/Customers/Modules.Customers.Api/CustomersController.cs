@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Customers.Application.Commands.SignInCustomerCommand;
 using Modules.Customers.Application.Commands.SignUpCustomerCommand;
-using Shared.Abstractions.Dispatchers;
-using Shared.Abstractions.Mediation.Commands;
 using Shared.Application.Auth;
 using Swashbuckle.AspNetCore.Annotations;
 

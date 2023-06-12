@@ -21,6 +21,11 @@ namespace Modules.Customers.Infrastructure.Repository
             return customer;
         }
 
+        public async Task Commit()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<Customer> GetCustomerByEmail(string email)
         {
             return await _dbContext.Customers.FirstOrDefaultAsync(c => c.Email == email);

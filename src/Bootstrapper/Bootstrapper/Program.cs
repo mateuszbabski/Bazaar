@@ -1,6 +1,7 @@
 using Bootstrapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using Shared.Application.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,8 +40,8 @@ builder.Services.AddSwaggerGen((setup =>
 
 builder.Services.AddModules(builder.Configuration);
 
-//builder.Host.UseSerilog((context, configuration) =>
-    //configuration.ReadFrom.Configuration(context.Configuration));
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
 
 var app = builder.Build();
 
@@ -50,7 +51,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseSerilogRequestLogging();
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 

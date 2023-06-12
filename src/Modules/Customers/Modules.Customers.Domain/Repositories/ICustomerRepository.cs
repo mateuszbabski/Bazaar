@@ -8,5 +8,6 @@ namespace Modules.Customers.Domain.Repositories
         Task<Customer> Add(Customer customer);
         Task<Customer> GetCustomerByEmail(string email);
         Task<Customer> GetCustomerById(CustomerId id);
+        Task Commit();
     }
 }

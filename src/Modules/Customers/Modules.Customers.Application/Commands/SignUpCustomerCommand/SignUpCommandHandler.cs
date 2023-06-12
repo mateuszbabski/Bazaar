@@ -3,6 +3,7 @@ using MediatR;
 using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
 using Shared.Abstractions.Auth;
+using Shared.Abstractions.DomainEvents;
 using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
 using Shared.Domain.ValueObjects;
@@ -14,17 +15,17 @@ namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
         private readonly ICustomerRepository _customerRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHashingService _hashingService;
-        private readonly ICustomersUnitOfWork _unitOfWork;
+        private readonly IDomainEventDispatcher _domainEventDispatcher;
 
         public SignUpCommandHandler(ICustomerRepository customerRepository,
                                     ITokenManager tokenManager,
                                     IHashingService hashingService,
-                                    ICustomersUnitOfWork unitOfWork)
+                                    IDomainEventDispatcher<Customer> domainEventDispatcher)
         {
             _customerRepository = customerRepository;
             _tokenManager = tokenManager;
             _hashingService = hashingService;
-            _unitOfWork = unitOfWork;
+            _domainEventDispatcher = domainEventDispatcher;
         }
 
         public async Task<AuthenticationResult> Handle(SignUpCommand command, CancellationToken cancellationToken)
@@ -52,7 +53,9 @@ namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
 
             await _customerRepository.Add(customer);
 
-            await _unitOfWork.CommitAsync();
+            await _customerRepository.Commit();
+
+            await _domainEventDispatcher.DispatchDomainEventsAsync(customer, cancellationToken);            
 
             var token = _tokenManager.GenerateToken(customer.Id, customer.Email, customer.Role);
 
