@@ -14,12 +14,5 @@ namespace Shared.Infrastructure.UnitOfWork
 
             return services;
         }
-
-        public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
-        {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            return services;
-        }
     }
 }
