@@ -10,7 +10,8 @@ namespace Shared.Infrastructure.Events
         public EventDispatcher(IServiceProvider serviceProvider)
             => _serviceProvider = serviceProvider;
 
-        public async Task PublishAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : class, IEvent
+        public async Task PublishAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default)
+            where TEvent : class, IEvent
         {
             using var scope = _serviceProvider.CreateScope();
             var handlers = scope.ServiceProvider.GetServices<IEventHandler<TEvent>>();

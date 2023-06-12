@@ -8,4 +8,8 @@ namespace Shared.Abstractions.DomainEvents
 
         void ClearAllDomainEvents();
     }
+
+    public interface IDomainEventsAccessor<T> : IDomainEventsAccessor
+    {
+    }
 }
