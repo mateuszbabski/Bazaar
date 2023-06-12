@@ -3,7 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Customers.Domain.Repositories;
 using Modules.Customers.Infrastructure.Context;
+using Modules.Customers.Infrastructure.DomainEvents;
 using Modules.Customers.Infrastructure.Repository;
+using Shared.Infrastructure.DomainEvents;
 using Shared.Infrastructure.UnitOfWork;
 
 namespace Modules.Customers.Infrastructure
@@ -18,6 +20,7 @@ namespace Modules.Customers.Infrastructure
             });
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddDomainEventsAccessor<CustomersDomainEventsAccessor>();
             services.AddUnitOfWork<CustomersUnitOfWork>();
 
             return services;
