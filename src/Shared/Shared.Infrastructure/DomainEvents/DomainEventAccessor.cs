@@ -4,11 +4,11 @@ using Shared.Domain;
 
 namespace Shared.Infrastructure.DomainEvents
 {
-    public class DomainEventsAccessor : IDomainEventsAccessor
+    public class DomainEventsAccessor<T> : IDomainEventsAccessor where T : DbContext
     {
-        private readonly DbContext _dbContext;
+        private readonly T _dbContext;
 
-        public DomainEventsAccessor(DbContext dbContext)
+        public DomainEventsAccessor(T dbContext)
         {
             _dbContext = dbContext;
         }
