@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using Modules.Customers.Domain.Repositories;
 using Shared.Abstractions.Auth;
-using Shared.Abstractions.Mediation.Commands;
 using Shared.Application.Auth;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Modules.Customers.Application.Commands.SignInCustomerCommand
 {
-    internal sealed class SignInCommandHandler : ICommandHandler<SignInCommand, AuthenticationResult>
+    internal sealed class SignInCommandHandler : IRequestHandler<SignInCommand, AuthenticationResult>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly ITokenManager _tokenManager;
@@ -20,7 +20,8 @@ namespace Modules.Customers.Application.Commands.SignInCustomerCommand
             _tokenManager = tokenManager;
             _hashingService = hashingService;
         }
-        public async Task<AuthenticationResult> HandleAsync(SignInCommand command, CancellationToken cancellationToken = default)
+
+        public async Task<AuthenticationResult> Handle(SignInCommand command, CancellationToken cancellationToken)
         {
             var customer = await _customerRepository.GetCustomerByEmail(command.Email) ?? throw new Exception("Email not found");
 

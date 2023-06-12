@@ -1,10 +1,10 @@
-﻿using Shared.Abstractions.Mediation.Commands;
+﻿using MediatR;
 using Shared.Application.Auth;
 using System.ComponentModel.DataAnnotations;
 
 namespace Modules.Customers.Application.Commands.SignInCustomerCommand
 {
-    public class SignInCommand : ICommand<AuthenticationResult>
+    public class SignInCommand : IRequest<AuthenticationResult>
     {
         [Required]
         [EmailAddress]

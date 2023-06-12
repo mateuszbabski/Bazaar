@@ -14,12 +14,12 @@ namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
         private readonly ICustomerRepository _customerRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHashingService _hashingService;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICustomersUnitOfWork _unitOfWork;
 
         public SignUpCommandHandler(ICustomerRepository customerRepository,
                                     ITokenManager tokenManager,
                                     IHashingService hashingService,
-                                    IUnitOfWork unitOfWork)
+                                    ICustomersUnitOfWork unitOfWork)
         {
             _customerRepository = customerRepository;
             _tokenManager = tokenManager;
