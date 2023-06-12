@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Abstractions.Auth;
 using Shared.Abstractions.CurrencyConverters;
 using Shared.Abstractions.Time;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Infrastructure.Auth;
 using Shared.Infrastructure.CurrencyConverters;
 using Shared.Infrastructure.DomainEvents;
@@ -35,21 +33,11 @@ namespace Shared.Infrastructure
             services.AddMediatR(configuration =>
                 configuration.RegisterServicesFromAssemblies(assemblies));
 
-            
-            //services.AddCommands();
-            //services.AddQueries();
             services.AddEvents(assemblies);
-            services.AddDomainEvents(assemblies);
-            //services.TryAddSingleton<IDispatcher, Dispatcher>();
-
-            //services.AddDbContext<DbContext>(options =>
-            //{
-            //    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-            //});
-
-            services.AddUnitOfWork();
+            services.AddDomainEventsDispatcher(assemblies);                      
 
             services.AddSingleton(new UnitOfWorkTypeRegistry());
+            services.AddSingleton(new DomainEventsTypeRegistry());
 
             services.AddHttpClient<ICurrencyConverter, CurrencyConverter>();
 

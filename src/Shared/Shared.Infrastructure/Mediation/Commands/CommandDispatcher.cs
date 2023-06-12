@@ -17,9 +17,9 @@ namespace Shared.Infrastructure.Mediation.Commands
         //    return await handler.HandleAsync(command, cancellationToken);
         //}
 
-        public async Task<TResult> SendAsync<TResult>(ICommand<TResult> command, CancellationToken cancellationToken = default)
+        public async Task<TResult> SendAsync<TResult>(IRequest<TResult> command, CancellationToken cancellationToken = default)
         {
-            var handler = _serviceProvider.GetRequiredService<ICommandHandler<ICommand<TResult>, TResult>>();
+            var handler = _serviceProvider.GetRequiredService<ICommandHandler<IRequest<TResult>, TResult>>();
             return await handler.HandleAsync(command, cancellationToken);
         }
     }

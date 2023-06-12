@@ -26,7 +26,7 @@ namespace Shared.Infrastructure.Dispatchers
             return result;
         }
 
-        public async Task<TResult> SendAsync<TResult>(ICommand<TResult> command, CancellationToken cancellationToken = default)
+        public async Task<TResult> SendAsync<TResult>(IRequest<TResult> command, CancellationToken cancellationToken = default)
         {
             var result = await _commandDispatcher.SendAsync(command, cancellationToken);
             return result;
