@@ -15,17 +15,17 @@ namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
         private readonly ICustomerRepository _customerRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHashingService _hashingService;
-        private readonly IDomainEventDispatcher _domainEventDispatcher;
+        private readonly IUnitOfWork _unitOfWork;
 
         public SignUpCommandHandler(ICustomerRepository customerRepository,
                                     ITokenManager tokenManager,
                                     IHashingService hashingService,
-                                    IDomainEventDispatcher<Customer> domainEventDispatcher)
+                                    IUnitOfWork unitOfWork)
         {
             _customerRepository = customerRepository;
             _tokenManager = tokenManager;
             _hashingService = hashingService;
-            _domainEventDispatcher = domainEventDispatcher;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<AuthenticationResult> Handle(SignUpCommand command, CancellationToken cancellationToken)
@@ -53,9 +53,7 @@ namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
 
             await _customerRepository.Add(customer);
 
-            await _customerRepository.Commit();
-
-            await _domainEventDispatcher.DispatchDomainEventsAsync(customer, cancellationToken);            
+            await _unitOfWork.CommitAndDispatchEventsAsync();          
 
             var token = _tokenManager.GenerateToken(customer.Id, customer.Email, customer.Role);
 
