@@ -1,7 +1,10 @@
-﻿namespace Shared.Abstractions.UnitOfWork
+﻿using Shared.Domain;
+
+namespace Shared.Abstractions.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        Task<int> CommitAsync();
+        Task<int> CommitChangesAsync();
+        Task CommitAndDispatchEventsAsync();
     }
 }

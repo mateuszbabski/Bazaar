@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shared.Abstractions.DomainEvents;
 using Shared.Abstractions.UnitOfWork;
+using Shared.Domain;
 
 namespace Shared.Infrastructure.UnitOfWork
 {
@@ -15,9 +16,14 @@ namespace Shared.Infrastructure.UnitOfWork
             _domainEventDispatcher = domainEventDispatcher;
         }
 
-        public async Task<int> CommitAsync()
+        public async Task CommitAndDispatchEventsAsync()
         {
-            await _domainEventDispatcher.DispatchEventAsync();
+            await _dbContext.SaveChangesAsync();
+            await _domainEventDispatcher.DispatchDomainEventsAsync();
+        }
+
+        public async Task<int> CommitChangesAsync()
+        {
             return await _dbContext.SaveChangesAsync();
         }
     }
