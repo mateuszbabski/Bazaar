@@ -10,8 +10,6 @@ namespace Shared.Domain
 
         protected void AddDomainEvent(IDomainEvent domainEvent)
         {
-            //_domainEvents ??= new List<IDomainEvent>();
-
             _domainEvents.Add(domainEvent);
         }
 
