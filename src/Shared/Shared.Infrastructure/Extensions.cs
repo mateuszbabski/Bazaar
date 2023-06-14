@@ -11,6 +11,7 @@ using Shared.Infrastructure.DomainEvents;
 using Shared.Infrastructure.Events;
 using Shared.Infrastructure.Time;
 using Shared.Infrastructure.UnitOfWork;
+using Shared.Infrastructure.UserServices;
 using System.Reflection;
 using System.Text;
 
@@ -32,6 +33,9 @@ namespace Shared.Infrastructure
 
             services.AddMediatR(configuration =>
                 configuration.RegisterServicesFromAssemblies(assemblies));
+
+            services.AddHttpContextAccessor();
+            services.AddCurrentUserProvider();
 
             services.AddEvents(assemblies);
             services.AddDomainEventsDispatcher(assemblies);                      
