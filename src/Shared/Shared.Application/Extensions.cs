@@ -9,7 +9,7 @@ namespace Shared.Application
         public static IServiceCollection AddSharedApplication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<GlobalExceptionHandlerMiddleware>();
-
+            
             return services;
         }
     }

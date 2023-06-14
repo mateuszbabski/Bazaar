@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Customers.Application.Commands.SignInCustomerCommand;
 using Modules.Customers.Application.Commands.SignUpCustomerCommand;
+using Modules.Customers.Application.Dtos;
+using Modules.Customers.Application.Queries.GetCustomerById;
 using Shared.Application.Auth;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -36,6 +38,16 @@ namespace Modules.Customers.Api
         public async Task<ActionResult<AuthenticationResult>> SignInAsync(SignInCommand command)
         {
             var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpGet("get-customer")]
+        [SwaggerOperation("Get customer")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<CustomerDto>> GetCustomerAsync([FromQuery] GetCustomerByIdQuery query)
+        {
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
     }

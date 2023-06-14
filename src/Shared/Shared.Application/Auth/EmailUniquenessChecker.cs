@@ -1,9 +1,10 @@
 ﻿//namespace Shared.Infrastructure.Auth
 //{
-//    internal sealed class EmailUniquenessChecker
+//    internal sealed class EmailUniquenessChecker : IEmailUniquenessChecker
 //    {
 //        private readonly ICustomerRepository _customerRepository;
 //        private readonly IShopRepository _shopRepository;
+
 //        public EmailUniquenessChecker(ICustomerRepository customerRepository,
 //                                      IShopRepository shopRepository)
 //        {
@@ -18,7 +19,7 @@
 //            var shop = await _shopRepository.GetShopByEmail(email);
 
 //            if (customer != null || shop != null)
-//                throw new Exception("Email cannot be used");
+//                throw new BadRequestException("Email cannot be used");
 //            return true;
 //        }
 //    }

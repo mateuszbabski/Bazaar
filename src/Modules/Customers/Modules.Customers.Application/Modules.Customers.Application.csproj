@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Exceptions\" />
-    <Folder Include="Queries\" />
+    <Folder Include="Queries\GetDetailedCustomerById\" />
   </ItemGroup>
 
     <ItemGroup>
