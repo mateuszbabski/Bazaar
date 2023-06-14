@@ -18,8 +18,8 @@ namespace Shared.Infrastructure.UnitOfWork
 
         public async Task CommitAndDispatchEventsAsync()
         {
-            await _dbContext.SaveChangesAsync();
             await _domainEventDispatcher.DispatchDomainEventsAsync();
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<int> CommitChangesAsync()

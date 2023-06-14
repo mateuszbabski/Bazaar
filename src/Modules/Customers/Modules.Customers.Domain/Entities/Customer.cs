@@ -50,6 +50,30 @@ namespace Modules.Customers.Domain.Entities
 
         }
 
+        public void UpdateCustomerDetails(string name,
+                                          string lastName,
+                                          string country,
+                                          string city,
+                                          string street,
+                                          string postalCode,
+                                          string telephoneNumber)
+        {
+            var addressParams = new List<string>()
+            {
+                country, city, street, postalCode
+            };
+
+            if (addressParams.All(c => !string.IsNullOrEmpty(c)))
+            {
+                var newShopAddress = Address.CreateAddress(country, city, street, postalCode);
+                SetAddress(newShopAddress);
+            }
+
+            SetName(name);
+            SetLastName(lastName);
+            SetTelephoneNumber(telephoneNumber);
+        }
+
         internal void SetAddress(Address address)
         {
             if (address is not null)
