@@ -2,7 +2,7 @@
 using Modules.Customers.Domain.Repositories;
 using Shared.Abstractions.Auth;
 using Shared.Application.Auth;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Shared.Application.Exceptions;
 
 namespace Modules.Customers.Application.Commands.SignInCustomerCommand
 {
@@ -23,11 +23,12 @@ namespace Modules.Customers.Application.Commands.SignInCustomerCommand
 
         public async Task<AuthenticationResult> Handle(SignInCommand command, CancellationToken cancellationToken)
         {
-            var customer = await _customerRepository.GetCustomerByEmail(command.Email) ?? throw new Exception("Email not found");
+            var customer = await _customerRepository.GetCustomerByEmail(command.Email) 
+                ?? throw new BadRequestException("Invalid email or password");
 
             if (!_hashingService.ValidatePassword(command.Password, customer.PasswordHash))
             {
-                throw new Exception("Invalid password");
+                throw new BadRequestException("Invalid email or password");
             }
 
             var token = _tokenManager.GenerateToken(customer.Id, customer.Email, customer.Role);

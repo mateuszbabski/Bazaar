@@ -1,15 +1,11 @@
-﻿using Bazaar.Modules.Customers.Tests.Unit.Domain;
-using FluentValidation;
-using Modules.Customers.Application.Commands.SignUpCustomerCommand;
+﻿using Modules.Customers.Application.Commands.SignUpCustomerCommand;
 using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
 using Moq;
 using Shared.Abstractions.Auth;
 using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
-using Shared.Domain.Exceptions;
 using Shared.Domain.ValueObjects;
-using System.ComponentModel.DataAnnotations;
 
 namespace Bazaar.Modules.Customers.Tests.Unit.Application
 {
@@ -20,7 +16,6 @@ namespace Bazaar.Modules.Customers.Tests.Unit.Application
         private readonly Mock<ITokenManager> _tokenManagerMock = new();
         private readonly Mock<IHashingService> _hashingServiceMock = new();
         private readonly Mock<IUnitOfWork> _unitOfWorkMock = new();
-        private readonly Mock<SignUpValidator> _validatorMock = new();
 
         public SIgnUpCustomerCommandTest()
         {
