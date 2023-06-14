@@ -6,6 +6,7 @@ using Shared.Abstractions.Auth;
 using Shared.Abstractions.DomainEvents;
 using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
+using Shared.Application.Exceptions;
 using Shared.Domain.ValueObjects;
 
 namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
@@ -15,7 +16,7 @@ namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
         private readonly ICustomerRepository _customerRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHashingService _hashingService;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;        
 
         public SignUpCommandHandler(ICustomerRepository customerRepository,
                                     ITokenManager tokenManager,
@@ -33,7 +34,7 @@ namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
             var emailCheck = await _customerRepository.GetCustomerByEmail(command.Email);
             if (emailCheck != null)
             {
-                throw new Exception("Email in use");
+                throw new BadRequestException("Email in use");
             }
 
             var validator = new SignUpValidator();
