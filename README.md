@@ -46,9 +46,9 @@ $ dotnet restore
 
 #### Update appsettings.json 
 
-#### Create empty database, create migration and update database
+#### Create empty database, create migration for each module and update database
 
-#### Set API Layer as startup project
+#### Set Bootstrapper Layer as startup project
 
 #### Run application
 ```
