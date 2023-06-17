@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules.Shops.Application\Modules.Shops.Application.csproj" />
+    <ProjectReference Include="..\Modules.Shops.Domain\Modules.Shops.Domain.csproj" />
+    <ProjectReference Include="..\Modules.Shops.Infrastructure\Modules.Shops.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
