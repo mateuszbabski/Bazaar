@@ -9,7 +9,7 @@ namespace Modules.Shops.Api
     {
         public static IServiceCollection AddShopsModule(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddShopsInfrastructure();
+            services.AddShopsInfrastructure(configuration);
             services.AddShopsApplication();
 
             return services;

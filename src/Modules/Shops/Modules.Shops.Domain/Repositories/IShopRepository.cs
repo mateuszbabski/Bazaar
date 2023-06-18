@@ -9,5 +9,6 @@ namespace Modules.Shops.Domain.Repositories
         Task<Shop> GetShopByEmail(string email);
         Task<Shop> GetShopById(ShopId id);
         Task<IEnumerable<Shop>> GetAllShops();
+        Task Commit();
     }
 }
