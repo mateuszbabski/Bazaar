@@ -56,8 +56,25 @@ $ dotnet run
 ```
 
 ## Features
-Copied from other readme - to be rewritten:
 
+### Customers module:
+- Creating an account
+- Sign in
+- Emitting domain events that account was created
+
+### Shared layer:
+- Auth helpers - hashing service, token manager, jwt settings
+- Email uniqueness checker
+- Domain event accessor and disptacher
+- Integration event disptacher (in progress)
+- Error handling middleware
+- User fetching service
+- Unit of work pattern
+- Module scanner/loader
+- Currency converter
+- Business rules checker
+
+Copied from other readme - to be rewritten:
 Done:
 - Register/Login for Customer and Shop separately
 - Adding, updating and deleting products available to buy
