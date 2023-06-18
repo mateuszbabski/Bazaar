@@ -4,15 +4,15 @@ using Shared.Abstractions.Auth;
 using Shared.Application.Auth;
 using Shared.Application.Exceptions;
 
-namespace Modules.Customers.Application.Commands.SignInCustomerCommand
+namespace Modules.Customers.Application.Commands.SignInCustomer
 {
-    internal sealed class SignInCommandHandler : IRequestHandler<SignInCommand, AuthenticationResult>
+    internal sealed class SignInCustomerCommandHandler : IRequestHandler<SignInCustomerCommand, AuthenticationResult>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHashingService _hashingService;
 
-        public SignInCommandHandler(ICustomerRepository customerRepository,
+        public SignInCustomerCommandHandler(ICustomerRepository customerRepository,
                                     ITokenManager tokenManager,
                                     IHashingService hashingService)
         {
@@ -21,7 +21,7 @@ namespace Modules.Customers.Application.Commands.SignInCustomerCommand
             _hashingService = hashingService;
         }
 
-        public async Task<AuthenticationResult> Handle(SignInCommand command, CancellationToken cancellationToken)
+        public async Task<AuthenticationResult> Handle(SignInCustomerCommand command, CancellationToken cancellationToken)
         {
             var customer = await _customerRepository.GetCustomerByEmail(command.Email) 
                 ?? throw new BadRequestException("Invalid email or password");

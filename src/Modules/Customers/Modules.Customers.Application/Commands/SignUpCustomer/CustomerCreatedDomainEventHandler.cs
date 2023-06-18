@@ -3,7 +3,7 @@ using Modules.Customers.Domain.Events;
 using Serilog;
 using Shared.Abstractions.Time;
 
-namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
+namespace Modules.Customers.Application.Commands.SignUpCustomer
 {
     internal sealed class CustomerCreatedDomainEventHandler
         : INotificationHandler<CustomerCreatedDomainEvent>

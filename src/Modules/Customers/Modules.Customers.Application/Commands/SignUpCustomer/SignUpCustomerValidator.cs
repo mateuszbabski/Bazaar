@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
+namespace Modules.Customers.Application.Commands.SignUpCustomer
 {
-    public class SignUpValidator : AbstractValidator<SignUpCommand>
+    public class SignUpCustomerValidator : AbstractValidator<SignUpCustomerCommand>
     {
-        public SignUpValidator()
+        public SignUpCustomerValidator()
         {
             RuleFor(c => c.Email).NotEmpty()
                                  .EmailAddress()

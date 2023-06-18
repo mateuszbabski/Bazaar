@@ -2,9 +2,9 @@
 using Shared.Application.Auth;
 using System.ComponentModel.DataAnnotations;
 
-namespace Modules.Customers.Application.Commands.SignInCustomerCommand
+namespace Modules.Customers.Application.Commands.SignInCustomer
 {
-    public class SignInCommand : IRequest<AuthenticationResult>
+    public class SignInCustomerCommand : IRequest<AuthenticationResult>
     {
         [Required]
         [EmailAddress]

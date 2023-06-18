@@ -3,22 +3,21 @@ using MediatR;
 using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
 using Shared.Abstractions.Auth;
-using Shared.Abstractions.DomainEvents;
 using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
 using Shared.Application.Exceptions;
 using Shared.Domain.ValueObjects;
 
-namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
+namespace Modules.Customers.Application.Commands.SignUpCustomer
 {
-    internal sealed class SignUpCommandHandler : IRequestHandler<SignUpCommand, AuthenticationResult>
+    internal sealed class SignUpCustomerCommandHandler : IRequestHandler<SignUpCustomerCommand, AuthenticationResult>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHashingService _hashingService;
         private readonly IUnitOfWork _unitOfWork;        
 
-        public SignUpCommandHandler(ICustomerRepository customerRepository,
+        public SignUpCustomerCommandHandler(ICustomerRepository customerRepository,
                                     ITokenManager tokenManager,
                                     IHashingService hashingService,
                                     IUnitOfWork unitOfWork)
@@ -29,7 +28,7 @@ namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<AuthenticationResult> Handle(SignUpCommand command, CancellationToken cancellationToken)
+        public async Task<AuthenticationResult> Handle(SignUpCustomerCommand command, CancellationToken cancellationToken)
         {
             var emailCheck = await _customerRepository.GetCustomerByEmail(command.Email);
             if (emailCheck != null)
@@ -37,7 +36,7 @@ namespace Modules.Customers.Application.Commands.SignUpCustomerCommand
                 throw new BadRequestException("Email in use");
             }
 
-            var validator = new SignUpValidator();
+            var validator = new SignUpCustomerValidator();
             validator.ValidateAndThrow(command);
 
             //await CheckIfEmailIsFreeToUse(command.Email);

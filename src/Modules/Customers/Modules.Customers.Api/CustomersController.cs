@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Modules.Customers.Application.Commands.SignInCustomerCommand;
-using Modules.Customers.Application.Commands.SignUpCustomerCommand;
+using Modules.Customers.Application.Commands.SignInCustomer;
+using Modules.Customers.Application.Commands.SignUpCustomer;
 using Modules.Customers.Application.Dtos;
 using Modules.Customers.Application.Queries.GetCustomerById;
 using Shared.Application.Auth;
@@ -25,7 +25,7 @@ namespace Modules.Customers.Api
         [SwaggerOperation("Sign up")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<AuthenticationResult>> SignUpAsync(SignUpCommand command)
+        public async Task<ActionResult<AuthenticationResult>> SignUpAsync(SignUpCustomerCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
@@ -35,7 +35,7 @@ namespace Modules.Customers.Api
         [SwaggerOperation("Sign in")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<AuthenticationResult>> SignInAsync(SignInCommand command)
+        public async Task<ActionResult<AuthenticationResult>> SignInAsync(SignInCustomerCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

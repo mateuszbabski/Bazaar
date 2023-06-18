@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using Modules.Customers.Application.Commands.SignUpCustomerCommand;
+using Modules.Customers.Application.Commands.SignUpCustomer;
 
 namespace Modules.Customers.Application
 {
@@ -8,7 +8,7 @@ namespace Modules.Customers.Application
     {
         public static IServiceCollection AddCustomersApplication(this IServiceCollection services)
         {
-            services.AddScoped<IValidator<SignUpCommand>, SignUpValidator>();
+            services.AddScoped<IValidator<SignUpCustomerCommand>, SignUpCustomerValidator>();
 
             return services;
         }
