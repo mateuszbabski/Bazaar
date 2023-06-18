@@ -16,9 +16,8 @@ namespace Modules.Customers.Domain.Entities
         public TelephoneNumber TelephoneNumber { get; private set; }
         public Roles Role { get; private set; } = Roles.customer;
 
-        private Customer()
-        {
-        }
+        private Customer() { }
+        
         internal Customer(Email email,
                           PasswordHash passwordHash,
                           Name name,
@@ -47,7 +46,6 @@ namespace Modules.Customers.Domain.Entities
             customer.AddDomainEvent(new CustomerCreatedDomainEvent(customer));
 
             return customer;
-
         }
 
         public void UpdateCustomerDetails(string name,
