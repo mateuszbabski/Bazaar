@@ -1,4 +1,4 @@
-﻿using Modules.Customers.Application.Commands.SignUpCustomerCommand;
+﻿using Modules.Customers.Application.Commands.SignUpCustomer;
 using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
 using Moq;
@@ -11,7 +11,7 @@ namespace Bazaar.Modules.Customers.Tests.Unit.Application
 {
     public class SIgnUpCustomerCommandTest
     {
-        private readonly SignUpCommandHandler _sut;
+        private readonly SignUpCustomerCommandHandler _sut;
         private readonly Mock<ICustomerRepository> _customerRepositoryMock = new();
         private readonly Mock<ITokenManager> _tokenManagerMock = new();
         private readonly Mock<IHashingService> _hashingServiceMock = new();
@@ -19,7 +19,7 @@ namespace Bazaar.Modules.Customers.Tests.Unit.Application
 
         public SIgnUpCustomerCommandTest()
         {
-            _sut = new SignUpCommandHandler(_customerRepositoryMock.Object,
+            _sut = new SignUpCustomerCommandHandler(_customerRepositoryMock.Object,
                                             _tokenManagerMock.Object,
                                             _hashingServiceMock.Object,
                                             _unitOfWorkMock.Object);
@@ -28,7 +28,7 @@ namespace Bazaar.Modules.Customers.Tests.Unit.Application
         [Fact]
         public async Task SignUpCustomer_ValidParams_ShouldReturnTokenAndId()
         {
-            var command = new SignUpCommand()
+            var command = new SignUpCustomerCommand()
             {
                 Email = "customer@example.com",
                 Password = "password1",
@@ -56,7 +56,7 @@ namespace Bazaar.Modules.Customers.Tests.Unit.Application
         [Fact]
         public async Task SignUpCustomer_InValidParams_ShouldThrowException()
         {
-            var command = new SignUpCommand()
+            var command = new SignUpCustomerCommand()
             {
                 Email = "",
                 Password = "password1",
