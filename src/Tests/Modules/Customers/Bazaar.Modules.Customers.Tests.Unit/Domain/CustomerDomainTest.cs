@@ -1,4 +1,6 @@
 ﻿using Modules.Customers.Domain.Entities;
+using Modules.Customers.Domain.Events;
+using Shared.Domain;
 using Shared.Domain.Exceptions;
 using Shared.Domain.ValueObjects;
 

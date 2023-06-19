@@ -18,7 +18,7 @@ namespace Modules.Customers.Application.Queries.GetCustomerById
             var customer = await _customerRepository.GetCustomerById(request.Id)
                 ?? throw new NotFoundException("User not found");
 
-            var customerDto = CustomerDto.CreateDtoFromObjet(customer);
+            var customerDto = CustomerDto.CreateDtoFromObject(customer);
 
             return customerDto;
         }

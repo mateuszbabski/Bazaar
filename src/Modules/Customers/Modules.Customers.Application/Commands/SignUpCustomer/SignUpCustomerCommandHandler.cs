@@ -18,9 +18,9 @@ namespace Modules.Customers.Application.Commands.SignUpCustomer
         private readonly IUnitOfWork _unitOfWork;        
 
         public SignUpCustomerCommandHandler(ICustomerRepository customerRepository,
-                                    ITokenManager tokenManager,
-                                    IHashingService hashingService,
-                                    IUnitOfWork unitOfWork)
+                                            ITokenManager tokenManager,
+                                            IHashingService hashingService,
+                                            IUnitOfWork unitOfWork)
         {
             _customerRepository = customerRepository;
             _tokenManager = tokenManager;

@@ -1,32 +1,24 @@
 ﻿using Bazaar.Modules.Customers.Tests.Unit.Domain;
-using Modules.Customers.Application.Commands.SignInCustomerCommand;
-using Modules.Customers.Application.Commands.SignUpCustomerCommand;
-using Modules.Customers.Domain.Entities;
+using Modules.Customers.Application.Commands.SignInCustomer;
 using Modules.Customers.Domain.Repositories;
 using Moq;
 using Shared.Abstractions.Auth;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
 using Shared.Application.Exceptions;
 using Shared.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bazaar.Modules.Customers.Tests.Unit.Application
 {
     public class SignInCustomerCommandTest
     {
-        private readonly SignInCommandHandler _sut;
+        private readonly SignInCustomerCommandHandler _sut;
         private readonly Mock<ICustomerRepository> _customerRepositoryMock = new();
         private readonly Mock<ITokenManager> _tokenManagerMock = new();
         private readonly Mock<IHashingService> _hashingServiceMock = new();
 
         public SignInCustomerCommandTest()
         {
-            _sut = new SignInCommandHandler(_customerRepositoryMock.Object,
+            _sut = new SignInCustomerCommandHandler(_customerRepositoryMock.Object,
                                             _tokenManagerMock.Object,
                                             _hashingServiceMock.Object);
         }
@@ -36,7 +28,7 @@ namespace Bazaar.Modules.Customers.Tests.Unit.Application
         {
             var customer = CustomerFactory.GetCustomer();
 
-            var command = new SignInCommand()
+            var command = new SignInCustomerCommand()
             {
                 Email = "customer@example.com",
                 Password = "passwordHash"
@@ -56,7 +48,7 @@ namespace Bazaar.Modules.Customers.Tests.Unit.Application
         [Fact]
         public async Task SignInCustomer_InValidEmail_ThrowsBadRequestException()
         {
-            var command = new SignInCommand()
+            var command = new SignInCustomerCommand()
             {
                 Email = "customer@example.com",
                 Password = "password1"
@@ -75,7 +67,7 @@ namespace Bazaar.Modules.Customers.Tests.Unit.Application
         {
             var customer = CustomerFactory.GetCustomer();
 
-            var command = new SignInCommand()
+            var command = new SignInCustomerCommand()
             {
                 Email = "customer@example.com",
                 Password = "password1"

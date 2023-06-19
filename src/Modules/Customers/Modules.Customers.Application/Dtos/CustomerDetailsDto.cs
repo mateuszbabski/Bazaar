@@ -12,7 +12,7 @@ namespace Modules.Customers.Application.Dtos
         public Address CustomerAddress { get; init; }
         public string CustomerTelephoneNumber { get; init; }
 
-        public static CustomerDetailsDto CreateDtoFromObjet(Customer customer)
+        public static CustomerDetailsDto CreateDtoFromObject(Customer customer)
         {
             return new CustomerDetailsDto
             {

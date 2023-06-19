@@ -1,6 +1,7 @@
 ﻿using Shared.Application;
 using Shared.Infrastructure;
 using Modules.Customers.Api;
+using Modules.Shops.Api;
 using Shared.Infrastructure.Modules;
 using System.Reflection;
 
@@ -20,6 +21,7 @@ namespace Bootstrapper
             services.AddSharedApplication(configuration);   
 
             services.AddCustomersModule(configuration);
+            services.AddShopsModule(configuration);
 
             return services;
         }

@@ -8,7 +8,7 @@ namespace Modules.Shops.Application
     {
         public static IServiceCollection AddShopsApplication(this IServiceCollection services)
         {
-            //services.AddScoped<IValidator<SignUpShopCommand>, SignUpShopValidator>();
+            services.AddScoped<IValidator<SignUpShopCommand>, SignUpShopValidator>();
             return services;
         }
     }

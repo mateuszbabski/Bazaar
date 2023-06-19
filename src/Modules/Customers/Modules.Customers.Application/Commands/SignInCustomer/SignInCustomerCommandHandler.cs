@@ -13,8 +13,8 @@ namespace Modules.Customers.Application.Commands.SignInCustomer
         private readonly IHashingService _hashingService;
 
         public SignInCustomerCommandHandler(ICustomerRepository customerRepository,
-                                    ITokenManager tokenManager,
-                                    IHashingService hashingService)
+                                            ITokenManager tokenManager,
+                                            IHashingService hashingService)
         {
             _customerRepository = customerRepository;
             _tokenManager = tokenManager;

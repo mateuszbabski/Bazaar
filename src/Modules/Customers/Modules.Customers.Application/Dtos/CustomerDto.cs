@@ -7,7 +7,7 @@ namespace Modules.Customers.Application.Dtos
         public Guid CustomerId { get; init; }
         public string CustomerEmail { get; init; }
 
-        public static CustomerDto CreateDtoFromObjet(Customer customer)
+        public static CustomerDto CreateDtoFromObject(Customer customer)
         {
             return new CustomerDto
             {
