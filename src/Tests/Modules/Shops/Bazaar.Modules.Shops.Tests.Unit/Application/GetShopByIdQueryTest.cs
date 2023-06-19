@@ -47,7 +47,8 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
 
             _shopRepositoryMock.Setup(x => x.GetShopById(query.Id)).ThrowsAsync(new NotFoundException("Shop not found."));
 
-            var result = await Assert.ThrowsAsync<NotFoundException>(() => _sut.Handle(query, CancellationToken.None));
+            var result = await Assert.ThrowsAsync<NotFoundException>(() 
+                => _sut.Handle(query, CancellationToken.None));
 
             Assert.IsType<NotFoundException>(result);
             Assert.Equal("Shop not found.", result.Message);
