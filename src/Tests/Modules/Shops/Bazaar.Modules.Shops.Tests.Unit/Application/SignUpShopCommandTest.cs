@@ -56,7 +56,7 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
         }
 
         [Fact]
-        public async Task SignUpShopr_InValidParams_ShouldThrowException()
+        public async Task SignUpShop_InValidParams_ShouldThrowException()
         {
             var command = new SignUpShopCommand()
             {
