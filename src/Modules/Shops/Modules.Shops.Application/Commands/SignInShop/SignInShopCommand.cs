@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Shared.Application.Auth;
+using System.ComponentModel.DataAnnotations;
 
 namespace Modules.Shops.Application.Commands.SignInShop
 {
-    internal class SignInShopCommand
+    public class SignInShopCommand : IRequest<AuthenticationResult>
     {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        [MinLength(6)]
+        public string Password { get; set; }
     }
 }

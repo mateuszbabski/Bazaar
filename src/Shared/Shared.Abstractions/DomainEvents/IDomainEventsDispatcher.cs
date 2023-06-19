@@ -1,6 +1,4 @@
-﻿using Shared.Domain;
-
-namespace Shared.Abstractions.DomainEvents
+﻿namespace Shared.Abstractions.DomainEvents
 {
     public interface IDomainEventDispatcher
     {
