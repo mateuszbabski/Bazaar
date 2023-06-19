@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Modules.Shops.Application.Dtos;
 
 namespace Modules.Shops.Application.Queries.GetShopById
 {
-    internal class GetShopByIdQuery
+    public class GetShopByIdQuery : IRequest<ShopDetailsDto>
     {
+        public Guid Id { get; set; }
     }
 }
