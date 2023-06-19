@@ -7,8 +7,8 @@ using Modules.Shops.Application.Commands.SignUpShop;
 using Modules.Shops.Application.Commands.UpdateShopDetails;
 using Modules.Shops.Application.Dtos;
 using Modules.Shops.Application.Queries.GetShopById;
+using Modules.Shops.Application.Queries.GetShops;
 using Shared.Application.Auth;
-using Shared.Domain.ValueObjects;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Modules.Shops.Api
@@ -67,6 +67,17 @@ namespace Modules.Shops.Api
             });
 
             return Ok(shop);
+        }
+
+        [HttpGet("GetShops")]
+        [SwaggerOperation("Get shops")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<ShopDto>>> GetAllShops()
+        {
+            var shops = await _mediator.Send(new GetShopsQuery());
+
+            return Ok(shops);
         }
     }
 }
