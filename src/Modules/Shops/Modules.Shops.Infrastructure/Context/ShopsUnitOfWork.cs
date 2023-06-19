@@ -6,7 +6,7 @@ namespace Modules.Shops.Infrastructure.Context
     internal class ShopsUnitOfWork : SqlServerUnitOfWork<ShopsDbContext>
     {
         public ShopsUnitOfWork(ShopsDbContext dbContext,
-                                   IDomainEventDispatcher domainEventDispatcher)
+                               IDomainEventDispatcher domainEventDispatcher)
             : base(dbContext, domainEventDispatcher)
         {
         }
