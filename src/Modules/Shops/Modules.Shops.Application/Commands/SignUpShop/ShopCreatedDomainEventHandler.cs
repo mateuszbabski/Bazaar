@@ -1,12 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Modules.Shops.Domain.Events;
+using Serilog;
+using Shared.Abstractions.Time;
 
 namespace Modules.Shops.Application.Commands.SignUpShop
 {
-    internal class ShopCreatedDomainEventHandler
+    internal sealed class ShopCreatedDomainEventHandler
+        : INotificationHandler<ShopCreatedDomainEvent>
     {
+        private readonly IDateTimeProvider _dateTimeProvider;
+
+        public ShopCreatedDomainEventHandler(IDateTimeProvider dateTimeProvider)
+        {
+            _dateTimeProvider = dateTimeProvider;
+        }
+        public async Task Handle(ShopCreatedDomainEvent notification, CancellationToken cancellationToken)
+        {
+            Log.Information("Shop created at: {@date}", _dateTimeProvider.UtcNow);
+
+            // send welcome email
+        }
     }
 }
