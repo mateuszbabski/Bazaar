@@ -87,7 +87,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{5663
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Customers", "Customers", "{52C3C9EF-3D75-4B59-BD08-425726384254}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazaar.Modules.Customers.Tests.Unit", "src\Tests\Modules\Customers\Bazaar.Modules.Customers.Tests.Unit\Bazaar.Modules.Customers.Tests.Unit.csproj", "{AD2E9CAD-E99F-49D2-933A-B2EF12FA8C10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.Modules.Customers.Tests.Unit", "src\Tests\Modules\Customers\Bazaar.Modules.Customers.Tests.Unit\Bazaar.Modules.Customers.Tests.Unit.csproj", "{AD2E9CAD-E99F-49D2-933A-B2EF12FA8C10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shops", "Shops", "{7B70BEB6-EF17-4D91-BC18-1B87938BDD17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazaar.Modules.Shops.Tests.Unit", "src\Tests\Modules\Shops\Bazaar.Modules.Shops.Tests.Unit\Bazaar.Modules.Shops.Tests.Unit.csproj", "{746B393A-AE01-477D-A659-1668796BF5E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -215,6 +219,10 @@ Global
 		{AD2E9CAD-E99F-49D2-933A-B2EF12FA8C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD2E9CAD-E99F-49D2-933A-B2EF12FA8C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD2E9CAD-E99F-49D2-933A-B2EF12FA8C10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{746B393A-AE01-477D-A659-1668796BF5E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{746B393A-AE01-477D-A659-1668796BF5E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{746B393A-AE01-477D-A659-1668796BF5E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{746B393A-AE01-477D-A659-1668796BF5E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -262,6 +270,8 @@ Global
 		{56632C8D-8D09-47FD-805D-FC23AF6F9520} = {7EBB1002-6FE7-4B54-8A62-F786DD7C3441}
 		{52C3C9EF-3D75-4B59-BD08-425726384254} = {56632C8D-8D09-47FD-805D-FC23AF6F9520}
 		{AD2E9CAD-E99F-49D2-933A-B2EF12FA8C10} = {52C3C9EF-3D75-4B59-BD08-425726384254}
+		{7B70BEB6-EF17-4D91-BC18-1B87938BDD17} = {56632C8D-8D09-47FD-805D-FC23AF6F9520}
+		{746B393A-AE01-477D-A659-1668796BF5E7} = {7B70BEB6-EF17-4D91-BC18-1B87938BDD17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {62F69AFD-C788-4D6E-8088-A31F563BEF11}
