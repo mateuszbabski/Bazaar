@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Shared.Abstractions.Modules
+﻿namespace Shared.Abstractions.Modules
 {
     public interface IModule
     {
