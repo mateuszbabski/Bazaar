@@ -1,13 +1,9 @@
 ﻿using Bazaar.Modules.Shops.Tests.Unit.Domain;
 using Modules.Shops.Application.Dtos;
-using Modules.Shops.Application.Queries.GetShops;
 using Modules.Shops.Application.Queries.GetShopsByName;
-using Modules.Shops.Domain.Entities;
 using Modules.Shops.Domain.Repositories;
 using Moq;
 using Shared.Application.Exceptions;
-using Shared.Domain.ValueObjects;
-using System.Xml.Linq;
 
 namespace Bazaar.Modules.Shops.Tests.Unit.Application
 {

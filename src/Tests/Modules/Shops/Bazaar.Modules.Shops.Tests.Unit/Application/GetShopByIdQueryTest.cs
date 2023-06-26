@@ -4,7 +4,6 @@ using Modules.Shops.Application.Queries.GetShopById;
 using Modules.Shops.Domain.Repositories;
 using Moq;
 using Shared.Application.Exceptions;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Bazaar.Modules.Shops.Tests.Unit.Application
 {
