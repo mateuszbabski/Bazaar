@@ -14,7 +14,7 @@ namespace Modules.Shops.Application.Dtos
         public Address ShopAddress { get; init; }
         public string ShopContactNumber { get; init; }
 
-        public static ShopDetailsDto CreateDtoFromObject(Shop shop)
+        internal static ShopDetailsDto CreateDtoFromObject(Shop shop)
         {
             return new ShopDetailsDto
             {

@@ -7,7 +7,7 @@ namespace Modules.Shops.Application.Dtos
         public Guid ShopId { get; init; }
         public string ShopName { get; init; }
 
-        public static IEnumerable<ShopDto> CreateDtoFromObject(IEnumerable<Shop> shops)
+        internal static IEnumerable<ShopDto> CreateDtoFromObject(IEnumerable<Shop> shops)
         {
             var shopList = new List<ShopDto>();
 

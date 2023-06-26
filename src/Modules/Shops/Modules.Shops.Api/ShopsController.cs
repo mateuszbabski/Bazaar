@@ -8,6 +8,8 @@ using Modules.Shops.Application.Commands.UpdateShopDetails;
 using Modules.Shops.Application.Dtos;
 using Modules.Shops.Application.Queries.GetShopById;
 using Modules.Shops.Application.Queries.GetShops;
+using Modules.Shops.Application.Queries.GetShopsByLocalization;
+using Modules.Shops.Application.Queries.GetShopsByName;
 using Shared.Application.Auth;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -78,6 +80,35 @@ namespace Modules.Shops.Api
             var shops = await _mediator.Send(new GetShopsQuery());
 
             return Ok(shops);
+        }
+
+        [HttpGet("GetShopsByName")]
+        [SwaggerOperation("Get shops by Name")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<ShopDto>>> GetShopsByName(string name)
+        {
+            var shop = await _mediator.Send(new GetShopsByNameQuery()
+            {
+                ShopName = name
+            });
+
+            return Ok(shop);
+        }
+
+        [HttpGet("GetShopsByLocalization")]
+        [SwaggerOperation("Get shops by Localization")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<ShopDto>>> GetShopsByLocalization(string country, string city)
+        {
+            var shop = await _mediator.Send(new GetShopsByLocalizationQuery()
+            {
+                Country = country,
+                City = city
+            });
+
+            return Ok(shop);
         }
     }
 }
