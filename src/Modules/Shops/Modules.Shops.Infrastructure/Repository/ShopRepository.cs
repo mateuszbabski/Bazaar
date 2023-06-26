@@ -3,6 +3,7 @@ using Modules.Shops.Domain.Entities;
 using Modules.Shops.Domain.Repositories;
 using Modules.Shops.Domain.ValueObjects;
 using Modules.Shops.Infrastructure.Context;
+using Shared.Domain.ValueObjects;
 
 namespace Modules.Shops.Infrastructure.Repository
 {
@@ -38,7 +39,26 @@ namespace Modules.Shops.Infrastructure.Repository
 
         public async Task<IEnumerable<Shop?>> GetAllShops()
         {
-            return await _dbContext.Shops.ToListAsync();
+            return await _dbContext.Shops.OrderBy(x => x.ShopName)
+                                         .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Shop>> GetShopsByName(string name)
+        {
+            return await _dbContext.Shops.Where(x => name == null
+                                                     || x.ShopName.Value.ToLower().Contains(name.ToLower()))
+                                         .OrderBy(x => x.ShopName)
+                                         .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Shop>> GetShopsByLocalization(string country, string city)
+        {
+            return await _dbContext.Shops.Where(x => country == null
+                                                     || x.ShopAddress.Country.ToLower().Contains(country.ToLower()))
+                                         .Where(x => city == null
+                                                     || x.ShopAddress.City.ToLower().Contains(city.ToLower()))
+                                         .OrderBy(x => x.ShopName)
+                                         .ToListAsync();
         }
     }
 }

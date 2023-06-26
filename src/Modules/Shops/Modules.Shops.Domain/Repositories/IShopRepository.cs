@@ -8,6 +8,8 @@ namespace Modules.Shops.Domain.Repositories
         Task<Shop> Add(Shop shop);
         Task<Shop> GetShopByEmail(string email);
         Task<Shop> GetShopById(ShopId id);
+        Task<IEnumerable<Shop>> GetShopsByName(string name);
+        Task<IEnumerable<Shop>> GetShopsByLocalization(string country, string city);
         Task<IEnumerable<Shop>> GetAllShops();
         Task Commit();
     }
