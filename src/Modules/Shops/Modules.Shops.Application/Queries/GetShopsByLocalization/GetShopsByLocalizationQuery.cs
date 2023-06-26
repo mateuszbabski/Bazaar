@@ -5,7 +5,8 @@ namespace Modules.Shops.Application.Queries.GetShopsByLocalization
 {
     public class GetShopsByLocalizationQuery : IRequest<IEnumerable<ShopDto>>
     {
-        public string Country { get; set; }
-        public string City { get; set; }
+        #nullable enable
+        public string? Country { get; set; }
+        public string? City { get; set; }
     }
 }

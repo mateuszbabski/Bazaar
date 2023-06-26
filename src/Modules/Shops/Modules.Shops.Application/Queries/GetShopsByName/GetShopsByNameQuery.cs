@@ -5,6 +5,7 @@ namespace Modules.Shops.Application.Queries.GetShopsByName
 {
     public class GetShopsByNameQuery : IRequest<IEnumerable<ShopDto>>
     {
-        public string ShopName { get; set; }
+        #nullable enable
+        public string? ShopName { get; set; }
     }
 }
