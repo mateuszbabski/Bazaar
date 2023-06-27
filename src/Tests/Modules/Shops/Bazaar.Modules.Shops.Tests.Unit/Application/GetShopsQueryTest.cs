@@ -5,6 +5,7 @@ using Modules.Shops.Domain.Entities;
 using Modules.Shops.Domain.Repositories;
 using Moq;
 using Shared.Application.Exceptions;
+using Shared.Application.Queries;
 
 namespace Bazaar.Modules.Shops.Tests.Unit.Application
 {
@@ -34,8 +35,8 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
             var result = await _sut.Handle(new GetShopsQuery(), CancellationToken.None);
 
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<IEnumerable<ShopDto>>(result);
-            Assert.Equal(result.First().ShopId, shop1.Id.Value);
+            Assert.IsAssignableFrom<PagedList<ShopDto>>(result);
+            Assert.Equal(result.Items.First().ShopId, shop1.Id.Value);
         }
 
         [Fact]

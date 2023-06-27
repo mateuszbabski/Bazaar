@@ -4,6 +4,7 @@ using Modules.Shops.Application.Queries.GetShopsByName;
 using Modules.Shops.Domain.Repositories;
 using Moq;
 using Shared.Application.Exceptions;
+using Shared.Application.Queries;
 
 namespace Bazaar.Modules.Shops.Tests.Unit.Application
 {
@@ -34,8 +35,8 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
             var result = await _sut.Handle(query, CancellationToken.None);
 
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<IEnumerable<ShopDto>>(result);
-            Assert.Single(result);
+            Assert.IsAssignableFrom<PagedList<ShopDto>>(result);
+            Assert.Single(result.Items);
         }
 
         [Fact]
@@ -55,8 +56,8 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
             var result = await _sut.Handle(query, CancellationToken.None);
 
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<IEnumerable<ShopDto>>(result);
-            Assert.Equal(2, result.Count());
+            Assert.IsAssignableFrom<PagedList<ShopDto>>(result);
+            Assert.Equal(2, result.Items.Count());
         }
 
         [Fact]
@@ -76,8 +77,8 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
             var result = await _sut.Handle(query, CancellationToken.None);
 
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<IEnumerable<ShopDto>>(result);
-            Assert.Equal(2, result.Count());
+            Assert.IsAssignableFrom<PagedList<ShopDto>>(result);
+            Assert.Equal(2, result.Items.Count());
         }
 
         [Fact]
