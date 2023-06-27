@@ -11,6 +11,7 @@ using Modules.Shops.Application.Queries.GetShops;
 using Modules.Shops.Application.Queries.GetShopsByLocalization;
 using Modules.Shops.Application.Queries.GetShopsByName;
 using Shared.Application.Auth;
+using Shared.Application.Queries;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Modules.Shops.Api
@@ -57,7 +58,7 @@ namespace Modules.Shops.Api
             return NoContent();
         }
 
-        [HttpGet("GetShopById")]
+        [HttpGet("{id}", Name = "GetShopById")]
         [SwaggerOperation("Get shop by Id")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -75,9 +76,9 @@ namespace Modules.Shops.Api
         [SwaggerOperation("Get shops")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<ShopDto>>> GetAllShops()
+        public async Task<ActionResult<PagedList<ShopDto>>> GetAllShops([FromQuery] GetShopsQuery query)
         {
-            var shops = await _mediator.Send(new GetShopsQuery());
+            var shops = await _mediator.Send(query);
 
             return Ok(shops);
         }
@@ -86,12 +87,9 @@ namespace Modules.Shops.Api
         [SwaggerOperation("Get shops by Name")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<ShopDto>>> GetShopsByName(string name)
+        public async Task<ActionResult<PagedList<ShopDto>>> GetShopsByName([FromQuery] GetShopsByNameQuery query)
         {
-            var shop = await _mediator.Send(new GetShopsByNameQuery()
-            {
-                ShopName = name
-            });
+            var shop = await _mediator.Send(query);
 
             return Ok(shop);
         }
@@ -100,13 +98,9 @@ namespace Modules.Shops.Api
         [SwaggerOperation("Get shops by Localization")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<ShopDto>>> GetShopsByLocalization(string country, string city)
+        public async Task<ActionResult<PagedList<ShopDto>>> GetShopsByLocalization([FromQuery] GetShopsByLocalizationQuery query)
         {
-            var shop = await _mediator.Send(new GetShopsByLocalizationQuery()
-            {
-                Country = country,
-                City = city
-            });
+            var shop = await _mediator.Send(query);
 
             return Ok(shop);
         }
