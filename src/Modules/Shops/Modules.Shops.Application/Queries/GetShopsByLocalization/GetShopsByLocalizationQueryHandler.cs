@@ -2,10 +2,11 @@
 using Modules.Shops.Application.Dtos;
 using Modules.Shops.Domain.Repositories;
 using Shared.Application.Exceptions;
+using Shared.Application.Queries;
 
 namespace Modules.Shops.Application.Queries.GetShopsByLocalization
 {
-    public class GetShopsByLocalizationQueryHandler : IRequestHandler<GetShopsByLocalizationQuery, IEnumerable<ShopDto>>
+    public class GetShopsByLocalizationQueryHandler : IRequestHandler<GetShopsByLocalizationQuery, PagedList<ShopDto>>
     {
         private readonly IShopRepository _shopRepository;
 
@@ -13,14 +14,23 @@ namespace Modules.Shops.Application.Queries.GetShopsByLocalization
         {
             _shopRepository = shopRepository;
         }
-        public async Task<IEnumerable<ShopDto>> Handle(GetShopsByLocalizationQuery request, CancellationToken cancellationToken)
+        public async Task<PagedList<ShopDto>> Handle(GetShopsByLocalizationQuery query, CancellationToken cancellationToken)
         {
-            var shops = await _shopRepository.GetShopsByLocalization(request.Country, request.City)
+            var shops = await _shopRepository.GetShopsByLocalization(query.Country, query.City)
                 ?? throw new NotFoundException("Shops not found");
 
-            var shopListDto = ShopDto.CreateDtoFromObject(shops);
+            var pagedShops = shops.Skip((query.PageNumber - 1) * query.PageSize)
+                                  .Take(query.PageSize)
+                                  .ToList();
 
-            return shopListDto;
+            var shopListDto = ShopDto.CreateDtoFromObject(pagedShops);
+
+            var pagedShopList = new PagedList<ShopDto>(shopListDto,
+                                                       shopListDto.Count(),
+                                                       query.PageNumber,
+                                                       query.PageSize);
+
+            return pagedShopList;
         }
     }
 }
