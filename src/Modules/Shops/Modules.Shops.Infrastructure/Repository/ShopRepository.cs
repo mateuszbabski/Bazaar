@@ -45,10 +45,10 @@ namespace Modules.Shops.Infrastructure.Repository
         {
             if (String.IsNullOrEmpty(name))
             {
-                return await _dbContext.Shops.OrderBy(x => x.ShopName).ToListAsync();
+                return await _dbContext.Shops.ToListAsync();
             }
 
-            var allShops = await _dbContext.Shops.OrderBy(x => x.ShopName).ToListAsync();
+            var allShops = await _dbContext.Shops.ToListAsync();
             var filteredShopList = allShops.Where(x => x.ShopName.Value.ToLower().Contains(name.ToLower()));
                         
             return filteredShopList;
@@ -60,7 +60,6 @@ namespace Modules.Shops.Infrastructure.Repository
                                                      || x.ShopAddress.Country.ToLower().Contains(country.ToLower()))
                                          .Where(x => city == null
                                                      || x.ShopAddress.City.ToLower().Contains(city.ToLower()))
-                                         .OrderBy(x => x.ShopName)
                                          .ToListAsync();
         }
     }
