@@ -18,7 +18,7 @@ namespace Bootstrapper
             var arrayAssemblies = assemblies.ToArray<Assembly>();
 
             services.AddSharedInfrastructure(configuration, arrayAssemblies);
-            services.AddSharedApplication(configuration);   
+            services.AddSharedApplication();   
 
             services.AddCustomersModule(configuration);
             services.AddShopsModule(configuration);

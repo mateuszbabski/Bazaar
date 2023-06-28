@@ -1,4 +1,5 @@
 ﻿using Modules.Shops.Domain.Entities;
+using Shared.Domain.ValueObjects;
 
 namespace Modules.Shops.Application.Dtos
 {
@@ -6,8 +7,9 @@ namespace Modules.Shops.Application.Dtos
     {
         public Guid ShopId { get; init; }
         public string ShopName { get; init; }
+        public Address ShopAddress { get; init; }
 
-        internal static IEnumerable<ShopDto> CreateDtoFromObject(IEnumerable<Shop> shops)
+        internal static IEnumerable<ShopDto> CreateDtoFromObject(List<Shop> shops)
         {
             var shopList = new List<ShopDto>();
 
@@ -16,7 +18,8 @@ namespace Modules.Shops.Application.Dtos
                 var shopDto = new ShopDto()
                 {
                     ShopId = shop.Id,
-                    ShopName = shop.ShopName
+                    ShopName = shop.ShopName,
+                    ShopAddress = shop.ShopAddress
                 };
 
                 shopList.Add(shopDto);

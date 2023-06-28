@@ -1,10 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Shared.Abstractions.DomainEvents;
-using Shared.Abstractions.UnitOfWork;
-using Shared.Domain;
-using Shared.Infrastructure.UnitOfWork;
 using System.Reflection;
 
 namespace Shared.Infrastructure.DomainEvents

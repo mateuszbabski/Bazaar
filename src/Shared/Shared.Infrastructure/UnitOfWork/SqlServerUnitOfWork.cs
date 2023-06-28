@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shared.Abstractions.DomainEvents;
 using Shared.Abstractions.UnitOfWork;
-using Shared.Domain;
 
 namespace Shared.Infrastructure.UnitOfWork
 {
