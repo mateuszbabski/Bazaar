@@ -31,7 +31,7 @@ namespace Modules.Shops.Application.Queries.GetShops
             var shopListDto = ShopDto.CreateDtoFromObject(pagedShops);
 
             var pagedShopList = new PagedList<ShopDto>(shopListDto,
-                                                       shopListDto.Count(),
+                                                       baseQuery.Count(),
                                                        query.PageNumber,
                                                        query.PageSize);
 

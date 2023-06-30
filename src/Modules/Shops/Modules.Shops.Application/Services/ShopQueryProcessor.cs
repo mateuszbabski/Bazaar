@@ -1,7 +1,4 @@
-﻿using MediatR;
-using Modules.Shops.Domain.Entities;
-using Serilog;
-using Shared.Abstractions.Queries;
+﻿using Modules.Shops.Domain.Entities;
 using Shared.Application.Queries;
 using System.Linq.Expressions;
 
@@ -11,7 +8,6 @@ namespace Modules.Shops.Application.Services
     {
         public override IQueryable<Shop> SortQuery(IQueryable<Shop> baseQuery, string sortBy, string sortDirection)
         {
-            Log.Information("sortby: {@sort}", sortBy);
             if (!string.IsNullOrEmpty(sortBy))
             {
                 var columnsSelector = new Dictionary<string, Expression<Func<Shop, object>>>(StringComparer.OrdinalIgnoreCase)
