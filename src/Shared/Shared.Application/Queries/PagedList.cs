@@ -22,13 +22,5 @@
             ItemsTo = ItemsFrom + pageSize - 1;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
         }
-
-        public static PagedList<T> CreatePagedList(IEnumerable<T> source, int pageNumber, int pageSize) 
-        {
-            var count = source.Count();
-            var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
-
-            return new PagedList<T>(items, count, pageNumber, pageSize);
-        }
     }
 }

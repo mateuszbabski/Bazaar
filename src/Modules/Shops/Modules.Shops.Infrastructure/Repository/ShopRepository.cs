@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Modules.Shops.Application.Dtos;
 using Modules.Shops.Domain.Entities;
 using Modules.Shops.Domain.Repositories;
 using Modules.Shops.Domain.ValueObjects;
