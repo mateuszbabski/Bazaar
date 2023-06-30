@@ -4,6 +4,7 @@ using Modules.Shops.Application.Queries.GetShops;
 using Modules.Shops.Domain.Entities;
 using Modules.Shops.Domain.Repositories;
 using Moq;
+using Shared.Abstractions.Queries;
 using Shared.Application.Exceptions;
 using Shared.Application.Queries;
 
@@ -13,9 +14,10 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
     {
         private readonly GetShopsQueryHandler _sut;
         private readonly Mock<IShopRepository> _shopRepositoryMock = new();
+        private readonly Mock<IQueryProcessor<Shop>> _queryProcessorMock = new();
         public GetShopsQueryTest()
         {
-            _sut = new GetShopsQueryHandler(_shopRepositoryMock.Object);
+            _sut = new GetShopsQueryHandler(_shopRepositoryMock.Object, _queryProcessorMock.Object);
         }
 
         [Fact]
@@ -31,6 +33,11 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
             };
 
             _shopRepositoryMock.Setup(x => x.GetAllShops()).ReturnsAsync(shopListMock);
+
+            _queryProcessorMock.Setup(x => x.SortQuery(shopListMock.AsQueryable(), It.IsAny<string>(), It.IsAny<string>()))
+                               .Returns(shopListMock.AsQueryable());
+            _queryProcessorMock.Setup(x => x.PageQuery(shopListMock.AsEnumerable(), It.IsAny<int>(), It.IsAny<int>()))
+                               .Returns(shopListMock);
 
             var result = await _sut.Handle(new GetShopsQuery(), CancellationToken.None);
 
