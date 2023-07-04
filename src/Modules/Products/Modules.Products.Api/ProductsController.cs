@@ -1,7 +1,6 @@
 ﻿namespace Modules.Products.Api
 {
-    public class Class1
+    internal class ProductsController
     {
-
     }
 }
