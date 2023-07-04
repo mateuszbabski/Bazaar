@@ -1,6 +1,11 @@
-﻿namespace Modules.Products.Domain.Exceptions
+﻿using Shared.Domain.Exceptions;
+
+namespace Modules.Products.Domain.Exceptions
 {
-    internal class InvalidProductPriceException
+    public class InvalidProductPriceException : InvalidPriceException
     {
+        public InvalidProductPriceException(string message) : base(message)
+        {
+        }
     }
 }

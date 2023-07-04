@@ -1,6 +1,10 @@
 ﻿namespace Modules.Products.Domain.Exceptions
 {
-    internal class InvalidProductDescriptionException
+    public class InvalidProductDescriptionException : Exception
     {
+        public InvalidProductDescriptionException() : base(message: "Product description cannot be empty.")
+        {
+            
+        }
     }
 }
