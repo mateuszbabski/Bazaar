@@ -1,6 +1,9 @@
-﻿namespace Modules.Products.Domain.Events
+﻿using Modules.Products.Domain.Entities;
+using Shared.Domain;
+
+namespace Modules.Products.Domain.Events
 {
-    internal class ProductAvailabilityUpdatedDomainEvent
+    public record ProductAvailabilityUpdatedDomainEvent(Product Product) : IDomainEvent
     {
     }
 }
