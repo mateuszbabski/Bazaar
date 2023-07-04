@@ -1,4 +1,5 @@
 ﻿using Modules.Products.Domain.Entities;
+using Modules.Products.Domain.Events;
 using Modules.Products.Domain.Exceptions;
 using Modules.Products.Domain.ValueObjects;
 using Shared.Domain.Exceptions;
@@ -8,6 +9,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Domain
 {
     public class ProductDomainTest
     {
+
         [Fact]
         public void CreateProduct_ReturnsProduct_IfAllParamsValid()
         {
@@ -17,13 +19,14 @@ namespace Bazaar.Modules.Products.Tests.Unit.Domain
                                                 1,
                                                 MoneyValue.Of(10, "USD"),
                                                 "piece",
-                                                Guid.NewGuid()); 
-            
+                                                Guid.NewGuid());
+
             Assert.NotNull(product);
             Assert.IsType<Product>(product);
             Assert.IsType<ProductId>(product.Id);
             Assert.Equal("productName", product.ProductName);
             Assert.Equal(10, product.Price.Amount);
+            Assert.IsType<ProductAddedToShopDomainEvent>(product.DomainEvents.FirstOrDefault());
         }
 
         [Fact]
@@ -88,6 +91,36 @@ namespace Bazaar.Modules.Products.Tests.Unit.Domain
 
             Assert.IsType<InvalidProductCategoryException>(act);
             Assert.Equal("Invalid product category.", act.Message);
+        }
+
+        [Fact]
+        public void UpdateProductName_ReturnsProduct_IfAllParamsValid()
+        {
+            var product = ProductFactory.GetProduct();
+            product.ChangeProductDetails("updated Name", "", "", "");
+
+            Assert.Equal("updated Name", product.ProductName);
+            Assert.IsType<ProductDetailsChangedDomainEvent>(product.DomainEvents.Last());
+        }
+
+        [Fact]
+        public void UpdateProductPrice_ReturnsProduct_IfAllParamsValid()
+        {
+            var product = ProductFactory.GetProduct();
+            product.ChangeProductPrice(50, "USD");
+
+            Assert.Equal(50, product.Price.Amount);
+            Assert.IsType<ProductPriceChangedDomainEvent>(product.DomainEvents.Last());
+        }
+
+        [Fact]
+        public void UpdateProductWeight_ReturnsProduct_IfAllParamsValid()
+        {
+            var product = ProductFactory.GetProduct();
+            product.ChangeProductWeightAndUnit(5, "piece");
+
+            Assert.Equal(5, product.WeightPerUnit);
+            Assert.IsType<ProductWeightChangedDomainEvent>(product.DomainEvents.Last());
         }
     }
 }

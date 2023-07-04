@@ -57,16 +57,20 @@ namespace Modules.Products.Domain.Entities
             return product;
         }
 
-        internal void ChangeDetails(string productName, string productDescription, string unit)
+        public void ChangeProductDetails(string productName,
+                                         string productDescription,
+                                         string productCategory,
+                                         string unit)
         {
             SetName(productName);
             SetDescription(productDescription);
             SetUnit(unit);
+            SetCategory(productCategory);
 
             this.AddDomainEvent(new ProductDetailsChangedDomainEvent(this));
         }
 
-        internal void ChangeAvailability()
+        public void ChangeAvailability()
         {
             if (IsAvailable == true)
             {
@@ -78,22 +82,34 @@ namespace Modules.Products.Domain.Entities
             }
         }
 
-        internal void SetPrice(MoneyValue price)
+        public void ChangeProductPrice(decimal amount, string currency)
         {
-            Price = price;
+            SetPrice(MoneyValue.Of(amount, currency));
             this.AddDomainEvent(new ProductPriceChangedDomainEvent(this));
         }
 
-        internal void SetUnit(string unit)
+        internal void SetPrice(MoneyValue price)
         {
-            if (!string.IsNullOrEmpty(unit))
-                Unit = new ProductUnit(unit);
+            Price = price;            
+        }
+
+        public void ChangeProductWeightAndUnit(decimal weight, string unit)
+        {
+            SetWeight(weight);
+            SetUnit(unit);
+            this.AddDomainEvent(new ProductWeightChangedDomainEvent(this));
         }
 
         internal void SetWeight(decimal weight)
         {
             if (!string.IsNullOrEmpty(weight.ToString()))
                 WeightPerUnit = new Weight(weight);
+        }
+
+        internal void SetUnit(string unit)
+        {
+            if (!string.IsNullOrEmpty(unit))
+                Unit = new ProductUnit(unit);
         }
 
         internal void SetName(string productName)
@@ -111,7 +127,7 @@ namespace Modules.Products.Domain.Entities
         internal void SetCategory(string productCategory)
         {
             if (!string.IsNullOrEmpty(productCategory))
-                ProductCategory = new ProductCategory(productCategory);
+                ProductCategory = ProductCategory.Create(productCategory);
         }
 
         public MoneyValue GetPrice()

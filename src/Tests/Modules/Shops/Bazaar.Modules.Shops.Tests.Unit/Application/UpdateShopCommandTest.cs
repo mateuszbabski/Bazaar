@@ -2,14 +2,8 @@
 using Modules.Shops.Application.Commands.UpdateShopDetails;
 using Modules.Shops.Domain.Repositories;
 using Moq;
-using Shared.Abstractions.Auth;
 using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bazaar.Modules.Shops.Tests.Unit.Application
 {
