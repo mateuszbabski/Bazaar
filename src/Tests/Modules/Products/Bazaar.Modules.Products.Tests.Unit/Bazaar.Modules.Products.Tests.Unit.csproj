@@ -22,4 +22,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Modules\Products\Modules.Products.Application\Modules.Products.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\Modules\Products\Modules.Products.Domain\Modules.Products.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

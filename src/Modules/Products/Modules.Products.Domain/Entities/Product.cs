@@ -36,13 +36,13 @@ namespace Modules.Products.Domain.Entities
             ShopId = shopId;
             IsAvailable = true;
         }
-        internal static Product CreateProduct(ProductName productName,
-                                              ProductDescription productDescription,
-                                              ProductCategory productCategory,
-                                              Weight weightPerUnit,
-                                              MoneyValue price,
-                                              ProductUnit unit,
-                                              ProductShopId shopId)
+        public static Product CreateProduct(ProductName productName,
+                                            ProductDescription productDescription,
+                                            ProductCategory productCategory,
+                                            Weight weightPerUnit,
+                                            MoneyValue price,
+                                            ProductUnit unit,
+                                            ProductShopId shopId)
         {
             var product = new Product(productName,
                                       productDescription,
@@ -90,6 +90,12 @@ namespace Modules.Products.Domain.Entities
                 Unit = new ProductUnit(unit);
         }
 
+        internal void SetWeight(decimal weight)
+        {
+            if (!string.IsNullOrEmpty(weight.ToString()))
+                WeightPerUnit = new Weight(weight);
+        }
+
         internal void SetName(string productName)
         {
             if (!string.IsNullOrEmpty(productName))
@@ -100,6 +106,12 @@ namespace Modules.Products.Domain.Entities
         {
             if (!string.IsNullOrEmpty(productDescription))
                 ProductDescription = new ProductDescription(productDescription);
+        }
+
+        internal void SetCategory(string productCategory)
+        {
+            if (!string.IsNullOrEmpty(productCategory))
+                ProductCategory = new ProductCategory(productCategory);
         }
 
         public MoneyValue GetPrice()

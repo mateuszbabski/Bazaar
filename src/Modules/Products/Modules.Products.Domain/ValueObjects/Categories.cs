@@ -16,7 +16,7 @@ namespace Modules.Products.Domain.ValueObjects
         {
             _categories = new List<string>
             {
-
+                "Food"
             };
         }
     }
