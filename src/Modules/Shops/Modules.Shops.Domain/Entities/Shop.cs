@@ -89,6 +89,8 @@ namespace Modules.Shops.Domain.Entities
             SetOwnerName(ownerName);
             SetContactNumber(contactNumber);
             SetTaxNumber(taxNumber);
+
+            this.AddDomainEvent(new ShopDetailsUpdatedDomainEvent(this));
         }
 
         internal void SetAddress(Address shopAddress)
