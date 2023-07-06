@@ -21,12 +21,14 @@ namespace Bazaar.Modules.Products.Tests.Unit.Domain
                                                 "piece",
                                                 Guid.NewGuid());
 
+            var eventList = product.DomainEvents.ToList();
+
             Assert.NotNull(product);
             Assert.IsType<Product>(product);
             Assert.IsType<ProductId>(product.Id);
             Assert.Equal("productName", product.ProductName);
             Assert.Equal(10, product.Price.Amount);
-            Assert.IsType<ProductAddedToShopDomainEvent>(product.DomainEvents.FirstOrDefault());
+            Assert.IsType<ProductAddedToShopDomainEvent>(eventList.FirstOrDefault());
         }
 
         [Fact]
@@ -99,8 +101,10 @@ namespace Bazaar.Modules.Products.Tests.Unit.Domain
             var product = ProductFactory.GetProduct();
             product.ChangeProductDetails("updated Name", "", "", "");
 
+            var eventList = product.DomainEvents.ToList();
+
             Assert.Equal("updated Name", product.ProductName);
-            Assert.IsType<ProductDetailsChangedDomainEvent>(product.DomainEvents.Last());
+            Assert.IsType<ProductDetailsChangedDomainEvent>(eventList.Last());
         }
 
         [Fact]
@@ -109,8 +113,10 @@ namespace Bazaar.Modules.Products.Tests.Unit.Domain
             var product = ProductFactory.GetProduct();
             product.ChangeProductPrice(50, "USD");
 
+            var eventList = product.DomainEvents.ToList();
+
             Assert.Equal(50, product.Price.Amount);
-            Assert.IsType<ProductPriceChangedDomainEvent>(product.DomainEvents.Last());
+            Assert.IsType<ProductPriceChangedDomainEvent>(eventList.Last());
         }
 
         [Fact]
@@ -119,8 +125,36 @@ namespace Bazaar.Modules.Products.Tests.Unit.Domain
             var product = ProductFactory.GetProduct();
             product.ChangeProductWeightAndUnit(5, "piece");
 
+            var eventList = product.DomainEvents.ToList();
+
             Assert.Equal(5, product.WeightPerUnit);
-            Assert.IsType<ProductWeightChangedDomainEvent>(product.DomainEvents.Last());
+            Assert.IsType<ProductWeightChangedDomainEvent>(eventList.Last());
+        }
+
+        [Fact]
+        public void UpdateProductWeight_Throws_IfWeightIsInvalid()
+        {
+            var product = ProductFactory.GetProduct();
+
+            var act = Assert.Throws<InvalidWeightException>(() =>
+                          product.ChangeProductWeightAndUnit(0, "piece"));
+
+
+            Assert.Equal(1, product.WeightPerUnit);
+            Assert.IsType<InvalidWeightException>(act);
+        }
+
+        [Fact]
+        public void UpdateProductWeight_Throws_IfWeightIsNull()
+        {
+            var product = ProductFactory.GetProduct();
+
+            var act = Assert.Throws<InvalidWeightException>(() =>
+                          product.ChangeProductWeightAndUnit(0, "piece"));
+
+
+            Assert.Equal(1, product.WeightPerUnit);
+            Assert.IsType<InvalidWeightException>(act);
         }
     }
 }
