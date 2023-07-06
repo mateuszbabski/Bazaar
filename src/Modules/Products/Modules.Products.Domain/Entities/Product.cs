@@ -36,6 +36,7 @@ namespace Modules.Products.Domain.Entities
             ShopId = shopId;
             IsAvailable = true;
         }
+
         public static Product CreateProduct(ProductName productName,
                                             ProductDescription productDescription,
                                             ProductCategory productCategory,
@@ -88,43 +89,48 @@ namespace Modules.Products.Domain.Entities
             this.AddDomainEvent(new ProductPriceChangedDomainEvent(this));
         }
 
-        internal void SetPrice(MoneyValue price)
+        private void SetPrice(MoneyValue price)
         {
             Price = price;            
         }
 
+        // TO TEST METHOD
         public void ChangeProductWeightAndUnit(decimal weight, string unit)
         {
-            SetWeight(weight);
+            if(!weight.Equals(null) && !string.IsNullOrEmpty(weight.ToString()))
+            {
+                SetWeight(weight);
+            }
+
             SetUnit(unit);
             this.AddDomainEvent(new ProductWeightChangedDomainEvent(this));
         }
 
-        internal void SetWeight(decimal weight)
+        private void SetWeight(decimal weight)
         {
             if (!string.IsNullOrEmpty(weight.ToString()))
                 WeightPerUnit = new Weight(weight);
         }
 
-        internal void SetUnit(string unit)
+        private void SetUnit(string unit)
         {
             if (!string.IsNullOrEmpty(unit))
                 Unit = new ProductUnit(unit);
         }
 
-        internal void SetName(string productName)
+        private void SetName(string productName)
         {
             if (!string.IsNullOrEmpty(productName))
                 ProductName = new ProductName(productName);
         }
 
-        internal void SetDescription(string productDescription)
+        private void SetDescription(string productDescription)
         {
             if (!string.IsNullOrEmpty(productDescription))
                 ProductDescription = new ProductDescription(productDescription);
         }
 
-        internal void SetCategory(string productCategory)
+        private void SetCategory(string productCategory)
         {
             if (!string.IsNullOrEmpty(productCategory))
                 ProductCategory = ProductCategory.Create(productCategory);
@@ -135,13 +141,13 @@ namespace Modules.Products.Domain.Entities
             return Price;
         }
 
-        internal void Remove()
+        private void Remove()
         {
             IsAvailable = false;
             this.AddDomainEvent(new ProductRemovedFromShopDomainEvent(this));
         }
 
-        internal void Restore()
+        private void Restore()
         {
             IsAvailable = true;
             this.AddDomainEvent(new ProductRestoredDomainEvent(this));
