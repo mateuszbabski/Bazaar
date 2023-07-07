@@ -1,6 +1,9 @@
-﻿namespace Modules.Products.Application.Commands.ChangeProductAvailability
+﻿using MediatR;
+
+namespace Modules.Products.Application.Commands.ChangeProductAvailability
 {
-    internal class ChangeProductAvailabilityCommand
+    public class ChangeProductAvailabilityCommand : IRequest<Guid>
     {
+        public Guid Id { get; set; }
     }
 }
