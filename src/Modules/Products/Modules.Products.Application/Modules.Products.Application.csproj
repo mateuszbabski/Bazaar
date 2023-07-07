@@ -8,8 +8,6 @@
   <ItemGroup>
     <Folder Include="Events\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Queries\GetAllProducts\" />
-    <Folder Include="Queries\GetProductById\" />
     <Folder Include="Queries\GetProductsByName\" />
     <Folder Include="Queries\GetProductsByCategory\" />
     <Folder Include="Queries\GetProductsByPriceRange\" />
