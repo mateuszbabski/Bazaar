@@ -27,7 +27,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
             var shop = ShopFactory.GetShop();
             var productListMock = new ProductListMock(shop);  
             
-            var productList = productListMock.Products.ToList();
+            var productList = productListMock.Products;
 
             _productRepositoryMock.Setup(x => x.GetAllProducts()).ReturnsAsync(productList);
 
