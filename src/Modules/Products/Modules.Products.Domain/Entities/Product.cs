@@ -94,15 +94,13 @@ namespace Modules.Products.Domain.Entities
             Price = price;            
         }
 
-        // TO TEST METHOD
-        public void ChangeProductWeightAndUnit(decimal weight, string unit)
+        public void ChangeProductWeight(decimal weight)
         {
             if(!weight.Equals(null) && !string.IsNullOrEmpty(weight.ToString()))
             {
                 SetWeight(weight);
             }
-
-            SetUnit(unit);
+            
             this.AddDomainEvent(new ProductWeightChangedDomainEvent(this));
         }
 

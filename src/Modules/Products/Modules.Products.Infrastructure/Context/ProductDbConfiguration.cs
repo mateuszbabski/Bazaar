@@ -21,7 +21,7 @@ namespace Modules.Products.Infrastructure.Context
                    .HasConversion(c => c.Value, c => new ProductDescription(c));
 
             //builder.Property(c => c.ProductCategory)
-            //       .HasConversion(c => c.CategoryName, c => new ProductCategory(c));
+            //       .HasConversion(c => c.CategoryName, c => ProductCategory.Create(c));
 
             builder.OwnsOne(c => c.ProductCategory, mv =>
             {
