@@ -1,6 +1,11 @@
-﻿namespace Modules.Products.Application.Commands.ChangeProductPrice
+﻿using MediatR;
+
+namespace Modules.Products.Application.Commands.ChangeProductPrice
 {
-    internal class ChangeProductPriceCommand
+    public class ChangeProductPriceCommand : IRequest<Guid>
     {
+        public Guid Id { get; set; }
+        public decimal Amount { get; set; }
+        public string Currency { get; set; }
     }
 }
