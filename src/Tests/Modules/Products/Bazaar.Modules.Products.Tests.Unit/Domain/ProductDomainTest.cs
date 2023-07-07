@@ -123,7 +123,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Domain
         public void UpdateProductWeight_ReturnsProduct_IfAllParamsValid()
         {
             var product = ProductFactory.GetProduct();
-            product.ChangeProductWeightAndUnit(5, "piece");
+            product.ChangeProductWeight(5);
 
             var eventList = product.DomainEvents.ToList();
 
@@ -137,20 +137,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Domain
             var product = ProductFactory.GetProduct();
 
             var act = Assert.Throws<InvalidWeightException>(() =>
-                          product.ChangeProductWeightAndUnit(0, "piece"));
-
-
-            Assert.Equal(1, product.WeightPerUnit);
-            Assert.IsType<InvalidWeightException>(act);
-        }
-
-        [Fact]
-        public void UpdateProductWeight_Throws_IfWeightIsNull()
-        {
-            var product = ProductFactory.GetProduct();
-
-            var act = Assert.Throws<InvalidWeightException>(() =>
-                          product.ChangeProductWeightAndUnit(0, "piece"));
+                          product.ChangeProductWeight(0));
 
 
             Assert.Equal(1, product.WeightPerUnit);

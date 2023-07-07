@@ -29,7 +29,7 @@ namespace Modules.Shops.Application.Commands.UpdateShopDetails
             {
                 throw new BadRequestException("Shop not found");
             }
-
+            
             shop.UpdateShopDetails(command.OwnerName,
                                    command.OwnerLastName,
                                    command.ShopName,
