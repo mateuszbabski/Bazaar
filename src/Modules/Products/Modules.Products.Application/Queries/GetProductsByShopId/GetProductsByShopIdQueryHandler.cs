@@ -5,27 +5,27 @@ using Modules.Products.Domain.Repositories;
 using Shared.Abstractions.Queries;
 using Shared.Application.Exceptions;
 using Shared.Application.Queries;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace Modules.Products.Application.Queries.GetProductsByCategory
+namespace Modules.Products.Application.Queries.GetProductsByShopId
 {
-    public class GetProductsByCategoryQueryHandler : IRequestHandler<GetProductsByCategoryQuery, PagedList<ProductDto>>
+    public class GetProductsByShopIdQueryHandler : IRequestHandler<GetProductsByShopIdQuery, PagedList<ProductDto>>
     {
         private readonly IProductRepository _productRepository;
         private readonly IQueryProcessor<Product> _queryProcessor;
 
-        public GetProductsByCategoryQueryHandler(IProductRepository productRepository, IQueryProcessor<Product> queryProcessor)
+        public GetProductsByShopIdQueryHandler(IProductRepository productRepository, IQueryProcessor<Product> queryProcessor)
         {
             _productRepository = productRepository;
             _queryProcessor = queryProcessor;
         }
 
-        public async Task<PagedList<ProductDto>> Handle(GetProductsByCategoryQuery query, CancellationToken cancellationToken)
+        public async Task<PagedList<ProductDto>> Handle(GetProductsByShopIdQuery query, CancellationToken cancellationToken)
         {
-            var baseQuery = await _productRepository.GetProductsByCategory(query.CategoryName)
-                ?? throw new NotFoundException("Shops not found");
+            var baseQuery = await _productRepository.GetProductsByShopId(query.ShopId)
+            ?? throw new NotFoundException("Shops not found");
 
             var sortedQuery = _queryProcessor.SortQuery(baseQuery.AsQueryable(), query.SortBy, query.SortDirection);
-
             var pagedProducts = _queryProcessor.PageQuery(sortedQuery.AsEnumerable(), query.PageNumber, query.PageSize);
 
             var productListDto = ProductDto.CreateDtoFromObject(pagedProducts);
