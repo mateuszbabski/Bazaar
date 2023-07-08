@@ -62,6 +62,19 @@ $ dotnet run
 - Sign in
 - Emitting domain events that account was created
 
+### Shops module:
+- Creating a shop account
+- Sign in
+- Emitting domain events that account was created/updated
+- Update shop details
+- Querying shops by localization and its name
+
+### Products module:
+- Add product to store (only for shop account)
+- Update / edit product details (price, weight, availability etc.)
+- Emitting domain events that product was created/updated
+- Querying products by name, price, shop, category etc.
+
 ### Shared layer:
 - Auth helpers - hashing service, token manager, jwt settings
 - Email uniqueness checker
@@ -73,21 +86,9 @@ $ dotnet run
 - Module scanner/loader
 - Currency converter
 - Business rules checker
+- Query Processor
 
-Copied from other readme - to be rewritten:
-Done:
-- Register/Login for Customer and Shop separately
-- Adding, updating and deleting products available to buy
-- Creating shopping cart. Adding, removing products and deleting cart
-- Placing and cancelling orders
-- Splitting order by shops
-- Creating invoice for customer and split them for shops
-- Currency conversion while adding to cart various products
-- Change shopping cart currency
-- Domain unit test
-- Domain events
-
-To implement:
+### To implement:
 - Autoupdate prices while checking out cart/placing order basis on current rates
 - Searching products
 - Notify all shops owners about products to prepare
