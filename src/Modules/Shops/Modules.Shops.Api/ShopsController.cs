@@ -27,7 +27,7 @@ namespace Modules.Shops.Api
             _mediator = mediator;
         }
 
-        [HttpPost("sign-up")]
+        [HttpPost("SignUp")]
         [SwaggerOperation("Sign up")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -37,7 +37,7 @@ namespace Modules.Shops.Api
             return Ok(result);
         }
 
-        [HttpPost("sign-in")]
+        [HttpPost("SignIn")]
         [SwaggerOperation("Sign in")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -62,12 +62,14 @@ namespace Modules.Shops.Api
         [SwaggerOperation("Get shop by Id")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ShopDetailsDto>> GetShopById(Guid id)
+        public async Task<ActionResult<ShopDetailsDto>> GetShopById([FromQuery] GetShopByIdQuery query)
+            //public async Task<ActionResult<ShopDetailsDto>> GetShopById(Guid id)
         {
-            var shop = await _mediator.Send(new GetShopByIdQuery()
-            {
-                Id = id
-            });
+            //var shop = await _mediator.Send(new GetShopByIdQuery()
+            //{
+            //    Id = id
+            //});
+            var shop = await _mediator.Send(query);
 
             return Ok(shop);
         }

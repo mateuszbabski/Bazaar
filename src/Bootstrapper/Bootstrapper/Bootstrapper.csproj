@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Modules\Customers\Modules.Customers.Api\Modules.Customers.Api.csproj" />
+    <ProjectReference Include="..\..\Modules\Products\Modules.Products.Api\Modules.Products.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Shops\Modules.Shops.Api\Modules.Shops.Api.csproj" />
     <ProjectReference Include="..\..\Shared\Shared.Abstractions\Shared.Abstractions.csproj" />
     <ProjectReference Include="..\..\Shared\Shared.Application\Shared.Application.csproj" />
