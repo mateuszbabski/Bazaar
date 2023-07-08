@@ -22,7 +22,7 @@ namespace Modules.Products.Application.Queries.GetProductsByCategory
         public async Task<PagedList<ProductDto>> Handle(GetProductsByCategoryQuery query, CancellationToken cancellationToken)
         {
             var baseQuery = await _productRepository.GetProductsByCategory(query.CategoryName)
-                ?? throw new NotFoundException("Shops not found");
+                ?? throw new NotFoundException("Products not found");
 
             var sortedQuery = _queryProcessor.SortQuery(baseQuery.AsQueryable(), query.SortBy, query.SortDirection);
 

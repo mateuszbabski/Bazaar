@@ -22,7 +22,7 @@ namespace Modules.Products.Application.Queries.GetProductsByName
         public async Task<PagedList<ProductDto>> Handle(GetProductsByNameQuery query, CancellationToken cancellationToken)
         {
             var baseQuery = await _productRepository.GetProductsByName(query.ProductName)
-            ?? throw new NotFoundException("Shops not found");
+            ?? throw new NotFoundException("Products not found");
 
             var sortedQuery = _queryProcessor.SortQuery(baseQuery.AsQueryable(), query.SortBy, query.SortDirection);
             var pagedProducts = _queryProcessor.PageQuery(sortedQuery.AsEnumerable(), query.PageNumber, query.PageSize);
