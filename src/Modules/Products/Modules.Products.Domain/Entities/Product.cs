@@ -85,6 +85,11 @@ namespace Modules.Products.Domain.Entities
 
         public void ChangeProductPrice(decimal amount, string currency)
         {
+            if(String.IsNullOrEmpty(currency))
+            {
+                currency = this.Price.Currency;
+            }
+
             SetPrice(MoneyValue.Of(amount, currency));
             this.AddDomainEvent(new ProductPriceChangedDomainEvent(this));
         }
