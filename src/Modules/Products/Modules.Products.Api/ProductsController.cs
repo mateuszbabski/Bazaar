@@ -36,6 +36,7 @@ namespace Modules.Products.Api
         [SwaggerOperation("Add product")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<Guid>> AddProduct(AddProductCommand command)
         {
             var result = await _mediator.Send(command);
@@ -47,6 +48,7 @@ namespace Modules.Products.Api
         [SwaggerOperation("Change product availability")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Guid>> ChangeProductAvailability(ChangeProductAvailabilityCommand command)
         {
@@ -59,6 +61,7 @@ namespace Modules.Products.Api
         [SwaggerOperation("Change product details")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Guid>> ChangeProductDetails(ChangeProductDetailsCommand command)
         {
@@ -71,6 +74,7 @@ namespace Modules.Products.Api
         [SwaggerOperation("Change product price")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Guid>> ChangeProductPrice(ChangeProductPriceCommand command)
         {
@@ -83,6 +87,7 @@ namespace Modules.Products.Api
         [SwaggerOperation("Change product weight")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Guid>> ChangeProductWeight(ChangeProductWeightCommand command)
         {
@@ -105,11 +110,14 @@ namespace Modules.Products.Api
         [SwaggerOperation("Get product by Id")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ProductDetailsDto>> GetProductById([FromQuery] GetProductByIdQuery query)
+        public async Task<ActionResult<ProductDetailsDto>> GetProductById(Guid id)
         {
-            var shop = await _mediator.Send(query);
+            var product = await _mediator.Send(new GetProductByIdQuery()
+            {
+                Id = id
+            });
 
-            return Ok(shop);
+            return Ok(product);
         }
 
         [HttpGet("GetProductByCategory")]

@@ -12,6 +12,7 @@ namespace Modules.Products.Application.Dtos
         public string ProductPriceCurrency { get; init; }
         public decimal WeightPerUnit { get; init; }
         public string Unit { get; init; }
+        public Guid ShopId { get; init; }
         public bool IsAvailable { get; init; }
 
         internal static ProductDetailsDto CreateDtoFromObject(Product product)
@@ -26,6 +27,7 @@ namespace Modules.Products.Application.Dtos
                 ProductPriceCurrency = product.Price.Currency,
                 WeightPerUnit = product.WeightPerUnit,
                 Unit = product.Unit,
+                ShopId = product.ShopId,
                 IsAvailable = product.IsAvailable,
             };
         }

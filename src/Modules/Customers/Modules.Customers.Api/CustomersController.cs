@@ -21,7 +21,7 @@ namespace Modules.Customers.Api
             _mediator = mediator;
         }
 
-        [HttpPost("sign-up")]
+        [HttpPost("SignUp")]
         [SwaggerOperation("Sign up")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -31,7 +31,7 @@ namespace Modules.Customers.Api
             return Ok(result);
         }
 
-        [HttpPost("sign-in")]
+        [HttpPost("SignIn")]
         [SwaggerOperation("Sign in")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -41,8 +41,8 @@ namespace Modules.Customers.Api
             return Ok(result);
         }
 
-        [HttpGet("get-customer")]
-        [SwaggerOperation("Get customer")]
+        [HttpGet("GetCustomerById")]
+        [SwaggerOperation("Get customer by id")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<CustomerDto>> GetCustomerAsync([FromQuery] GetCustomerByIdQuery query)

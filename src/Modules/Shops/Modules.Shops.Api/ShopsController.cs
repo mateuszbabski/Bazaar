@@ -52,6 +52,7 @@ namespace Modules.Shops.Api
         [SwaggerOperation("Update shop details")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult> UpdateShopDetails(UpdateShopDetailsCommand command)
         {
             await _mediator.Send(command);
@@ -61,15 +62,13 @@ namespace Modules.Shops.Api
         [HttpGet("{id}", Name = "GetShopById")]
         [SwaggerOperation("Get shop by Id")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ShopDetailsDto>> GetShopById([FromQuery] GetShopByIdQuery query)
-            //public async Task<ActionResult<ShopDetailsDto>> GetShopById(Guid id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]        
+        public async Task<ActionResult<ShopDetailsDto>> GetShopById(Guid id)
         {
-            //var shop = await _mediator.Send(new GetShopByIdQuery()
-            //{
-            //    Id = id
-            //});
-            var shop = await _mediator.Send(query);
+            var shop = await _mediator.Send(new GetShopByIdQuery()
+            {
+                Id = id
+            });            
 
             return Ok(shop);
         }

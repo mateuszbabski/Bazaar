@@ -41,9 +41,15 @@ namespace Modules.Products.Infrastructure.Repository
 
         public async Task<IEnumerable<Product>> GetProductsByName(string name)
         {
-            return await _dbContext.Products.Where(x => name == null
-                                                        || x.ProductName.Value.ToLower().Contains(name.ToLower()))
-                                            .ToListAsync();
+            if (String.IsNullOrEmpty(name))
+            {
+                return await _dbContext.Products.ToListAsync();
+            }
+
+            var allProducts = await _dbContext.Products.ToListAsync();
+            var filteredProductList = allProducts.Where(x => x.ProductName.Value.ToLower().Contains(name.ToLower()));
+
+            return filteredProductList;
         }
 
         public async Task<IEnumerable<Product>> GetProductsByShopId(ProductShopId shopId)
