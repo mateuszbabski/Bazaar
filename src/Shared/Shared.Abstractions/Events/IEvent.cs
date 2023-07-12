@@ -1,6 +1,8 @@
-﻿namespace Shared.Abstractions.Events
+﻿using MediatR;
+
+namespace Shared.Abstractions.Events
 {
-    public interface IEvent
+    public interface IEvent : INotification
     {
     }
 }
