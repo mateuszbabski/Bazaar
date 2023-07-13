@@ -4,12 +4,13 @@ namespace Shared.Domain
 {
     public abstract class Entity
     {
-        private readonly List<IDomainEvent> _domainEvents = new();
+        private List<IDomainEvent> _domainEvents = new();
 
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
         protected void AddDomainEvent(IDomainEvent domainEvent)
         {
+            _domainEvents ??= new List<IDomainEvent>();
             _domainEvents.Add(domainEvent);
         }
 

@@ -37,11 +37,12 @@ namespace Shared.Infrastructure
             services.AddHttpContextAccessor();
             services.AddCurrentUserProvider();
 
+            services.AddSingleton(new UnitOfWorkTypeRegistry());
+            services.AddSingleton(new DomainEventsTypeRegistry());
+
             services.AddEvents(assemblies);
             services.AddDomainEventsDispatcher(assemblies);                      
 
-            services.AddSingleton(new UnitOfWorkTypeRegistry());
-            services.AddSingleton(new DomainEventsTypeRegistry());
 
             services.AddHttpClient<ICurrencyConverter, CurrencyConverter>();
 

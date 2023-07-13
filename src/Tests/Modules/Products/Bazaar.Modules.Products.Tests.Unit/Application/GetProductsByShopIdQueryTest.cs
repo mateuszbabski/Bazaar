@@ -1,6 +1,5 @@
 ﻿using Modules.Products.Application.Dtos;
 using Modules.Products.Application.Queries.GetProductsByShopId;
-using Modules.Products.Application.Queries.GetProductsByShopId;
 using Modules.Products.Domain.Entities;
 using Modules.Products.Domain.Repositories;
 using Moq;

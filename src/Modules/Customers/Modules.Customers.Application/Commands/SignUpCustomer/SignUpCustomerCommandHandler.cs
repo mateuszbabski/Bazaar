@@ -2,6 +2,7 @@
 using MediatR;
 using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
+using Serilog;
 using Shared.Abstractions.Auth;
 using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
@@ -52,7 +53,7 @@ namespace Modules.Customers.Application.Commands.SignUpCustomer
                                            command.TelephoneNumber);
 
             await _customerRepository.Add(customer);
-
+            Log.Information("events count: {@ev}", customer.DomainEvents.Count);
             await _unitOfWork.CommitAndDispatchEventsAsync();          
 
             var token = _tokenManager.GenerateToken(customer.Id, customer.Email, customer.Role);
