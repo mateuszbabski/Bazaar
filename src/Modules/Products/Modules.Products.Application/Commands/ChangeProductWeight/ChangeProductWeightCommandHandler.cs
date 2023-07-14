@@ -35,7 +35,7 @@ namespace Modules.Products.Application.Commands.ChangeProductWeight
 
             product.ChangeProductWeight(command.WeightPerUnit);
 
-            await _unitOfWork.CommitAndDispatchEventsAsync();
+            await _unitOfWork.CommitAndDispatchDomainEventsAsync(product);
 
             return product.Id;
         }

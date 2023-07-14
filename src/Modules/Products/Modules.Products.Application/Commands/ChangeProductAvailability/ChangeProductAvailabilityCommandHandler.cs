@@ -33,7 +33,7 @@ namespace Modules.Products.Application.Commands.ChangeProductAvailability
 
             product.ChangeAvailability();
 
-            await _unitOfWork.CommitAndDispatchEventsAsync();
+            await _unitOfWork.CommitAndDispatchDomainEventsAsync(product);
 
             return product.Id;
         }

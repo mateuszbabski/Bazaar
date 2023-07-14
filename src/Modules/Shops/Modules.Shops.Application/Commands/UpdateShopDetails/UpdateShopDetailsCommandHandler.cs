@@ -40,7 +40,7 @@ namespace Modules.Shops.Application.Commands.UpdateShopDetails
                                    command.TaxNumber,
                                    command.ContactNumber);
 
-            await _unitOfWork.CommitAndDispatchEventsAsync();
+            await _unitOfWork.CommitAndDispatchDomainEventsAsync(shop);
         }
     }
 }

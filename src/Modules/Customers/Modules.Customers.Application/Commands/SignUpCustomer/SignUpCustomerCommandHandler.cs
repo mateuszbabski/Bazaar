@@ -56,8 +56,8 @@ namespace Modules.Customers.Application.Commands.SignUpCustomer
 
             await _customerRepository.Add(customer);
             
-            Log.Information("events count: {@ev}", customer.DomainEvents.Count);
-            await _unitOfWork.CommitAndDispatchDomainEventsAsync(customer);          
+            await _unitOfWork.CommitAndDispatchDomainEventsAsync(customer);
+            //await _unitOfWork.CommitAndDispatchEventsAsync();
 
             var token = _tokenManager.GenerateToken(customer.Id, customer.Email, customer.Role);
 

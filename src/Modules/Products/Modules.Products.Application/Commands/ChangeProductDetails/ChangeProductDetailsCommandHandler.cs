@@ -37,7 +37,7 @@ namespace Modules.Products.Application.Commands.ChangeProductDetails
                                          command.ProductCategory,
                                          command.Unit);
 
-            await _unitOfWork.CommitAndDispatchEventsAsync();
+            await _unitOfWork.CommitAndDispatchDomainEventsAsync(product);
 
             return product.Id;
         }

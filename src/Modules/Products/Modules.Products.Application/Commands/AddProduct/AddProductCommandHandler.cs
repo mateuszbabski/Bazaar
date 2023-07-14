@@ -46,7 +46,7 @@ namespace Modules.Products.Application.Commands.AddProduct
 
             await _productRepository.Add(product);
 
-            await _unitOfWork.CommitAndDispatchEventsAsync();
+            await _unitOfWork.CommitAndDispatchDomainEventsAsync(product);
 
             return product.Id;
         }

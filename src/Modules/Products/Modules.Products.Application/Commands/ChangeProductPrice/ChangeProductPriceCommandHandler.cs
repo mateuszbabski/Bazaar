@@ -34,7 +34,7 @@ namespace Modules.Products.Application.Commands.ChangeProductPrice
 
             product.ChangeProductPrice(command.Amount, command.Currency);
 
-            await _unitOfWork.CommitAndDispatchEventsAsync();
+            await _unitOfWork.CommitAndDispatchDomainEventsAsync(product);
 
             return product.Id;
         }
