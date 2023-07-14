@@ -10,13 +10,18 @@ namespace Shared.Infrastructure.Events
     {
         public static IServiceCollection AddEvents(this IServiceCollection services, params Assembly[] assemblies)
         {
-            services.TryAddSingleton<IEventDispatcher, EventDispatcher>();
+            services.AddScoped<IEventDispatcher, EventDispatcher>();
+
+            var mediatorHandlerTypes = services
+                .Where(descriptor => descriptor.ServiceType.IsGenericType &&
+                                     descriptor.ServiceType.GetGenericTypeDefinition() == typeof(INotificationHandler<>))
+                .Select(descriptor => descriptor.ImplementationType);
 
             services.Scan(s => s.FromAssemblies(assemblies)
-                    //.AddClasses(c => c.AssignableTo(typeof(IEventHandler<>)))
-                    .AddClasses(c => c.AssignableTo(typeof(INotificationHandler<>)))
+                    .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>))
+                    .Where(type => !mediatorHandlerTypes.Contains(type)))
                     .AsImplementedInterfaces()
-                    .WithSingletonLifetime());
+                    .WithScopedLifetime());
 
             return services;
         }

@@ -15,7 +15,7 @@ namespace Shared.Infrastructure.Events
         {
             using var scope = _serviceProvider.CreateScope();
             var handlers = scope.ServiceProvider.GetServices<IEventHandler<TEvent>>();
-            var tasks = handlers.Select(x => x.HandleAsync(@event, cancellationToken));
+            var tasks = handlers.Select(x => x.Handle(@event, cancellationToken));
             await Task.WhenAll(tasks);
         }
     }

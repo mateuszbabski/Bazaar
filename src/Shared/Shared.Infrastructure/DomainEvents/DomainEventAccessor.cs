@@ -5,7 +5,7 @@ using Shared.Domain;
 
 namespace Shared.Infrastructure.DomainEvents
 {
-    public class DomainEventsAccessor<T> : IDomainEventsAccessor<T> where T : DbContext
+    public class DomainEventsAccessor<T> : IDomainEventsAccessor where T : DbContext
     {
         private readonly T _dbContext;
 
