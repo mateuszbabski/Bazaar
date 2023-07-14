@@ -1,12 +1,13 @@
 ﻿using MediatR;
 using Modules.Shops.Domain.Events;
 using Serilog;
+using Shared.Abstractions.DomainEvents;
 using Shared.Abstractions.Time;
 
 namespace Modules.Shops.Application.Commands.SignUpShop
 {
     internal sealed class ShopCreatedDomainEventHandler
-        : INotificationHandler<ShopCreatedDomainEvent>
+        : IDomainEventHandler<ShopCreatedDomainEvent>
     {
         private readonly IDateTimeProvider _dateTimeProvider;
 

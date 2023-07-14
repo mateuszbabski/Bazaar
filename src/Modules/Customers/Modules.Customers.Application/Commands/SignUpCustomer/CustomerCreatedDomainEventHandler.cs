@@ -1,12 +1,13 @@
 ﻿using MediatR;
 using Modules.Customers.Domain.Events;
 using Serilog;
+using Shared.Abstractions.DomainEvents;
 using Shared.Abstractions.Time;
 
 namespace Modules.Customers.Application.Commands.SignUpCustomer
 {
     internal sealed class CustomerCreatedDomainEventHandler
-        : INotificationHandler<CustomerCreatedDomainEvent>
+        : IDomainEventHandler<CustomerCreatedDomainEvent>
     {
         private readonly IDateTimeProvider _dateTimeProvider;
 
@@ -18,7 +19,7 @@ namespace Modules.Customers.Application.Commands.SignUpCustomer
         {
             Log.Information("Customer created at: {@date}", _dateTimeProvider.UtcNow);
 
-            // send welcome email
+            // send welcome email            
         }
     }
 }

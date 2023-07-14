@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
 using Serilog;
@@ -8,6 +9,7 @@ using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
 using Shared.Application.Exceptions;
 using Shared.Domain.ValueObjects;
+using System.Reflection;
 
 namespace Modules.Customers.Application.Commands.SignUpCustomer
 {
@@ -53,8 +55,9 @@ namespace Modules.Customers.Application.Commands.SignUpCustomer
                                            command.TelephoneNumber);
 
             await _customerRepository.Add(customer);
+            
             Log.Information("events count: {@ev}", customer.DomainEvents.Count);
-            await _unitOfWork.CommitAndDispatchEventsAsync();          
+            await _unitOfWork.CommitAndDispatchDomainEventsAsync(customer);          
 
             var token = _tokenManager.GenerateToken(customer.Id, customer.Email, customer.Role);
 

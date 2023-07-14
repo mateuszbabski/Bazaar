@@ -54,7 +54,8 @@ namespace Modules.Shops.Application.Commands.SignUpShop
 
             await _shopRepository.Add(shop);
 
-            await _unitOfWork.CommitAndDispatchEventsAsync();
+            await _unitOfWork.CommitAndDispatchDomainEventsAsync(shop);
+            //await _unitOfWork.CommitAndDispatchEventsAsync();
 
             var token = _tokenManager.GenerateToken(shop.Id, shop.Email, shop.Role);
 

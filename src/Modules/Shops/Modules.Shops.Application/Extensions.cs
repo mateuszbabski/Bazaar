@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Shops.Application.Commands.SignUpShop;
 using Modules.Shops.Application.Services;
 using Modules.Shops.Domain.Entities;
+using Modules.Shops.Domain.Events;
 using Shared.Application.Queries;
 
 namespace Modules.Shops.Application
