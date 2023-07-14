@@ -1,7 +1,9 @@
-﻿namespace Shared.Abstractions.Events
+﻿using MediatR;
+
+namespace Shared.Abstractions.Events
 {
-    public interface IEventHandler<in TEvent> where TEvent : class, IEvent
-    {
-        Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
+    public interface IEventHandler<in TEvent> : INotificationHandler<TEvent> 
+        where TEvent : class, IEvent
+    {        
     }
 }
