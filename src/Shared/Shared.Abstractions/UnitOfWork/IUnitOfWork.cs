@@ -6,5 +6,7 @@ namespace Shared.Abstractions.UnitOfWork
     {
         Task<int> CommitChangesAsync();
         Task CommitAndDispatchEventsAsync();
+        Task CommitAndDispatchDomainEventsAsync<TEntity>(TEntity entity) 
+            where TEntity : Entity;
     }
 }
