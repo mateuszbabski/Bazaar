@@ -3,7 +3,7 @@ using Shared.Domain;
 
 namespace Modules.Products.Domain.Events
 {
-    public record ProductRemovedFromShopDomainEvent(Product Product) : IDomainEvent
+    public sealed record ProductRemovedFromShopDomainEvent(Product Product) : IDomainEvent
     {
     }
 }
