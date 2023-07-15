@@ -19,7 +19,8 @@ namespace Modules.Customers.Application.Commands.SignUpCustomer
         {
             Log.Information("Customer created at: {@date}", _dateTimeProvider.UtcNow);
 
-            // send welcome email            
+            // send welcome email
+            await Task.CompletedTask;
         }
     }
 }

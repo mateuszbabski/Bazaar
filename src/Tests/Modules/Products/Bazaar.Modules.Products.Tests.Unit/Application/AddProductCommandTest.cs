@@ -44,7 +44,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
             var result = await _sut.Handle(command, CancellationToken.None);
 
             _productRepositoryMock.Verify(x => x.Add(It.Is<Product>(x => x.Id.Value == result)), Times.Once);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Once);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Once);
 
             Assert.IsType<Guid>(result);
         }
@@ -68,7 +68,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
             var act = await Assert.ThrowsAsync<ForbidException>(() => _sut.Handle(command, CancellationToken.None));
 
             _productRepositoryMock.Verify(x => x.Add(It.IsAny<Product>()), Times.Never);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
 
             Assert.IsType<ForbidException>(act);
         }
@@ -93,7 +93,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
             var act = await Assert.ThrowsAsync<InvalidProductNameException>(() => _sut.Handle(command, CancellationToken.None));
 
             _productRepositoryMock.Verify(x => x.Add(It.IsAny<Product>()), Times.Never);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
 
             Assert.IsType<InvalidProductNameException>(act);
             Assert.Equal("Product name cannot be empty.", act.Message);
@@ -119,7 +119,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
             var act = await Assert.ThrowsAsync<InvalidPriceException>(() => _sut.Handle(command, CancellationToken.None));
 
             _productRepositoryMock.Verify(x => x.Add(It.IsAny<Product>()), Times.Never);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
 
             Assert.IsType<InvalidPriceException>(act);
             Assert.Equal("Money amount value cannot be zero or negative.", act.Message);
@@ -145,7 +145,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
             var act = await Assert.ThrowsAsync<InvalidProductCategoryException>(() => _sut.Handle(command, CancellationToken.None));
 
             _productRepositoryMock.Verify(x => x.Add(It.IsAny<Product>()), Times.Never);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
 
             Assert.IsType<InvalidProductCategoryException>(act);
             Assert.Equal("Invalid product category.", act.Message);

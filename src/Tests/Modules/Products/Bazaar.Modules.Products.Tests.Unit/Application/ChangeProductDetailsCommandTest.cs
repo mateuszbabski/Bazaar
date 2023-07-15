@@ -1,4 +1,5 @@
 ﻿using Modules.Products.Application.Commands.ChangeProductDetails;
+using Modules.Products.Domain.Entities;
 using Modules.Products.Domain.Exceptions;
 using Modules.Products.Domain.Repositories;
 using Moq;
@@ -42,7 +43,8 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
 
             await _sut.Handle(command, CancellationToken.None);
 
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Once);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Once);
+
             Assert.Equal("Updated name", productList.Products[0].ProductName);
             Assert.Equal("Updated description", productList.Products[0].ProductDescription);
             Assert.Equal("pcs", productList.Products[0].Unit);
@@ -65,7 +67,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
 
             await _sut.Handle(command, CancellationToken.None);
 
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Once);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Once);
             Assert.Equal("productName", productList.Products[0].ProductName);
         }
 
@@ -83,7 +85,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
             _currentUserServiceMock.Setup(s => s.UserId).Returns(shop.Id);
 
             var result = await Assert.ThrowsAsync<NotFoundException>(() => _sut.Handle(command, CancellationToken.None));
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
         }
 
         [Fact]
@@ -105,7 +107,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
                 => _sut.Handle(command, CancellationToken.None));
 
             Assert.IsType<InvalidProductCategoryException>(result);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
         }
     }
 }

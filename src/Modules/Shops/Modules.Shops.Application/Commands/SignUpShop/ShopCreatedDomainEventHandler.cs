@@ -20,6 +20,7 @@ namespace Modules.Shops.Application.Commands.SignUpShop
             Log.Information("Shop created at: {@date}", _dateTimeProvider.UtcNow);
 
             // send welcome email
+            await Task.CompletedTask;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Modules.Products.Application.Commands.ChangeProductPrice;
 using Modules.Products.Application.Commands.ChangeProductWeight;
+using Modules.Products.Domain.Entities;
 using Modules.Products.Domain.Repositories;
 using Moq;
 using Shared.Abstractions.UnitOfWork;
@@ -45,7 +46,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
             await _sut.Handle(command, CancellationToken.None);
 
             Assert.Equal(5, productList.Products[0].WeightPerUnit);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Once);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Once);
         }
 
         [Fact]
@@ -65,7 +66,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
 
             var result = await Assert.ThrowsAsync<NotFoundException>(()
                 => _sut.Handle(command, CancellationToken.None));
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
         }
 
         [Fact]
@@ -89,7 +90,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
                 => _sut.Handle(command, CancellationToken.None));
 
             Assert.Equal("Weight can't be equal or lower than 0.", result.Message);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
         }
     }
 }

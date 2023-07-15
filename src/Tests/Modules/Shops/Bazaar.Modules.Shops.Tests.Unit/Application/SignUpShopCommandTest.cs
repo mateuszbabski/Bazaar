@@ -49,7 +49,7 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
             var result = await _sut.Handle(command, CancellationToken.None);
 
             _shopRepositoryMock.Verify(x => x.Add(It.Is<Shop>(m => m.Id.Value == result.Id)), Times.Once);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Once);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Shop>()), Times.Once);
 
             Assert.IsType<AuthenticationResult>(result);
             Assert.IsType<Guid>(result.Id);
@@ -82,7 +82,7 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
                 => _sut.Handle(command, CancellationToken.None));
 
             _shopRepositoryMock.Verify(x => x.Add(It.IsAny<Shop>()), Times.Never);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Shop>()), Times.Never);
 
             Assert.IsType<FluentValidation.ValidationException>(act);
         }

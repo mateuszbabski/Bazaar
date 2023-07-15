@@ -47,7 +47,7 @@ namespace Bazaar.Modules.Customers.Tests.Unit.Application
             var result = await _sut.Handle(command, CancellationToken.None);
 
             _customerRepositoryMock.Verify(x => x.Add(It.Is<Customer>(m => m.Id.Value == result.Id)), Times.Once);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Once);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Customer>()), Times.Once);
 
             Assert.IsType<AuthenticationResult>(result);
             Assert.IsType<Guid>(result.Id);
@@ -78,7 +78,7 @@ namespace Bazaar.Modules.Customers.Tests.Unit.Application
                 => _sut.Handle(command, CancellationToken.None));
 
             _customerRepositoryMock.Verify(x => x.Add(It.IsAny<Customer>()), Times.Never);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Customer>()), Times.Never);
 
             Assert.IsType<FluentValidation.ValidationException>(act);
         }

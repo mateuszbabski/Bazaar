@@ -1,4 +1,5 @@
 ﻿using Modules.Products.Application.Commands.ChangeProductPrice;
+using Modules.Products.Domain.Entities;
 using Modules.Products.Domain.Exceptions;
 using Modules.Products.Domain.Repositories;
 using Modules.Shops.Domain.Repositories;
@@ -47,7 +48,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
             await _sut.Handle(command, CancellationToken.None);
 
             Assert.Equal(5, productList.Products[0].Price.Amount);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Once);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Once);
         }
 
         [Fact]
@@ -68,7 +69,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
 
             var result = await Assert.ThrowsAsync<NotFoundException>(() 
                 => _sut.Handle(command, CancellationToken.None));
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
         }
 
         [Fact]
@@ -93,7 +94,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
                 => _sut.Handle(command, CancellationToken.None));
 
             Assert.Equal("Money amount value cannot be zero or negative.", result.Message);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
         }
 
         [Fact]
@@ -118,7 +119,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
                 => _sut.Handle(command, CancellationToken.None));
 
             Assert.Equal("Invalid currency.", result.Message);
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Bazaar.Modules.Shops.Tests.Unit.Domain;
 using Modules.Shops.Application.Commands.UpdateShopDetails;
+using Modules.Shops.Domain.Entities;
 using Modules.Shops.Domain.Repositories;
 using Moq;
 using Shared.Abstractions.UnitOfWork;
@@ -40,7 +41,7 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
 
             Assert.Equal(shop.ShopName, command.ShopName);
 
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Once);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Shop>()), Times.Once);
         }
 
         [Fact]

@@ -1,4 +1,5 @@
 ﻿using Modules.Products.Application.Commands.ChangeProductAvailability;
+using Modules.Products.Domain.Entities;
 using Modules.Products.Domain.Repositories;
 using Moq;
 using Shared.Abstractions.UnitOfWork;
@@ -41,7 +42,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
 
             await _sut.Handle(command, CancellationToken.None);
 
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Once);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Once);
 
             Assert.False(productList.Products[0].IsAvailable);
         }
@@ -62,7 +63,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
 
             var result = await Assert.ThrowsAsync<NotFoundException>(() => _sut.Handle(command, CancellationToken.None));
 
-            _unitOfWorkMock.Verify(x => x.CommitAndDispatchEventsAsync(), Times.Never);
+            _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(It.IsAny<Product>()), Times.Never);
         }
     }
 }
