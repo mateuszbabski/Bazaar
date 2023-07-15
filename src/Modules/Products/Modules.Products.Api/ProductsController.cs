@@ -15,7 +15,6 @@ using Modules.Products.Application.Queries.GetProductsByName;
 using Modules.Products.Application.Queries.GetProductsByPriceRange;
 using Modules.Products.Application.Queries.GetProductsByShopId;
 using Shared.Application.Queries;
-using Shared.Domain.ValueObjects;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Modules.Products.Api

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Modules\Baskets\Modules.Baskets.Api\Modules.Baskets.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Customers\Modules.Customers.Api\Modules.Customers.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Products\Modules.Products.Api\Modules.Products.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Shops\Modules.Shops.Api\Modules.Shops.Api.csproj" />
