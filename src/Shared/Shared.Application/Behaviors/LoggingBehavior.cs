@@ -23,13 +23,13 @@ namespace Shared.Application.Behaviors
         {
             _logger.LogInformation("Starting request: {@RequestName}, {@DateTimeUtc}",
                 typeof(TRequest).Name,
-                _dateTimeProvider.UtcNow);
+                _dateTimeProvider.LocalTimeNow);
 
             var response = await next();
 
             _logger.LogInformation("Completed request: {@RequestName}, {@DateTimeUtc}",
                 typeof(TRequest).Name,
-                _dateTimeProvider.UtcNow);
+                _dateTimeProvider.LocalTimeNow);
 
             return response;
         }

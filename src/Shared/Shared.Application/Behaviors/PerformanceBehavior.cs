@@ -31,7 +31,7 @@ namespace Shared.Application.Behaviors
                 _logger.LogWarning("Long running request: {@RequestName}, ({@RequestTime} milliseconds) - {@RequestDateTime}, {@Request}",
                     typeof(TRequest).Name,
                     elapsedMilliseconds,
-                    _dateTimeProvider.UtcNow,
+                    _dateTimeProvider.LocalTimeNow,    
                     request);
             }
 
