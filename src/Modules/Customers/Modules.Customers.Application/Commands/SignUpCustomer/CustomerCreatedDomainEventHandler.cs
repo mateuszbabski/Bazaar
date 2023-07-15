@@ -18,6 +18,7 @@ namespace Modules.Customers.Application.Commands.SignUpCustomer
         public async Task Handle(CustomerCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
             Log.Information("Customer created at: {@date}", _dateTimeProvider.UtcNow);
+            Log.Information("Customer created at: {@date}", _dateTimeProvider.LocalTimeNow);
 
             // send welcome email
             await Task.CompletedTask;

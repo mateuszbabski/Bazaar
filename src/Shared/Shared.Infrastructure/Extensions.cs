@@ -38,7 +38,6 @@ namespace Shared.Infrastructure
             services.AddCurrentUserProvider();
 
             services.AddSingleton(new UnitOfWorkTypeRegistry());
-            services.AddSingleton(new DomainEventsTypeRegistry());
 
             services.AddEvents(assemblies);
             services.AddDomainEventsDispatcher(assemblies);                      

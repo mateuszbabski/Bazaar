@@ -17,7 +17,7 @@ namespace Modules.Shops.Application.Commands.SignUpShop
         }
         public async Task Handle(ShopCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
-            Log.Information("Shop created at: {@date}", _dateTimeProvider.UtcNow);
+            Log.Information("Shop created at: {@date}", _dateTimeProvider.LocalTimeNow);
 
             // send welcome email
             await Task.CompletedTask;

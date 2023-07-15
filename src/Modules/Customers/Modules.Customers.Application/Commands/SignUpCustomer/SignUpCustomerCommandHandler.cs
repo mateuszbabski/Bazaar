@@ -57,7 +57,6 @@ namespace Modules.Customers.Application.Commands.SignUpCustomer
             await _customerRepository.Add(customer);
             
             await _unitOfWork.CommitAndDispatchDomainEventsAsync(customer);
-            //await _unitOfWork.CommitAndDispatchEventsAsync();
 
             var token = _tokenManager.GenerateToken(customer.Id, customer.Email, customer.Role);
 
