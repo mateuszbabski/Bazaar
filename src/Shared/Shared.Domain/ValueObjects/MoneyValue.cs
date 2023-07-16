@@ -8,7 +8,7 @@ namespace Shared.Domain.ValueObjects
         public decimal Amount { get; }
         public string Currency { get; }
 
-        internal MoneyValue(decimal amount, string currency)
+        public MoneyValue(decimal amount, string currency)
         {
             Amount = amount;
             Currency = currency.ToUpper();

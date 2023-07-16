@@ -6,4 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Shared.Infrastructure\Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules.Baskets.Application\Modules.Baskets.Application.csproj" />
+    <ProjectReference Include="..\Modules.Baskets.Domain\Modules.Baskets.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
