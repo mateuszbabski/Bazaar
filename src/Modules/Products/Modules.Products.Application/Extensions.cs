@@ -11,7 +11,7 @@ namespace Modules.Products.Application
     {
         public static IServiceCollection AddProductsApplication(this IServiceCollection services)
         {
-            //services.AddScoped<IValidator<AddProductCommand>, AddProductValidator>();
+            services.AddScoped<IValidator<AddProductCommand>, AddProductCommandValidator>();
 
             services.AddQueryProcessor<ProductQueryProcessor, Product>();
 
