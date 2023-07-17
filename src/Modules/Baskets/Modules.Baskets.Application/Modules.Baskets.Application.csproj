@@ -3,13 +3,20 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.Abstractions\Shared.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\Shared\Shared.Application\Shared.Application.csproj" />
     <ProjectReference Include="..\Modules.Baskets.Domain\Modules.Baskets.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\AddProductToBasket\" />
+    <Folder Include="Commands\ChangeBasketCurrency\" />
+    <Folder Include="Commands\DeleteBasket\" />
+    <Folder Include="Commands\RemoveProductFromBasket\" />
+    <Folder Include="Queries\GetBasketByCustomerId\" />
   </ItemGroup>
 
 </Project>
