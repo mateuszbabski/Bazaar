@@ -95,7 +95,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.Modules.Shops.Tests.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Products", "Products", "{1085EE1F-6B86-4664-9935-6EF680D96110}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazaar.Modules.Products.Tests.Unit", "src\Tests\Modules\Products\Bazaar.Modules.Products.Tests.Unit\Bazaar.Modules.Products.Tests.Unit.csproj", "{155213F2-D9DB-4345-93CC-F2DB93758423}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.Modules.Products.Tests.Unit", "src\Tests\Modules\Products\Bazaar.Modules.Products.Tests.Unit\Bazaar.Modules.Products.Tests.Unit.csproj", "{155213F2-D9DB-4345-93CC-F2DB93758423}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Baskets", "Baskets", "{FCDE5876-8646-4C63-8A6A-B8943FBF0B73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazaar.Modules.Baskets.Tests.Unit", "src\Tests\Modules\Baskets\Bazaar.Modules.Baskets.Tests.Unit\Bazaar.Modules.Baskets.Tests.Unit\Bazaar.Modules.Baskets.Tests.Unit.csproj", "{4258A946-35AF-4C1D-BCF5-3600584F86B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -231,6 +235,10 @@ Global
 		{155213F2-D9DB-4345-93CC-F2DB93758423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{155213F2-D9DB-4345-93CC-F2DB93758423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{155213F2-D9DB-4345-93CC-F2DB93758423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4258A946-35AF-4C1D-BCF5-3600584F86B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4258A946-35AF-4C1D-BCF5-3600584F86B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4258A946-35AF-4C1D-BCF5-3600584F86B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4258A946-35AF-4C1D-BCF5-3600584F86B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -282,6 +290,8 @@ Global
 		{746B393A-AE01-477D-A659-1668796BF5E7} = {7B70BEB6-EF17-4D91-BC18-1B87938BDD17}
 		{1085EE1F-6B86-4664-9935-6EF680D96110} = {56632C8D-8D09-47FD-805D-FC23AF6F9520}
 		{155213F2-D9DB-4345-93CC-F2DB93758423} = {1085EE1F-6B86-4664-9935-6EF680D96110}
+		{FCDE5876-8646-4C63-8A6A-B8943FBF0B73} = {56632C8D-8D09-47FD-805D-FC23AF6F9520}
+		{4258A946-35AF-4C1D-BCF5-3600584F86B2} = {FCDE5876-8646-4C63-8A6A-B8943FBF0B73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {62F69AFD-C788-4D6E-8088-A31F563BEF11}

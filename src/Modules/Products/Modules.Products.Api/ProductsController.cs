@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Products.Application.Commands.AddProduct;
+using Modules.Products.Application.Commands.AddProductToBasket;
 using Modules.Products.Application.Commands.ChangeProductAvailability;
 using Modules.Products.Application.Commands.ChangeProductDetails;
 using Modules.Products.Application.Commands.ChangeProductPrice;
@@ -37,6 +38,19 @@ namespace Modules.Products.Api
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<Guid>> AddProduct(AddProductCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "customer")]
+        [HttpPost("AddProductToBasket")]
+        [SwaggerOperation("Add product to basket")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<Guid>> AddProductToBasket(AddProductToBasketCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

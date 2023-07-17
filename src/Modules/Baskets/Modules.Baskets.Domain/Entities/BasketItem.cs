@@ -2,6 +2,7 @@
 using Modules.Baskets.Domain.ValueObjects;
 using Shared.Domain;
 using Shared.Domain.ValueObjects;
+using System.Text.Json.Serialization;
 
 namespace Modules.Baskets.Domain.Entities
 {
@@ -14,29 +15,34 @@ namespace Modules.Baskets.Domain.Entities
         public int Quantity { get; private set; } = 1;
         public MoneyValue Price { get; private set; }
         public MoneyValue BaseCurrencyPrice { get; private set; }
+        [JsonIgnore]
+        public virtual Basket Basket { get; set; }
 
         private BasketItem() { }
-
-        // get product / projection
-        private BasketItem(Product product,
+        
+        private BasketItem(Guid productId,
+                           Guid shopId,
                            BasketId basketId,
                            int quantity,
                            string currency,
+                           MoneyValue baseProductPrice,
                            decimal convertedPrice)
         {
             Id = new BasketItemId(Guid.NewGuid());
-            ProductId = product.Id;
+            ProductId = productId;
             BasketId = basketId;
-            ShopId = product.ShopId;
+            ShopId = shopId;
             Quantity = quantity;
-            BaseCurrencyPrice = CountCartItemPrice(quantity, product.Price.Amount, product.Price.Currency);
+            BaseCurrencyPrice = CountCartItemPrice(quantity, baseProductPrice.Amount, baseProductPrice.Currency);
             Price = CountCartItemPrice(quantity, convertedPrice, currency);
         }
 
-        internal static BasketItem CreateBasketItemFromProduct(Product product,
+        internal static BasketItem CreateBasketItemFromProduct(Guid productId,
+                                                               Guid shopId,
                                                                BasketId basketId,
                                                                int quantity,
                                                                string currency,
+                                                               MoneyValue baseProductPrice,
                                                                decimal convertedPrice)
         {
             if (quantity <= 0)
@@ -44,7 +50,7 @@ namespace Modules.Baskets.Domain.Entities
                 throw new InvalidQuantityException();
             }
 
-            return new BasketItem(product, basketId, quantity, currency, convertedPrice);
+            return new BasketItem(productId, shopId, basketId, quantity, currency, baseProductPrice, convertedPrice);
         }
 
         private static MoneyValue CountCartItemPrice(int quantity, decimal price, string currency)

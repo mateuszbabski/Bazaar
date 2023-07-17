@@ -7,6 +7,7 @@ namespace Modules.Baskets.Domain.Entities
 {
     public class Basket : Entity, IAggregateRoot
     {
+        // TODO: get product/product projection to create basketitem
         public BasketId Id { get; private set; }
         public BasketCustomerId CustomerId { get; private set; }
         public List<BasketItem> Items { get; private set; }
@@ -56,16 +57,22 @@ namespace Modules.Baskets.Domain.Entities
             AddDomainEvent(new BasketCurrencyChangedDomainEvent(this));
         }
 
-        public void AddProductToShoppingCart(Product product, int quantity, decimal convertedPrice)
+        public void AddProductToBasket(Guid productId,
+                                       Guid shopId,
+                                       int quantity,
+                                       MoneyValue baseProductPrice,
+                                       decimal convertedPrice)
         {
-            var basketItem = Items.FirstOrDefault(x => x.ProductId == product.Id);
+            var basketItem = Items.FirstOrDefault(x => x.ProductId.Value == productId);
 
             if (basketItem == null)
             {
-                var newBasketItem = BasketItem.CreateBasketItemFromProduct(product,
+                var newBasketItem = BasketItem.CreateBasketItemFromProduct(productId,
+                                                                           shopId,
                                                                            this.Id,
                                                                            quantity,
                                                                            this.TotalPrice.Currency,
+                                                                           baseProductPrice,
                                                                            convertedPrice);
                 Items.Add(newBasketItem);
 
