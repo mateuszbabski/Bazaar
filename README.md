@@ -73,13 +73,21 @@ $ dotnet run
 - Add product to store (only for shop account)
 - Update / edit product details (price, weight, availability etc.)
 - Emitting domain events that product was created/updated
+- Emitting integration event that product was added to cart ("add to cart" button clicked - customers only feature)
 - Querying products by name, price, shop, category etc.
+
+### Baskets module:
+- Creating basket while adding first product
+- Clearing basket from products (delete)
+- Removing item from basket
+- Checkout basket
+- Change basket currency
 
 ### Shared layer:
 - Auth helpers - hashing service, token manager, jwt settings
-- Email uniqueness checker
-- Domain event accessor and disptacher
-- Integration event disptacher (in progress)
+- Email uniqueness checker (awaiting)
+- Domain event disptacher
+- Integration event disptacher 
 - Error handling middleware
 - User fetching service
 - Unit of work pattern
@@ -90,7 +98,6 @@ $ dotnet run
 
 ### To implement:
 - Autoupdate prices while checking out cart/placing order basis on current rates
-- Searching products
 - Notify all shops owners about products to prepare
 - Sending invoices
 - Sending email notifications about orders
