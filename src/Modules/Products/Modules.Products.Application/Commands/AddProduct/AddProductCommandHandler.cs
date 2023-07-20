@@ -1,8 +1,8 @@
 ﻿using MediatR;
+using Modules.Products.Application.Contracts;
 using Modules.Products.Domain.Entities;
 using Modules.Products.Domain.Repositories;
 using Modules.Products.Domain.ValueObjects;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
 using Shared.Domain.ValueObjects;
@@ -13,11 +13,11 @@ namespace Modules.Products.Application.Commands.AddProduct
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IProductRepository _productRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductsUnitOfWork _unitOfWork;
 
         public AddProductCommandHandler(ICurrentUserService currentUserService,
                                         IProductRepository productRepository,
-                                        IUnitOfWork unitOfWork)
+                                        IProductsUnitOfWork unitOfWork)
         {
             _currentUserService = currentUserService;
             _productRepository = productRepository;

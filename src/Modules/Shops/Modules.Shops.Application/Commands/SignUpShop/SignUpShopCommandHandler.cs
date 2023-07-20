@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Modules.Shops.Application.Contracts;
 using Modules.Shops.Domain.Entities;
 using Modules.Shops.Domain.Repositories;
 using Shared.Abstractions.Auth;
@@ -15,12 +16,12 @@ namespace Modules.Shops.Application.Commands.SignUpShop
         private readonly IShopRepository _shopRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHashingService _hashingService;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IShopsUnitOfWork _unitOfWork;
 
         public SignUpShopCommandHandler(IShopRepository shopRepository,
                                         ITokenManager tokenManager,
                                         IHashingService hashingService,
-                                        IUnitOfWork unitOfWork)
+                                        IShopsUnitOfWork unitOfWork)
         {
             _shopRepository = shopRepository;
             _tokenManager = tokenManager;

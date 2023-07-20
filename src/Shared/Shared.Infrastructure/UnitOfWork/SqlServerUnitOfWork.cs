@@ -19,6 +19,7 @@ namespace Shared.Infrastructure.UnitOfWork
 
         public async Task CommitAndDispatchDomainEventsAsync<TEntity>(TEntity entity) where TEntity : Entity
         {
+            Log.Information("DbContext: {@context}", _dbContext.GetType().Name);
             await _domainEventDispatcher.DispatchDomainEvents(entity);
             await _dbContext.SaveChangesAsync();
         }

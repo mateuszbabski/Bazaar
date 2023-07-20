@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Modules.Shops.Application.Contracts;
 using Modules.Shops.Domain.Repositories;
 using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
@@ -10,11 +11,11 @@ namespace Modules.Shops.Application.Commands.UpdateShopDetails
     {
         private readonly ICurrentUserService _userService;
         private readonly IShopRepository _shopRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IShopsUnitOfWork _unitOfWork;
 
         public UpdateShopDetailsCommandHandler(ICurrentUserService userService,
                                                IShopRepository shopRepository,
-                                               IUnitOfWork unitOfWork)
+                                               IShopsUnitOfWork unitOfWork)
         {
             _userService = userService;
             _shopRepository = shopRepository;

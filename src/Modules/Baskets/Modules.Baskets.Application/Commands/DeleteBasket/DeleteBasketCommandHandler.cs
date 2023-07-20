@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using Modules.Baskets.Application.Contracts;
 using Modules.Baskets.Domain.Repositories;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
 
@@ -10,11 +10,11 @@ namespace Modules.Baskets.Application.Commands.DeleteBasket
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IBasketRepository _basketRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IBasketsUnitOfWork _unitOfWork;
 
         public DeleteBasketCommandHandler(ICurrentUserService currentUserService,
                                           IBasketRepository basketRepository,
-                                          IUnitOfWork unitOfWork)
+                                          IBasketsUnitOfWork unitOfWork)
         {
             _currentUserService = currentUserService;
             _basketRepository = basketRepository;
