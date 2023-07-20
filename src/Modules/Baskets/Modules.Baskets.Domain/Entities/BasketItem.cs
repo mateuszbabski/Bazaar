@@ -19,7 +19,7 @@ namespace Modules.Baskets.Domain.Entities
         public virtual Basket Basket { get; set; }
 
         private BasketItem() { }
-        
+
         private BasketItem(Guid productId,
                            Guid shopId,
                            BasketId basketId,

@@ -7,7 +7,6 @@ namespace Modules.Baskets.Domain.Entities
 {
     public class Basket : Entity, IAggregateRoot
     {
-        // TODO: get product/product projection to create basketitem
         public BasketId Id { get; private set; }
         public BasketCustomerId CustomerId { get; private set; }
         public List<BasketItem> Items { get; private set; }
