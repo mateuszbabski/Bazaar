@@ -13,13 +13,16 @@ namespace Shared.Application.Behaviors
         private readonly IDateTimeProvider _dateTimeProvider;
         private readonly Stopwatch _timer;
 
-        public PerformanceBehavior(ILogger<PerformanceBehavior<TRequest, TResponse>> logger, IDateTimeProvider dateTimeProvider)
+        public PerformanceBehavior(ILogger<PerformanceBehavior<TRequest, TResponse>> logger,
+                                   IDateTimeProvider dateTimeProvider)
         {
             _logger = logger;
             _dateTimeProvider = dateTimeProvider;
             _timer = new Stopwatch();
         }
-        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+        public async Task<TResponse> Handle(TRequest request,
+                                            RequestHandlerDelegate<TResponse> next,
+                                            CancellationToken cancellationToken)
         {
             _timer.Start();
             var response = await next();

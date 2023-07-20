@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Shared.Domain;
 
 namespace Shared.Abstractions.UnitOfWork
@@ -8,5 +9,10 @@ namespace Shared.Abstractions.UnitOfWork
         Task<int> CommitChangesAsync();
         Task CommitAndDispatchDomainEventsAsync<TEntity>(TEntity entity) 
             where TEntity : Entity;
+    }
+
+    public interface IUnitOfWork<T> : IUnitOfWork 
+        where T : DbContext
+    {
     }
 }

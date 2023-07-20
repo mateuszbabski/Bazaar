@@ -19,10 +19,6 @@ namespace Shared.Infrastructure.Events
         {
             Log.Information("Integration event: {@event}", @event);
             await _mediator.Publish(@event, cancellationToken);
-            //using var scope = _serviceProvider.CreateScope();
-            //var handlers = scope.ServiceProvider.GetServices<IEventHandler<TEvent>>();
-            //var tasks = handlers.Select(x => x.Handle(@event, cancellationToken));
-            //await Task.WhenAll(tasks);
         }
     }
 }

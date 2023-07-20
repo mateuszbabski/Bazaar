@@ -12,13 +12,16 @@ namespace Shared.Application.Behaviors
         private readonly ILogger<ValidationBehavior<TRequest, TResponse>> _logger;
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 
-        public ValidationBehavior(ILogger<ValidationBehavior<TRequest, TResponse>> logger, IEnumerable<IValidator<TRequest>> validators)
+        public ValidationBehavior(ILogger<ValidationBehavior<TRequest, TResponse>> logger,
+                                  IEnumerable<IValidator<TRequest>> validators)
         {
             _logger = logger;
             _validators = validators;
         }
 
-        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+        public async Task<TResponse> Handle(TRequest request,
+                                            RequestHandlerDelegate<TResponse> next,
+                                            CancellationToken cancellationToken)
         {
             if (_validators.Any())
             {
