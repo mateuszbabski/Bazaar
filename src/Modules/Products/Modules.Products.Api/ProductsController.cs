@@ -50,10 +50,10 @@ namespace Modules.Products.Api
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Guid>> AddProductToBasket(AddProductToBasketCommand command)
+        public async Task<ActionResult> AddProductToBasket(AddProductToBasketCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            await _mediator.Send(command);
+            return Ok();
         }
 
         [Authorize(Roles = "shop")]

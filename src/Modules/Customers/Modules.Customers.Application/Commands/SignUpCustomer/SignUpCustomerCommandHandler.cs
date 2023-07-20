@@ -5,6 +5,7 @@ using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
 using Serilog;
 using Shared.Abstractions.Auth;
+using Shared.Abstractions.DomainEvents;
 using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
 using Shared.Application.Exceptions;
@@ -18,7 +19,7 @@ namespace Modules.Customers.Application.Commands.SignUpCustomer
         private readonly ICustomerRepository _customerRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHashingService _hashingService;
-        private readonly IUnitOfWork _unitOfWork;        
+        private readonly IUnitOfWork _unitOfWork;
 
         public SignUpCustomerCommandHandler(ICustomerRepository customerRepository,
                                             ITokenManager tokenManager,
@@ -55,7 +56,7 @@ namespace Modules.Customers.Application.Commands.SignUpCustomer
                                            command.TelephoneNumber);
 
             await _customerRepository.Add(customer);
-            
+
             await _unitOfWork.CommitAndDispatchDomainEventsAsync(customer);
 
             var token = _tokenManager.GenerateToken(customer.Id, customer.Email, customer.Role);
