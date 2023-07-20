@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Modules.Shops.Application.Contracts;
 using Modules.Shops.Domain.Repositories;
 using Modules.Shops.Infrastructure.Context;
 using Modules.Shops.Infrastructure.Repository;
+using Shared.Abstractions.UnitOfWork;
 using Shared.Infrastructure.UnitOfWork;
 
 namespace Modules.Shops.Infrastructure
@@ -17,8 +19,8 @@ namespace Modules.Shops.Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddScoped<IShopsUnitOfWork, ShopsUnitOfWork>();
             services.AddScoped<IShopRepository, ShopRepository>();
-            services.AddUnitOfWork<ShopsUnitOfWork>();
 
             return services;
         }

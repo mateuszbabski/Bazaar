@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Serilog;
 using Shared.Abstractions.DomainEvents;
 using Shared.Abstractions.UnitOfWork;
 using Shared.Domain;

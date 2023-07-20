@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
+using Modules.Customers.Application.Contracts;
 using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
 using Serilog;
@@ -19,12 +20,12 @@ namespace Modules.Customers.Application.Commands.SignUpCustomer
         private readonly ICustomerRepository _customerRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHashingService _hashingService;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICustomersUnitOfWork _unitOfWork;
 
         public SignUpCustomerCommandHandler(ICustomerRepository customerRepository,
                                             ITokenManager tokenManager,
                                             IHashingService hashingService,
-                                            IUnitOfWork unitOfWork)
+                                            ICustomersUnitOfWork unitOfWork)
         {
             _customerRepository = customerRepository;
             _tokenManager = tokenManager;
