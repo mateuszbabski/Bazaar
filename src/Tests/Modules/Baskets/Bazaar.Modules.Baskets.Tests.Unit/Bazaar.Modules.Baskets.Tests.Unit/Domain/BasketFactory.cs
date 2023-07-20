@@ -14,6 +14,13 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
             return basket;
         }
 
+        public static Basket CreateBasket(Guid customerId)
+        {
+            var basket = Basket.CreateBasket(customerId, "USD");
+
+            return basket;
+        }
+
         public static Basket GetBasketWithItems()
         {
             var basket = Basket.CreateBasket(Guid.NewGuid(), "USD");
