@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Modules.Customers.Application.Contracts;
 using Modules.Customers.Domain.Repositories;
 using Modules.Customers.Infrastructure.Context;
 using Modules.Customers.Infrastructure.Repository;
+using Shared.Abstractions.UnitOfWork;
 using Shared.Infrastructure.UnitOfWork;
 
 namespace Modules.Customers.Infrastructure
@@ -17,8 +19,8 @@ namespace Modules.Customers.Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddScoped<ICustomersUnitOfWork, CustomersUnitOfWork>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddUnitOfWork<CustomersUnitOfWork>();
 
             return services;
         }
