@@ -86,7 +86,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
             Assert.Equal(basket.Id.Value, result);
         }
 
-        private Basket CreateBasketWithProduct(Guid customerId)
+        private static Basket CreateBasketWithProduct(Guid customerId)
         {
             var basket = Basket.CreateBasket(customerId, "USD");
             var product = BasketFactory.GetProduct();

@@ -43,7 +43,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
             Assert.Equal(product.Id.Value, basketItem?.ProductId.Value);
             Assert.IsType<BasketItem>(basketItem);
 
-            basket.RemoveItemFromCart(basketItem.Id);
+            basket.RemoveItemFromBasket(basketItem.Id);
             var item = basket.Items.FirstOrDefault(x => x.Id == basketItem.Id);
 
             Assert.IsNotType<BasketItem>(item);

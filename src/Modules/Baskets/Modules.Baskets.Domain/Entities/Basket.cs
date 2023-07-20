@@ -43,7 +43,7 @@ namespace Modules.Baskets.Domain.Entities
             return TotalPrice;
         }
 
-        public void ChangeShoppingCartCurrency(decimal conversionRate, string currency)
+        public void ChangeBasketCurrency(decimal conversionRate, string currency)
         {
             foreach (var item in Items)
             {
@@ -80,14 +80,14 @@ namespace Modules.Baskets.Domain.Entities
             }
             else
             {
-                basketItem.ChangeCartItemQuantity(quantity, convertedPrice, this.TotalPrice.Currency);
+                basketItem.ChangeBasketItemQuantity(quantity, convertedPrice, this.TotalPrice.Currency);
                 this.AddDomainEvent(new ProductQuantityChangedDomainEvent(this, basketItem));
             }
 
             this.TotalPrice = CountTotalPrice(this.Items);
         }
 
-        public void RemoveItemFromCart(BasketItemId basketItemId)
+        public void RemoveItemFromBasket(BasketItemId basketItemId)
         {
             var item = Items.FirstOrDefault(x => x.Id == basketItemId);
 

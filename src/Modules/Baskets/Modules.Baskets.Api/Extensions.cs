@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Modules.Baskets.Infrastructure;
+using Modules.Baskets.Application;
 
 namespace Modules.Baskets.Api
 {
@@ -7,8 +9,8 @@ namespace Modules.Baskets.Api
     {
         public static IServiceCollection AddBasketsModule(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddBasketsInfrastructure(configuration);
-            //services.AddBasketsApplication();
+            services.AddBasketsInfrastructure(configuration);
+            services.AddBasketsApplication();
 
             return services;
         }

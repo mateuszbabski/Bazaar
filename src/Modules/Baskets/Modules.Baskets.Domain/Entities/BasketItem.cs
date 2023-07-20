@@ -33,8 +33,8 @@ namespace Modules.Baskets.Domain.Entities
             BasketId = basketId;
             ShopId = shopId;
             Quantity = quantity;
-            BaseCurrencyPrice = CountCartItemPrice(quantity, baseProductPrice.Amount, baseProductPrice.Currency);
-            Price = CountCartItemPrice(quantity, convertedPrice, currency);
+            BaseCurrencyPrice = CountBasketItemPrice(quantity, baseProductPrice.Amount, baseProductPrice.Currency);
+            Price = CountBasketItemPrice(quantity, convertedPrice, currency);
         }
 
         internal static BasketItem CreateBasketItemFromProduct(Guid productId,
@@ -53,12 +53,12 @@ namespace Modules.Baskets.Domain.Entities
             return new BasketItem(productId, shopId, basketId, quantity, currency, baseProductPrice, convertedPrice);
         }
 
-        private static MoneyValue CountCartItemPrice(int quantity, decimal price, string currency)
+        private static MoneyValue CountBasketItemPrice(int quantity, decimal price, string currency)
         {
             return MoneyValue.Of(quantity * price, currency);
         }
 
-        internal void ChangeCartItemQuantity(int quantity, decimal price, string currency)
+        internal void ChangeBasketItemQuantity(int quantity, decimal price, string currency)
         {
             if (quantity <= 0)
             {
@@ -67,7 +67,7 @@ namespace Modules.Baskets.Domain.Entities
 
             this.Quantity = quantity;
 
-            this.Price = CountCartItemPrice(quantity, price, currency);
+            this.Price = CountBasketItemPrice(quantity, price, currency);
         }
 
         internal void ChangeCurrency(decimal conversionRate, string currency)

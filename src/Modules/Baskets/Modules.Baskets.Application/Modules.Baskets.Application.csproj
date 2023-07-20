@@ -11,12 +11,4 @@
     <ProjectReference Include="..\Modules.Baskets.Domain\Modules.Baskets.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\AddProductToBasket\" />
-    <Folder Include="Commands\ChangeBasketCurrency\" />
-    <Folder Include="Commands\DeleteBasket\" />
-    <Folder Include="Commands\RemoveProductFromBasket\" />
-    <Folder Include="Queries\GetBasketByCustomerId\" />
-  </ItemGroup>
-
 </Project>
