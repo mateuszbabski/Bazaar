@@ -36,7 +36,7 @@ namespace Modules.Baskets.Application.Events.EventHandlers
                 throw new InvalidUserException("Customer Id conflict.");
             }
 
-            var basket = await ReturnOrCreateNewBasket(userId, notification.ProductPrice.Currency);
+            var basket = await ReturnOrCreateNewBasket(notification.CustomerId, notification.ProductPrice.Currency);
 
             var productConvertedPrice = await _currencyConverter.GetConvertedPrice(notification.ProductPrice.Amount,
                                                                                    notification.ProductPrice.Currency,
