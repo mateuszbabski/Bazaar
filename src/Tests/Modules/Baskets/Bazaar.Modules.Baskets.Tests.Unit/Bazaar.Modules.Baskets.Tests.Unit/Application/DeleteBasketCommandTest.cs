@@ -1,4 +1,5 @@
 ﻿using Modules.Baskets.Application.Commands.DeleteBasket;
+using Modules.Baskets.Application.Contracts;
 using Modules.Baskets.Domain.Entities;
 using Modules.Baskets.Domain.Repositories;
 using Moq;
@@ -13,7 +14,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
         private readonly DeleteBasketCommandHandler _sut;
         private readonly Mock<ICurrentUserService> _currentUserServiceMock = new();
         private readonly Mock<IBasketRepository> _basketRepositoryMock = new();
-        private readonly Mock<IUnitOfWork> _unitOfWorkMock = new();
+        private readonly Mock<IBasketsUnitOfWork> _unitOfWorkMock = new();
 
         public DeleteBasketCommandTest()
         {

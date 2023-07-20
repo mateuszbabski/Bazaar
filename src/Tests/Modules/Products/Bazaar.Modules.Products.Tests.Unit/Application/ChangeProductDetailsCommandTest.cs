@@ -1,9 +1,9 @@
 ﻿using Modules.Products.Application.Commands.ChangeProductDetails;
+using Modules.Products.Application.Contracts;
 using Modules.Products.Domain.Entities;
 using Modules.Products.Domain.Exceptions;
 using Modules.Products.Domain.Repositories;
 using Moq;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
 
@@ -14,7 +14,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
         private readonly ChangeProductDetailsCommandHandler _sut;
         private readonly Mock<ICurrentUserService> _currentUserServiceMock = new();
         private readonly Mock<IProductRepository> _productRepositoryMock = new();
-        private readonly Mock<IUnitOfWork> _unitOfWorkMock = new();
+        private readonly Mock<IProductsUnitOfWork> _unitOfWorkMock = new();
 
         public ChangeProductDetailsCommandTest()
         {

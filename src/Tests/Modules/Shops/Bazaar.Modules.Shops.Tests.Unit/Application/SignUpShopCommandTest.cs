@@ -1,9 +1,9 @@
 ﻿using Modules.Shops.Application.Commands.SignUpShop;
+using Modules.Shops.Application.Contracts;
 using Modules.Shops.Domain.Entities;
 using Modules.Shops.Domain.Repositories;
 using Moq;
 using Shared.Abstractions.Auth;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
 using Shared.Domain.ValueObjects;
 
@@ -15,7 +15,7 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
         private readonly Mock<IShopRepository> _shopRepositoryMock = new();
         private readonly Mock<ITokenManager> _tokenManagerMock = new();
         private readonly Mock<IHashingService> _hashingServiceMock = new();
-        private readonly Mock<IUnitOfWork> _unitOfWorkMock = new();
+        private readonly Mock<IShopsUnitOfWork> _unitOfWorkMock = new();
 
         public SignUpShopCommandTest()
         {

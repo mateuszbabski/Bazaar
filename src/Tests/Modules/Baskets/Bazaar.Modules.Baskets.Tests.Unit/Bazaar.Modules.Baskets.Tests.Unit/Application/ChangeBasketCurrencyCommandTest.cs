@@ -1,13 +1,11 @@
 ﻿using Bazaar.Modules.Baskets.Tests.Unit.Domain;
 using Modules.Baskets.Application.Commands.ChangeBasketCurrency;
+using Modules.Baskets.Application.Contracts;
 using Modules.Baskets.Domain.Entities;
 using Modules.Baskets.Domain.Exceptions;
 using Modules.Baskets.Domain.Repositories;
-using Modules.Products.Domain.Exceptions;
-using Modules.Products.Domain.Repositories;
 using Moq;
 using Shared.Abstractions.CurrencyConverters;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 
 namespace Bazaar.Modules.Baskets.Tests.Unit.Application
@@ -18,7 +16,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
         private readonly Mock<ICurrentUserService> _currentUserServiceMock = new();
         private readonly Mock<IBasketRepository> _basketRepositoryMock = new();
         private readonly Mock<ICurrencyConverter> _currencyConverterMock = new();
-        private readonly Mock<IUnitOfWork> _unitOfWorkMock = new();
+        private readonly Mock<IBasketsUnitOfWork> _unitOfWorkMock = new();
 
         public ChangeBasketCurrencyCommandTest()
         {
