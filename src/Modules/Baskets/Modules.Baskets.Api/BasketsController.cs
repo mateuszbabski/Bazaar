@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Baskets.Application.Commands.ChangeBasketCurrency;
 using Modules.Baskets.Application.Commands.DeleteBasket;
+using Modules.Baskets.Application.Commands.RemoveProductFromBasket;
+using Modules.Baskets.Application.Dtos;
+using Modules.Baskets.Application.Queries.GetBasketByCustomerId;
 using Shared.Domain.ValueObjects;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -46,6 +49,30 @@ namespace Modules.Baskets.Api
             await _mediator.Send(command);
 
             return NoContent();
+        }
+
+        [Authorize(Roles = "customer")]
+        [HttpPost("RemoveProductFromBasket")]
+        [SwaggerOperation("Remove product from basket")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<Guid>> RemoveProductFromBasket(RemoveProductFromBasketCommand command)
+        {
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [Authorize(Roles = "customer")]
+        [HttpGet("GetBasketByCustomerId")]
+        [SwaggerOperation("Get basket by customer Id")]
+        public async Task<ActionResult<BasketDto>> GetBasketForCustomer()
+        {
+            var basket = await _mediator.Send(new GetBasketByCustomerIdCommand());
+
+            return Ok(basket);
         }
     }
 }
