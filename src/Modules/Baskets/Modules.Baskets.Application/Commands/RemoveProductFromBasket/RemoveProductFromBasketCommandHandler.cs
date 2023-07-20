@@ -20,13 +20,13 @@ namespace Modules.Baskets.Application.Commands.RemoveProductFromBasket
             _basketRepository = basketRepository;
             _unitOfWork = unitOfWork;
         }
-        public async Task<Unit> Handle(RemoveProductFromBasketCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(RemoveProductFromBasketCommand command, CancellationToken cancellationToken)
         {
             var customerId = _currentUserService.UserId;
             var basket = await _basketRepository.GetBasketByCustomerId(customerId)
                 ?? throw new NotFoundException("Cart not found.");
 
-            basket.RemoveItemFromBasket(request.Id);
+            basket.RemoveItemFromBasket(command.Id);
 
             if (basket.Items.Count == 0)
             {

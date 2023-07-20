@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Modules.Baskets.Domain.Repositories;
-using Shared.Abstractions.CurrencyConverters;
 using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
@@ -21,7 +20,7 @@ namespace Modules.Baskets.Application.Commands.DeleteBasket
             _basketRepository = basketRepository;
             _unitOfWork = unitOfWork;
         }
-        public async Task<Unit> Handle(DeleteBasketCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteBasketCommand command, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
 

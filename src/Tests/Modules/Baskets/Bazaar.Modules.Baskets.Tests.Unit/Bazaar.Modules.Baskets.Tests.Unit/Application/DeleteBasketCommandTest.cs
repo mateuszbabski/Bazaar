@@ -23,7 +23,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
         }
 
         [Fact]
-        public async void DeleteBasket_DeletesCart_IfExists()
+        public async void DeleteBasket_DeletesBasket_IfExists()
         {
             var customerId = Guid.NewGuid();
 
