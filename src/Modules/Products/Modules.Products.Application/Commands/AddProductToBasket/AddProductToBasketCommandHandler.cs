@@ -7,7 +7,7 @@ using Shared.Application.Exceptions;
 
 namespace Modules.Products.Application.Commands.AddProductToBasket
 {
-    public class AddProductToBasketCommandHandler : IRequestHandler<AddProductToBasketCommand, Guid>
+    public class AddProductToBasketCommandHandler : IRequestHandler<AddProductToBasketCommand, Unit>
     {
         private readonly IProductRepository _productRepository;
         private readonly ICurrentUserService _userService;
@@ -22,7 +22,7 @@ namespace Modules.Products.Application.Commands.AddProductToBasket
             _eventDispatcher = eventDispatcher;
         }
 
-        public async Task<Guid> Handle(AddProductToBasketCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(AddProductToBasketCommand request, CancellationToken cancellationToken)
         {
             var customerId = _userService.UserId;
             var product = await _productRepository.GetById(request.Id)
@@ -35,7 +35,7 @@ namespace Modules.Products.Application.Commands.AddProductToBasket
                                                                               request.Quantity),
                                                 cancellationToken);
 
-            return await Task.FromResult(request.Id);
+            return Unit.Value;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Modules.Baskets.Application.Events.EventHandlers
                                       notification.ShopId,
                                       notification.Quantity,
                                       notification.ProductPrice,
-                                      productConvertedPrice);
+                                      productConvertedPrice);            
 
             await _unitOfWork.CommitAndDispatchDomainEventsAsync(basket);
         }
