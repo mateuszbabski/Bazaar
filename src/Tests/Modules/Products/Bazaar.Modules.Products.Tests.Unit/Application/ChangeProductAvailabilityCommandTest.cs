@@ -1,8 +1,8 @@
 ﻿using Modules.Products.Application.Commands.ChangeProductAvailability;
+using Modules.Products.Application.Contracts;
 using Modules.Products.Domain.Entities;
 using Modules.Products.Domain.Repositories;
 using Moq;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
 
@@ -13,7 +13,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
         private readonly ChangeProductAvailabilityCommandHandler _sut;
         private readonly Mock<ICurrentUserService> _currentUserServiceMock = new();
         private readonly Mock<IProductRepository> _productRepositoryMock = new();
-        private readonly Mock<IUnitOfWork> _unitOfWorkMock = new();
+        private readonly Mock<IProductsUnitOfWork> _unitOfWorkMock = new();
 
         public ChangeProductAvailabilityCommandTest()
         {

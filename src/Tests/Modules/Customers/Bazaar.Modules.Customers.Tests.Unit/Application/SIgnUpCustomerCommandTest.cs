@@ -1,9 +1,9 @@
 ﻿using Modules.Customers.Application.Commands.SignUpCustomer;
+using Modules.Customers.Application.Contracts;
 using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
 using Moq;
 using Shared.Abstractions.Auth;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
 using Shared.Domain.ValueObjects;
 
@@ -15,7 +15,7 @@ namespace Bazaar.Modules.Customers.Tests.Unit.Application
         private readonly Mock<ICustomerRepository> _customerRepositoryMock = new();
         private readonly Mock<ITokenManager> _tokenManagerMock = new();
         private readonly Mock<IHashingService> _hashingServiceMock = new();
-        private readonly Mock<IUnitOfWork> _unitOfWorkMock = new();
+        private readonly Mock<ICustomersUnitOfWork> _unitOfWorkMock = new();
 
         public SIgnUpCustomerCommandTest()
         {

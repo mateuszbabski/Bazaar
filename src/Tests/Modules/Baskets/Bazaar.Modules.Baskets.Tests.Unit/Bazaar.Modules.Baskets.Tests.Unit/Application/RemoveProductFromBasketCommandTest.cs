@@ -1,16 +1,11 @@
 ﻿using Bazaar.Modules.Baskets.Tests.Unit.Domain;
 using Modules.Baskets.Application.Commands.RemoveProductFromBasket;
+using Modules.Baskets.Application.Contracts;
 using Modules.Baskets.Domain.Entities;
 using Modules.Baskets.Domain.Repositories;
 using Moq;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bazaar.Modules.Baskets.Tests.Unit.Application
 {
@@ -19,7 +14,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
         private readonly RemoveProductFromBasketCommandHandler _sut;
         private readonly Mock<ICurrentUserService> _currentUserServiceMock = new();
         private readonly Mock<IBasketRepository> _basketRepositoryMock = new();
-        private readonly Mock<IUnitOfWork> _unitOfWorkMock = new();
+        private readonly Mock<IBasketsUnitOfWork> _unitOfWorkMock = new();
 
         public RemoveProductFromBasketCommandTest()
         {

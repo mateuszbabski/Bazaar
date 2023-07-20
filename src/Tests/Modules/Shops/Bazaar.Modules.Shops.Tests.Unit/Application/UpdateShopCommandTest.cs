@@ -1,9 +1,9 @@
 ﻿using Bazaar.Modules.Shops.Tests.Unit.Domain;
 using Modules.Shops.Application.Commands.UpdateShopDetails;
+using Modules.Shops.Application.Contracts;
 using Modules.Shops.Domain.Entities;
 using Modules.Shops.Domain.Repositories;
 using Moq;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 
 namespace Bazaar.Modules.Shops.Tests.Unit.Application
@@ -13,7 +13,7 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Application
         private readonly UpdateShopDetailsCommandHandler _sut;
         private readonly Mock<ICurrentUserService> _userServiceMock = new();
         private readonly Mock<IShopRepository> _shopRepositoryMock = new();
-        private readonly Mock<IUnitOfWork> _unitOfWorkMock = new();
+        private readonly Mock<IShopsUnitOfWork> _unitOfWorkMock = new();
 
         public UpdateShopCommandTest()
         {
