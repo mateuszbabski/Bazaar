@@ -21,7 +21,8 @@ namespace Modules.Baskets.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DbContext).Assembly);
+            modelBuilder.ApplyConfiguration(new BasketDbConfiguration());
+            modelBuilder.ApplyConfiguration(new BasketItemDbConfiguration());
         }
     }
 }
