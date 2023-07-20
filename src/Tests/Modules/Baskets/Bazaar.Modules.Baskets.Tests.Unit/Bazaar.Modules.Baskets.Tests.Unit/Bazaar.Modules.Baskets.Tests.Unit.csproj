@@ -27,6 +27,7 @@
     <ProjectReference Include="..\..\..\..\..\Modules\Baskets\Modules.Baskets.Application\Modules.Baskets.Application.csproj" />
     <ProjectReference Include="..\..\..\..\..\Modules\Baskets\Modules.Baskets.Domain\Modules.Baskets.Domain.csproj" />
     <ProjectReference Include="..\..\..\..\..\Modules\Products\Modules.Products.Domain\Modules.Products.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Shared\Shared.Application\Shared.Application.csproj" />
   </ItemGroup>
 
 </Project>
