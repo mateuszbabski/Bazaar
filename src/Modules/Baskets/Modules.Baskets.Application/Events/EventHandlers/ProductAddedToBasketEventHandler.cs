@@ -1,11 +1,10 @@
-﻿using MediatR;
+﻿using Modules.Baskets.Application.Contracts;
 using Modules.Baskets.Application.Exceptions;
 using Modules.Baskets.Domain.Entities;
 using Modules.Baskets.Domain.Repositories;
 using Modules.Shared.Application.IntegrationEvents;
 using Shared.Abstractions.CurrencyConverters;
 using Shared.Abstractions.Events;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 
 namespace Modules.Baskets.Application.Events.EventHandlers
@@ -14,12 +13,12 @@ namespace Modules.Baskets.Application.Events.EventHandlers
     {
         private readonly ICurrentUserService _userService;
         private readonly IBasketRepository _basketRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IBasketsUnitOfWork _unitOfWork;
         private readonly ICurrencyConverter _currencyConverter;
 
         public ProductAddedToBasketEventHandler(ICurrentUserService userService,
                                                 IBasketRepository basketRepository,
-                                                IUnitOfWork unitOfWork,
+                                                IBasketsUnitOfWork unitOfWork,
                                                 ICurrencyConverter currencyConverter)
         {
             _userService = userService;

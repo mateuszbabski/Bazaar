@@ -1,16 +1,11 @@
 ﻿using MediatR;
+using Modules.Baskets.Application.Contracts;
 using Modules.Baskets.Domain.Exceptions;
 using Modules.Baskets.Domain.Repositories;
 using Shared.Abstractions.CurrencyConverters;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
 using Shared.Domain.Rules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Modules.Baskets.Application.Commands.ChangeBasketCurrency
 {
@@ -19,12 +14,12 @@ namespace Modules.Baskets.Application.Commands.ChangeBasketCurrency
         private readonly ICurrentUserService _currentUserService;
         private readonly IBasketRepository _basketRepository;
         private readonly ICurrencyConverter _currencyConverter;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IBasketsUnitOfWork _unitOfWork;
 
         public ChangeBasketCurrencyCommandHandler(ICurrentUserService currentUserService,
                                                   IBasketRepository basketRepository,
                                                   ICurrencyConverter currencyConverter,
-                                                  IUnitOfWork unitOfWork)
+                                                  IBasketsUnitOfWork unitOfWork)
         {
             _currentUserService = currentUserService;
             _basketRepository = basketRepository;

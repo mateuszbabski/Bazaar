@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using Modules.Products.Application.Contracts;
 using Modules.Products.Domain.Repositories;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
 
@@ -10,11 +10,11 @@ namespace Modules.Products.Application.Commands.ChangeProductDetails
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IProductRepository _productRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductsUnitOfWork _unitOfWork;
 
         public ChangeProductDetailsCommandHandler(ICurrentUserService currentUserService,
                                                   IProductRepository productRepository,
-                                                  IUnitOfWork unitOfWork)
+                                                  IProductsUnitOfWork unitOfWork)
         {
             _currentUserService = currentUserService;
             _productRepository = productRepository;
