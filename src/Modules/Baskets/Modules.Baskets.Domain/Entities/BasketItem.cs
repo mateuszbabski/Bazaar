@@ -65,9 +65,10 @@ namespace Modules.Baskets.Domain.Entities
                 throw new InvalidQuantityException();
             }
 
-            this.Quantity = quantity;
-
             this.Price = CountBasketItemPrice(quantity, price, currency);
+            this.BaseCurrencyPrice = CountBasketItemPrice(quantity, this.BaseCurrencyPrice.Amount / this.Quantity, this.BaseCurrencyPrice.Currency);
+
+            this.Quantity = quantity;
         }
 
         internal void ChangeCurrency(decimal conversionRate, string currency)

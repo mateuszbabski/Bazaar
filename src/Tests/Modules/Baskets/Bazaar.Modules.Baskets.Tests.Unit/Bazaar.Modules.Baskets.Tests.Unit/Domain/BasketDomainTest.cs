@@ -51,6 +51,24 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
         }
 
         [Fact]
+        public void ChangeProductQuantityInBasket_UpdatessBasketItemQuantityInBasket()
+        {
+            var product = BasketFactory.GetProduct();
+            var basket = BasketFactory.GetBasket();
+
+            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.Price.Amount);
+
+            var basketItem = basket.Items.FirstOrDefault(x => x.ProductId.Value == product.Id.Value);
+
+            Assert.Equal(product.Id.Value, basketItem?.ProductId.Value);
+            Assert.Equal(1, basketItem?.Quantity);
+            Assert.IsType<BasketItem>(basketItem);
+
+            basket.ChangeBasketItemQuantity(basketItem.Id, 2);
+            Assert.Equal(2, basketItem?.Quantity);
+        }
+
+        [Fact]
         public void ChangeBasketCurrency_ChangesCurrency_IfCurrencyAvailable()
         {
             decimal conversionRate = 4.0M;
