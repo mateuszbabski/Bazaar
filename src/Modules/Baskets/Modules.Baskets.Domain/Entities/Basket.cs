@@ -96,5 +96,22 @@ namespace Modules.Baskets.Domain.Entities
 
             this.TotalPrice = CountTotalPrice(this.Items);
         }
+
+        public void ChangeBasketItemQuantity(BasketItemId basketItemId,
+                                             int quantity)
+        {
+            var basketItem = Items.FirstOrDefault(x => x.Id == basketItemId);
+
+            if (quantity == basketItem.Quantity)
+            {
+                return;
+            }
+
+            basketItem.ChangeBasketItemQuantity(quantity, (basketItem.Price.Amount / basketItem.Quantity), basketItem.Price.Currency);
+
+            this.AddDomainEvent(new ProductQuantityChangedDomainEvent(this, basketItem));
+
+            this.TotalPrice = CountTotalPrice(this.Items);
+        }
     }
 }
