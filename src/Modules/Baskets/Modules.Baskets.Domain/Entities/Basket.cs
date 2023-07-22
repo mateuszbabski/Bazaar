@@ -2,6 +2,7 @@
 using Shared.Domain;
 using Modules.Baskets.Domain.Events;
 using Modules.Baskets.Domain.ValueObjects;
+using Modules.Baskets.Domain.Exceptions;
 
 namespace Modules.Baskets.Domain.Entities
 {
@@ -100,7 +101,8 @@ namespace Modules.Baskets.Domain.Entities
         public void ChangeBasketItemQuantity(BasketItemId basketItemId,
                                              int quantity)
         {
-            var basketItem = Items.FirstOrDefault(x => x.Id == basketItemId);
+            var basketItem = Items.FirstOrDefault(x => x.Id == basketItemId) 
+                ?? throw new BasketItemNotFoundException();
 
             if (quantity == basketItem.Quantity)
             {
