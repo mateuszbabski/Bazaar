@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Baskets.Application.Commands.ChangeBasketCurrency;
 using Modules.Baskets.Application.Commands.ChangeProductQuantity;
+using Modules.Baskets.Application.Commands.CheckoutBasket;
 using Modules.Baskets.Application.Commands.DeleteBasket;
 using Modules.Baskets.Application.Commands.RemoveProductFromBasket;
 using Modules.Baskets.Application.Dtos;
@@ -24,13 +25,26 @@ namespace Modules.Baskets.Api
         }
 
         [Authorize(Roles = "customer")]
+        [HttpPost("CheckoutBasket")]
+        [SwaggerOperation("Checkout basket")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<Unit>> CheckoutBasket(CheckoutBasketCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [Authorize(Roles = "customer")]
         [HttpPost("ChangeBasketCurrency")]
         [SwaggerOperation("Change basket currency")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Guid>> ChangeBasketCurrency(ChangeBasketCurrencyCommand command)
+        public async Task<ActionResult<Unit>> ChangeBasketCurrency(ChangeBasketCurrencyCommand command)
         {
             var result = await _mediator.Send(command);
 
@@ -44,7 +58,7 @@ namespace Modules.Baskets.Api
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Guid>> ChangeProductQuantity(ChangeProductQuantityCommand command)
+        public async Task<ActionResult<Unit>> ChangeProductQuantity(ChangeProductQuantityCommand command)
         {
             var result = await _mediator.Send(command);
 
@@ -58,7 +72,7 @@ namespace Modules.Baskets.Api
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Guid>> DeleteBasket(DeleteBasketCommand command)
+        public async Task<ActionResult<Unit>> DeleteBasket(DeleteBasketCommand command)
         {
             await _mediator.Send(command);
 
@@ -72,7 +86,7 @@ namespace Modules.Baskets.Api
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Guid>> RemoveProductFromBasket(RemoveProductFromBasketCommand command)
+        public async Task<ActionResult<Unit>> RemoveProductFromBasket(RemoveProductFromBasketCommand command)
         {
             await _mediator.Send(command);
 

@@ -1,17 +1,12 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Modules.Customers.Application.Contracts;
 using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
-using Serilog;
 using Shared.Abstractions.Auth;
-using Shared.Abstractions.DomainEvents;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Auth;
 using Shared.Application.Exceptions;
 using Shared.Domain.ValueObjects;
-using System.Reflection;
 
 namespace Modules.Customers.Application.Commands.SignUpCustomer
 {
