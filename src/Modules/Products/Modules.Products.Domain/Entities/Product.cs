@@ -90,8 +90,9 @@ namespace Modules.Products.Domain.Entities
                 currency = this.Price.Currency;
             }
 
-            SetPrice(MoneyValue.Of(amount, currency));
-            this.AddDomainEvent(new ProductPriceChangedDomainEvent(this));
+            var newPrice = MoneyValue.Of(amount, currency);
+            SetPrice(newPrice);
+            this.AddDomainEvent(new ProductPriceChangedDomainEvent(this.Id, this.Price));
         }
 
         private void SetPrice(MoneyValue price)

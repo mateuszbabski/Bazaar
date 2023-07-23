@@ -7,8 +7,11 @@
 
   <ItemGroup>
     <Compile Remove="Exceptions\**" />
+    <Compile Remove="Queries\GetDetailedCustomerById\**" />
     <EmbeddedResource Remove="Exceptions\**" />
+    <EmbeddedResource Remove="Queries\GetDetailedCustomerById\**" />
     <None Remove="Exceptions\**" />
+    <None Remove="Queries\GetDetailedCustomerById\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,11 +23,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.Abstractions\Shared.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\Shared\Shared.Application\Shared.Application.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Shared.Domain\Shared.Domain.csproj" />
     <ProjectReference Include="..\Modules.Customers.Domain\Modules.Customers.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Queries\GetDetailedCustomerById\" />
   </ItemGroup>
 
     <ItemGroup>
