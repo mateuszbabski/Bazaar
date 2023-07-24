@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Shared.Domain\Shared.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

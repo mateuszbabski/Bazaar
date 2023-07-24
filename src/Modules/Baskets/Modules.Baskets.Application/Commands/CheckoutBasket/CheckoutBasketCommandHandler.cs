@@ -5,7 +5,7 @@ using Modules.Baskets.Domain.Repositories;
 using Shared.Abstractions.Events;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
-using Shared.Application.IntegrationEvents.BasketCheckedOut;
+using Modules.Baskets.Contracts.Events.BasketCheckedOut;
 
 namespace Modules.Baskets.Application.Commands.CheckoutBasket
 {

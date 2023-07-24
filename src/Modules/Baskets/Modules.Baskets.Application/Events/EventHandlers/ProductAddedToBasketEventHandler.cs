@@ -2,7 +2,7 @@
 using Modules.Baskets.Application.Exceptions;
 using Modules.Baskets.Domain.Entities;
 using Modules.Baskets.Domain.Repositories;
-using Modules.Shared.Application.IntegrationEvents;
+using Modules.Products.Contracts.Events;
 using Shared.Abstractions.CurrencyConverters;
 using Shared.Abstractions.Events;
 using Shared.Abstractions.UserServices;
