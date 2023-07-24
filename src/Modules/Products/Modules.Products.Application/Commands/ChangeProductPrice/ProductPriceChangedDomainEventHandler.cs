@@ -1,7 +1,7 @@
-﻿using Modules.Products.Domain.Events;
+﻿using Modules.Products.Contracts.Events;
+using Modules.Products.Domain.Events;
 using Shared.Abstractions.DomainEvents;
 using Shared.Abstractions.Events;
-using Shared.Application.IntegrationEvents;
 
 namespace Modules.Products.Application.Commands.ChangeProductPrice
 {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using Modules.Products.Contracts.Events;
 using Modules.Products.Domain.Repositories;
-using Modules.Shared.Application.IntegrationEvents;
 using Shared.Abstractions.Events;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
