@@ -2,10 +2,9 @@
 using Modules.Baskets.Application.Contracts;
 using Modules.Baskets.Application.Events.EventHandlers;
 using Modules.Baskets.Domain.Repositories;
-using Modules.Shared.Application.IntegrationEvents;
+using Modules.Products.Contracts.Events;
 using Moq;
 using Shared.Abstractions.CurrencyConverters;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Abstractions.UserServices;
 
 namespace Bazaar.Modules.Baskets.Tests.Unit.Application

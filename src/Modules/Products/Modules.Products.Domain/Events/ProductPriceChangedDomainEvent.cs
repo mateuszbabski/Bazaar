@@ -1,5 +1,4 @@
-﻿using Modules.Products.Domain.Entities;
-using Shared.Domain;
+﻿using Shared.Domain;
 using Shared.Domain.ValueObjects;
 
 namespace Modules.Products.Domain.Events
