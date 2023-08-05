@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shared.Infrastructure\Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules.Shippings.Application\Modules.Shippings.Application.csproj" />
+    <ProjectReference Include="..\Modules.Shippings.Domain\Modules.Shippings.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

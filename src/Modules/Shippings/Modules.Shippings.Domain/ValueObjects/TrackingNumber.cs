@@ -5,7 +5,7 @@ namespace Modules.Shippings.Domain.ValueObjects
     public record TrackingNumber
     {
         // TODO: create tracking number
-        public string Value { get; }
+        public Guid Value { get; }
 
         public TrackingNumber(Guid value)
         {
@@ -13,11 +13,9 @@ namespace Modules.Shippings.Domain.ValueObjects
             {
                 throw new InvalidTrackingNumberException();
             }
-
-            Value = value.ToString();
         }
 
-        public static implicit operator string(TrackingNumber trackingNumber) => trackingNumber.Value;
-        public static implicit operator TrackingNumber(string value) => new(value);
+        public static implicit operator Guid(TrackingNumber trackingNumber) => trackingNumber.Value;
+        public static implicit operator TrackingNumber(Guid value) => new(value);
     }
 }

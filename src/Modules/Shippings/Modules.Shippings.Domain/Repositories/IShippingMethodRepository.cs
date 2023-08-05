@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Modules.Shippings.Domain.Repositories
 {
-    public interface IShippingMethodsRepository
+    public interface IShippingMethodRepository
     {
         Task<ShippingMethod> CreateShippingMethod(ShippingMethod shipping);
         Task<ShippingMethod> UpdateShippingMethod(ShippingMethod shipping);

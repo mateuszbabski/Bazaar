@@ -7,7 +7,7 @@ namespace Modules.Products.Infrastructure.Context
     internal class ProductsUnitOfWork : SqlServerUnitOfWork<ProductsDbContext>, IProductsUnitOfWork
     {
         public ProductsUnitOfWork(ProductsDbContext dbContext,
-                               IDomainEventDispatcher domainEventDispatcher)
+                                  IDomainEventDispatcher domainEventDispatcher)
             : base(dbContext, domainEventDispatcher)
         {
         }
