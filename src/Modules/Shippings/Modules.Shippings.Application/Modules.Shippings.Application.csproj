@@ -11,16 +11,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\AddShippingMethod\" />
-    <Folder Include="Commands\DeleteShippingMethod\" />
-    <Folder Include="Commands\CancelShipping\" />
-    <Folder Include="Commands\UpdateShippingMethod\" />
-    <Folder Include="Queries\GetShippingMethods\" />
-    <Folder Include="Queries\GetShippingMethodById\" />
-    <Folder Include="Queries\GetShippingById\" />
-    <Folder Include="Queries\GetShippings\" />
-    <Folder Include="Queries\GetShippingByTrackingNumber\" />
-    <Folder Include="Queries\GetShippingByOrderId\" />
+    <Folder Include="Commands\ShippingMethods\AddShippingMethod\" />
+    <Folder Include="Commands\ShippingMethods\DeleteShippingMethod\" />
+    <Folder Include="Commands\ShippingMethods\" />
+    <Folder Include="Commands\Shippings\CancelShipping\" />
+    <Folder Include="Commands\Shippings\CreateShipping\" />
+    <Folder Include="Commands\Shippings\ChangeShippingStatus\" />
+    <Folder Include="Commands\Shippings\" />
+    <Folder Include="Commands\ShippingMethods\UpdateShippingMethod\" />
+    <Folder Include="Queries\ShippingMethods\GetShippingMethods\" />
+    <Folder Include="Queries\ShippingMethods\GetShippingMethodById\" />
+    <Folder Include="Queries\ShippingMethods\" />
+    <Folder Include="Queries\Shippings\GetShippingById\" />
+    <Folder Include="Queries\Shippings\GetShippings\" />
+    <Folder Include="Queries\Shippings\GetShippingByTrackingNumber\" />
+    <Folder Include="Queries\Shippings\GetShippingByOrderId\" />
+    <Folder Include="Queries\Shippings\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

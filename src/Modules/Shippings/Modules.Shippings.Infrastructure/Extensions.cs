@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Shippings.Application.Contracts;
 using Modules.Shippings.Domain.Repositories;
-using Modules.Shippings.Infrastructure.Context;
+using Modules.Shippings.Infrastructure.Context.Shippings;
 using Modules.Shippings.Infrastructure.Repository;
 
 namespace Modules.Shippings.Infrastructure

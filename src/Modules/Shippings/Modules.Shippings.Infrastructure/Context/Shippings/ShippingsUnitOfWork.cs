@@ -2,7 +2,7 @@
 using Shared.Abstractions.DomainEvents;
 using Shared.Infrastructure.UnitOfWork;
 
-namespace Modules.Shippings.Infrastructure.Context
+namespace Modules.Shippings.Infrastructure.Context.Shippings
 {
     internal class ShippingsUnitOfWork : SqlServerUnitOfWork<ShippingsDbContext>, IShippingsUnitOfWork
     {
@@ -10,7 +10,7 @@ namespace Modules.Shippings.Infrastructure.Context
                                    IDomainEventDispatcher domainEventDispatcher)
             : base(dbContext, domainEventDispatcher)
         {
-            
+
         }
     }
 }
