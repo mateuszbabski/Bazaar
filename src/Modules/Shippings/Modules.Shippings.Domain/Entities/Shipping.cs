@@ -31,9 +31,10 @@ namespace Modules.Shippings.Domain.Entities
             Id = new ShippingId(Guid.NewGuid());
             OrderId = orderId;
             ShippingMethodId = methodId;
+            TrackingNumber = new TrackingNumber(Guid.NewGuid());
             Status = ShippingStatus.Pending;
             CreatedDate = createdOn;
-            TrackingNumber = new TrackingNumber(Guid.NewGuid());
+            LastUpdateDate = createdOn;
             TotalWeight = weight;
             TotalPrice = CalculateTotalPrice(weight, baseShippingPrice);
         }
