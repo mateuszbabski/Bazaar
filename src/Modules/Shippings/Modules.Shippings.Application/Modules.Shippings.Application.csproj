@@ -10,4 +10,18 @@
     <ProjectReference Include="..\..\..\Shared\Shared.Abstractions\Shared.Abstractions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\AddShippingMethod\" />
+    <Folder Include="Commands\DeleteShippingMethod\" />
+    <Folder Include="Commands\CancelShipping\" />
+    <Folder Include="Commands\UpdateShippingMethod\" />
+    <Folder Include="Queries\GetShippingMethods\" />
+    <Folder Include="Queries\GetShippingMethodById\" />
+    <Folder Include="Queries\GetShippingById\" />
+    <Folder Include="Queries\GetShippings\" />
+    <Folder Include="Queries\GetShippingByTrackingNumber\" />
+    <Folder Include="Queries\GetShippingByOrderId\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

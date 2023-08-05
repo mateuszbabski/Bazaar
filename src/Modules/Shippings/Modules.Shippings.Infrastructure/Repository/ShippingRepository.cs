@@ -10,7 +10,7 @@ namespace Modules.Shippings.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public Task DeleteShipping(Shipping shipping)
+        public Task CancelShipping(Shipping shipping)
         {
             throw new NotImplementedException();
         }

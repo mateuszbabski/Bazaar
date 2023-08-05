@@ -11,6 +11,7 @@ namespace Modules.Shippings.Domain.Entities
         public ShippingMethodName Name { get; private set; }
         public MoneyValue BasePrice { get; private set; }
         public int DurationTimeInDays { get; private set; } = 1;
+        public bool IsAvailable { get; private set; } = true;
 
         private ShippingMethod()
         {
