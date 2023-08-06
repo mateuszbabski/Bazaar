@@ -51,7 +51,7 @@ namespace Modules.Shippings.Domain.Entities
         }
 
         private MoneyValue CalculateTotalPrice(decimal weight, MoneyValue baseShippingPrice)
-        {            
+        {
             return TotalPrice;
         }
     }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Modules.Shippings.Domain.Entities;
 using Modules.Shippings.Domain.ValueObjects;
+using Shared.Domain.ValueObjects;
 
 namespace Modules.Shippings.Infrastructure.Context.Shippings
 {
@@ -28,8 +29,10 @@ namespace Modules.Shippings.Infrastructure.Context.Shippings
             builder.Property(c => c.TrackingNumber)
                    .HasConversion(c => c.Value, c => new TrackingNumber(c));
 
+            builder.Property(c => c.TotalWeight)
+                   .HasConversion(c => c.Value, c => new Weight(c));
+
             builder.Property(c => c.Status).HasColumnName("ShippingStatus");
-            builder.Property(c => c.TotalWeight).HasColumnName("TotalWeight");
             builder.Property(c => c.CreatedDate).HasColumnName("CreatedDate");
             builder.Property(c => c.LastUpdateDate).HasColumnName("LastUpdatedDate");
 

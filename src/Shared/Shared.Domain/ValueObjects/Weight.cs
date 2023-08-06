@@ -8,7 +8,7 @@ namespace Shared.Domain.ValueObjects
 
         public Weight(decimal value)
         {
-            if (value <= 0 || string.IsNullOrEmpty(value.ToString()))
+            if (value < 0 || string.IsNullOrEmpty(value.ToString()))
             {
                 throw new InvalidWeightException();
             }

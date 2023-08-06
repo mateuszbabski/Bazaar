@@ -1,6 +1,8 @@
-﻿namespace Modules.Shippings.Application.Contracts
+﻿using Shared.Abstractions.UnitOfWork;
+
+namespace Modules.Shippings.Application.Contracts
 {
-    public interface IShippingMethodsUnitOfWork
+    public interface IShippingMethodsUnitOfWork : IUnitOfWork
     {
     }
 }
