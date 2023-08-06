@@ -20,7 +20,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
             var product = BasketFactory.GetProduct();
             var basket = BasketFactory.GetBasket();
 
-            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.Price.Amount);
+            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.WeightPerUnit, product.Price.Amount);
 
 
             var basketItem = basket.Items.FirstOrDefault(x => x.ProductId.Value == product.Id.Value);
@@ -36,7 +36,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
             var product = BasketFactory.GetProduct();
             var basket = BasketFactory.GetBasket();
 
-            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.Price.Amount);
+            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.WeightPerUnit, product.Price.Amount);
 
             var basketItem = basket.Items.FirstOrDefault(x => x.ProductId.Value == product.Id.Value);
 
@@ -56,7 +56,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
             var product = BasketFactory.GetProduct();
             var basket = BasketFactory.GetBasket();
 
-            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.Price.Amount);
+            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.WeightPerUnit, product.Price.Amount);
 
             var basketItem = basket.Items.FirstOrDefault(x => x.ProductId.Value == product.Id.Value);
 
@@ -75,7 +75,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
             var product = BasketFactory.GetProduct();
             var basket = BasketFactory.GetBasket();
 
-            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.Price.Amount);
+            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.WeightPerUnit, product.Price.Amount);
 
             basket.ChangeBasketCurrency(conversionRate, "PLN");
 
@@ -89,7 +89,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
             var product = BasketFactory.GetProduct();
             var basket = BasketFactory.GetBasket();
 
-            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.Price.Amount);
+            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.WeightPerUnit, product.Price.Amount);
 
             var act = Assert.Throws<InvalidPriceException>(() => basket.ChangeBasketCurrency(conversionRate, "PES"));
             Assert.IsType<InvalidPriceException>(act);

@@ -38,7 +38,12 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
                                                                   basket.TotalPrice.Currency))
                 .ReturnsAsync(product.Price.Amount);
 
-            var productAddedEvent = new ProductAddedToBasketEvent(product.Id, product.ShopId, customerId, product.Price, 1);
+            var productAddedEvent = new ProductAddedToBasketEvent(product.Id,
+                                                                  product.ShopId,
+                                                                  customerId,
+                                                                  product.Price,
+                                                                  product.WeightPerUnit,
+                                                                  1);
 
             await _sut.Handle(productAddedEvent, CancellationToken.None);
             _unitOfWorkMock.Verify(x => x.CommitAndDispatchDomainEventsAsync(basket), Times.Once());

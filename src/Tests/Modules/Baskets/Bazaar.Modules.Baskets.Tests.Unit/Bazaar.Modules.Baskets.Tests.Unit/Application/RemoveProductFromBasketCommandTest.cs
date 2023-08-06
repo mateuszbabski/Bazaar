@@ -95,8 +95,8 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
             var product = BasketFactory.GetProduct();
             var product2 = BasketFactory.GetProduct();
 
-            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.Price.Amount);
-            basket.AddProductToBasket(product2.Id, product2.ShopId, 2, product2.Price, product2.Price.Amount);
+            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.WeightPerUnit, product.Price.Amount);
+            basket.AddProductToBasket(product2.Id, product2.ShopId, 2, product2.Price, product2.WeightPerUnit, product2.Price.Amount);
 
             return basket;
         }

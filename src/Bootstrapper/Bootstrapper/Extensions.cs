@@ -6,6 +6,7 @@ using Modules.Products.Api;
 using Shared.Infrastructure.Modules;
 using System.Reflection;
 using Modules.Baskets.Api;
+using Modules.Shippings.Api;
 
 namespace Bootstrapper
 {
@@ -26,6 +27,7 @@ namespace Bootstrapper
             services.AddShopsModule(configuration);
             services.AddProductsModule(configuration);
             services.AddBasketsModule(configuration);
+            services.AddShippingsModule(configuration);
 
             return services;
         }

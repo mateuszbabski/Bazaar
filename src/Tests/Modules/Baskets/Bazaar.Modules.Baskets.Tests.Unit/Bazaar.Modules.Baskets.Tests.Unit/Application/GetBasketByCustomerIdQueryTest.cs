@@ -56,7 +56,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
             var basket = Basket.CreateBasket(customerId, "USD");
             var product = BasketFactory.GetProduct();
 
-            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.Price.Amount);
+            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.WeightPerUnit, product.Price.Amount);
 
             return basket;
         }

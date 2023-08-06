@@ -26,7 +26,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
             var basket = Basket.CreateBasket(Guid.NewGuid(), "USD");
             var product = GetProduct();
 
-            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.Price.Amount);
+            basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.WeightPerUnit, product.Price.Amount);
 
             return basket;
         }
