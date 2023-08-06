@@ -12,6 +12,7 @@ namespace Modules.Baskets.Domain.Entities
         public BasketCustomerId CustomerId { get; private set; }
         public List<BasketItem> Items { get; private set; }
         public MoneyValue TotalPrice { get; private set; }
+        public Weight TotalWeight { get; private set; }
 
         private Basket() { }
 
@@ -21,6 +22,7 @@ namespace Modules.Baskets.Domain.Entities
             CustomerId = customerId;
             Items = new List<BasketItem>();
             TotalPrice = new MoneyValue(0, currency);
+            TotalWeight = new Weight(0);
         }
 
         public static Basket CreateBasket(BasketCustomerId customerId, string currency)
@@ -36,6 +38,13 @@ namespace Modules.Baskets.Domain.Entities
             decimal allProductsPrice = items.Sum(x => x.Price.Amount);
 
             return new MoneyValue(allProductsPrice, TotalPrice.Currency);
+        }
+
+        private static Weight CalculateBasketWeight(List<BasketItem> items)
+        {
+            decimal totalWeight = items.Sum(x => x.BasketItemWeight.Value);
+
+            return new Weight(totalWeight);
         }
 
         internal MoneyValue GetPrice()
@@ -61,6 +70,7 @@ namespace Modules.Baskets.Domain.Entities
                                        Guid shopId,
                                        int quantity,
                                        MoneyValue baseProductPrice,
+                                       decimal productWeight,
                                        decimal convertedPrice)
         {
             var basketItem = Items.FirstOrDefault(x => x.ProductId.Value == productId);
@@ -73,6 +83,7 @@ namespace Modules.Baskets.Domain.Entities
                                                                            quantity,
                                                                            this.TotalPrice.Currency,
                                                                            baseProductPrice,
+                                                                           productWeight,
                                                                            convertedPrice);
                 Items.Add(newBasketItem);
 
@@ -85,6 +96,7 @@ namespace Modules.Baskets.Domain.Entities
             }
 
             this.TotalPrice = CountTotalPrice(this.Items);
+            this.TotalWeight = CalculateBasketWeight(this.Items);
         }
 
         public void RemoveItemFromBasket(BasketItemId basketItemId)
@@ -96,6 +108,7 @@ namespace Modules.Baskets.Domain.Entities
             this.AddDomainEvent(new ProductRemovedFromBasketDomainEvent(this, item));
 
             this.TotalPrice = CountTotalPrice(this.Items);
+            this.TotalWeight = CalculateBasketWeight(this.Items);
         }
 
         public void ChangeBasketItemQuantity(BasketItemId basketItemId,
@@ -114,6 +127,7 @@ namespace Modules.Baskets.Domain.Entities
             this.AddDomainEvent(new ProductQuantityChangedDomainEvent(this, basketItem));
 
             this.TotalPrice = CountTotalPrice(this.Items);
+            this.TotalWeight = CalculateBasketWeight(this.Items);
         }
     }
 }
