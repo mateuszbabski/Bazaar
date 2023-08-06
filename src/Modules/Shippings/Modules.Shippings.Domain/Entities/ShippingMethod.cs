@@ -24,6 +24,7 @@ namespace Modules.Shippings.Domain.Entities
             Name = name;
             BasePrice = basePrice;
             DurationTimeInDays = durationTime;
+            IsAvailable = true;
         }
 
         public static ShippingMethod CreateNewShippingMethod(string name, MoneyValue basePrice, int durationTime)
