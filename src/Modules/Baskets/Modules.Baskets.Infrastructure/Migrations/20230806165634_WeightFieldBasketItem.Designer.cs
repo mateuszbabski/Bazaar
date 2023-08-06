@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Modules.Baskets.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using Modules.Baskets.Infrastructure.Context;
 namespace Modules.Baskets.Infrastructure.Migrations
 {
     [DbContext(typeof(BasketsDbContext))]
-    partial class BasketsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230806165634_WeightFieldBasketItem")]
+    partial class WeightFieldBasketItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
