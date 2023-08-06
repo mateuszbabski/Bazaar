@@ -83,6 +83,13 @@ $ dotnet run
 - Checkout basket
 - Change basket currency
 
+- ### Shippings module:
+- Adding, updating, deleting shipping methods
+- Querying for available shipping methods
+- Create shipping from order
+- Querying shippings by orderId, trackingNumber
+- Listing shipping history for customer
+
 ### Shared layer:
 - Auth helpers - hashing service, token manager, jwt settings
 - Email uniqueness checker (awaiting)
