@@ -9,6 +9,7 @@ namespace Modules.Baskets.Application.Dtos
         public Guid CustomerId { get; init; }
         public List<BasketItemDto> Items { get; init; }
         public MoneyValue TotalPrice { get; init; }
+        public Weight TotalWeight { get; init; }
 
         public static BasketDto CreateBasketDtoFromObject(Basket basket)
         {
@@ -26,6 +27,7 @@ namespace Modules.Baskets.Application.Dtos
                 Id = basket.Id,
                 CustomerId = basket.CustomerId,
                 TotalPrice = basket.TotalPrice,
+                TotalWeight = basket.TotalWeight,
                 Items = basketItemsList
             };
         }

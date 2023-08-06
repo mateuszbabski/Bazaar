@@ -1,6 +1,7 @@
 ﻿using Modules.Products.Domain.Events;
 using Modules.Products.Domain.ValueObjects;
 using Shared.Domain;
+using Shared.Domain.Exceptions;
 using Shared.Domain.ValueObjects;
 
 namespace Modules.Products.Domain.Entities
@@ -102,11 +103,12 @@ namespace Modules.Products.Domain.Entities
 
         public void ChangeProductWeight(decimal weight)
         {
-            if(!weight.Equals(null) && !string.IsNullOrEmpty(weight.ToString()))
+            if(weight == 0 || weight.Equals(null) || string.IsNullOrEmpty(weight.ToString()))
             {
-                SetWeight(weight);
+                throw new InvalidWeightException();
             }
-            
+
+            SetWeight(weight);            
             this.AddDomainEvent(new ProductWeightChangedDomainEvent(this));
         }
 

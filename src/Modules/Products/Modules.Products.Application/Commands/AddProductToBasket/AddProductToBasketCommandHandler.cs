@@ -32,6 +32,7 @@ namespace Modules.Products.Application.Commands.AddProductToBasket
                                                                               product.ShopId,
                                                                               customerId,
                                                                               product.Price,
+                                                                              product.WeightPerUnit,
                                                                               request.Quantity),
                                                 cancellationToken);
 

@@ -7,6 +7,7 @@ namespace Modules.Products.Contracts.Events
                                             Guid ShopId,
                                             Guid CustomerId,
                                             MoneyValue ProductPrice,
+                                            decimal ProductWeight,
                                             int Quantity) : IEvent
     {
     }
