@@ -40,7 +40,6 @@ namespace Shared.Infrastructure
             services.AddEvents(assemblies);
             services.AddDomainEventsDispatcher(assemblies);
 
-
             services.AddHttpClient();
             services.AddScoped<ICurrencyConverter, CurrencyConverter>();
 
