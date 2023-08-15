@@ -1,33 +1,39 @@
-﻿using Modules.Shippings.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Modules.Shippings.Domain.Entities;
 using Modules.Shippings.Domain.Repositories;
+using Modules.Shippings.Infrastructure.Context.ShippingMethods;
 
 namespace Modules.Shippings.Infrastructure.Repository
 {
     internal sealed class ShippingMethodRepository : IShippingMethodRepository
     {
-        public Task<ShippingMethod> CreateShippingMethod(ShippingMethod shipping)
+        private readonly ShippingMethodsDbContext _dbContext;
+
+        public ShippingMethodRepository(ShippingMethodsDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+        public async Task<ShippingMethod> AddShippingMethod(ShippingMethod shipping)
+        {
+            await _dbContext.ShippingMethods.AddAsync(shipping);
+
+            return shipping;
         }
 
-        public Task DeleteShippingMethod(ShippingMethod shippingMethod)
+        public async Task DeleteShippingMethod(ShippingMethod shippingMethod)
         {
-            throw new NotImplementedException();
+            _dbContext.ShippingMethods.Remove(shippingMethod);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<ShippingMethod> GetShippingMethodById(Guid id)
+        public async Task<ShippingMethod> GetShippingMethodById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.ShippingMethods.FirstOrDefaultAsync(x => x.Id.Value == id);
         }
 
-        public Task<IEnumerable<ShippingMethod>> GetShippingMethods()
+        public async Task<IEnumerable<ShippingMethod>> GetShippingMethods()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<ShippingMethod> UpdateShippingMethod(ShippingMethod shipping)
-        {
-            throw new NotImplementedException();
+            return await _dbContext.ShippingMethods.ToListAsync();
         }
     }
 }

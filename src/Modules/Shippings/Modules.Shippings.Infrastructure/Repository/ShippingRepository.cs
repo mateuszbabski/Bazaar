@@ -5,6 +5,7 @@ namespace Modules.Shippings.Infrastructure.Repository
 {
     internal sealed class ShippingRepository : IShippingRepository
     {
+        // TODO: Repository for shippings
         public Task<Shipping> CreateShipping(Shipping shipping)
         {
             throw new NotImplementedException();
