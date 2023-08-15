@@ -7,7 +7,7 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Domain
     public class ShopDomainTest
     {
         [Fact]
-        public void CreateShop_ReturnsShopIfParamsAreValid()
+        public void CreateShop_ReturnsShop_IfParamsAreValid()
         {
             var address = Address.CreateAddress("country", "city", "street", "postalCode");
 
@@ -26,7 +26,7 @@ namespace Bazaar.Modules.Shops.Tests.Unit.Domain
         }
 
         [Fact]
-        public void CreateShop_ThrowsInvalidEmailExceptionWhenEmailIsInvalid()
+        public void CreateShop_ThrowsInvalidEmailException_WhenEmailIsInvalid()
         {
             var address = Address.CreateAddress("country", "city", "street", "postalCode");
 
