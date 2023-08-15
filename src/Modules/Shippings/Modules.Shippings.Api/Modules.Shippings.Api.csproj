@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Modules.Shippings.Application\Modules.Shippings.Application.csproj" />
     <ProjectReference Include="..\Modules.Shippings.Domain\Modules.Shippings.Domain.csproj" />
     <ProjectReference Include="..\Modules.Shippings.Infrastructure\Modules.Shippings.Infrastructure.csproj" />
