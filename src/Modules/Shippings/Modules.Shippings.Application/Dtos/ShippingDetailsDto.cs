@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Modules.Shippings.Application.Dtos
 {
-    internal class ShippingDetailsDto
+    public class ShippingDetailsDto
     {
     }
 }
