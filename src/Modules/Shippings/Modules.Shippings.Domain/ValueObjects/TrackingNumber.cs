@@ -4,7 +4,6 @@ namespace Modules.Shippings.Domain.ValueObjects
 {
     public record TrackingNumber
     {
-        // TODO: create tracking number
         public Guid Value { get; }
 
         public TrackingNumber(Guid value)

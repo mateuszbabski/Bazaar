@@ -6,6 +6,7 @@
         Pending = 10,
         PreparedToShipped = 20,
         Shipped = 30,
-        Delivered = 40
+        Delivered = 40,
+        Cancelled = 50
     }
 }
