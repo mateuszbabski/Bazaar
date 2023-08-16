@@ -19,5 +19,25 @@ namespace Modules.Shippings.Application.Dtos
                 DurationTimeInDays = shippingMethod.DurationTimeInDays
             };
         }
+
+        public static IEnumerable<ShippingMethodDto> CreateDtoListFromObjects(List<ShippingMethod> shippingMethods)
+        {
+            var shippingMethodList = new List<ShippingMethodDto>();
+            
+            foreach (var shippingMethod in shippingMethods)
+            {
+                var shippingMethodDto = new ShippingMethodDto()
+                {
+                    Id = shippingMethod.Id,
+                    Name = shippingMethod.Name,
+                    BasePrice = shippingMethod.BasePrice,
+                    DurationTimeInDays = shippingMethod.DurationTimeInDays
+                };
+
+                shippingMethodList.Add(shippingMethodDto);
+            }
+
+            return shippingMethodList;
+        }
     }
 }

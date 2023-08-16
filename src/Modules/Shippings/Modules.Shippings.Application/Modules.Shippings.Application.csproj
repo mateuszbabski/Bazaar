@@ -3,32 +3,24 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Shared.Application\Shared.Application.csproj" />
     <ProjectReference Include="..\Modules.Shippings.Domain\Modules.Shippings.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\ShippingMethods\AddShippingMethod\" />
-    <Folder Include="Commands\ShippingMethods\DeleteShippingMethod\" />
-    <Folder Include="Commands\ShippingMethods\" />
     <Folder Include="Commands\Shippings\CancelShipping\" />
     <Folder Include="Commands\Shippings\CreateShipping\" />
     <Folder Include="Commands\Shippings\ChangeShippingStatus\" />
     <Folder Include="Commands\Shippings\" />
-    <Folder Include="Commands\ShippingMethods\UpdateShippingMethod\" />
-    <Folder Include="Queries\ShippingMethods\GetShippingMethods\" />
-    <Folder Include="Queries\ShippingMethods\GetShippingMethodById\" />
-    <Folder Include="Queries\ShippingMethods\" />
     <Folder Include="Queries\Shippings\GetShippingById\" />
     <Folder Include="Queries\Shippings\GetShippings\" />
     <Folder Include="Queries\Shippings\GetShippingByTrackingNumber\" />
     <Folder Include="Queries\Shippings\GetShippingByOrderId\" />
     <Folder Include="Queries\Shippings\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
