@@ -8,7 +8,6 @@ namespace Modules.Baskets.Domain.Entities
 {
     public class BasketItem : Entity
     {
-        // TODO: Add basket item weight
         public BasketItemId Id { get; private set; }
         public BasketProductId ProductId { get; private set; }
         public BasketShopId ShopId { get; private set; }

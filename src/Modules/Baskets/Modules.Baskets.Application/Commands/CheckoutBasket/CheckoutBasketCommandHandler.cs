@@ -6,6 +6,7 @@ using Shared.Abstractions.Events;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
 using Modules.Baskets.Contracts.Events.BasketCheckedOut;
+using Shared.Domain.ValueObjects;
 
 namespace Modules.Baskets.Application.Commands.CheckoutBasket
 {
@@ -34,8 +35,11 @@ namespace Modules.Baskets.Application.Commands.CheckoutBasket
                 ?? throw new NotFoundException("Basket not found.");                       
             
             var basketMapped = CreateMappedBasket(basket);
-
+            //var address = Address.CreateAddress(command.Country, command.City, command.Street, command.PostalCode);
+            // TODO: after changing customer module
             var message = new BasketCheckoutMessage(basketMapped,
+                                                    //command.TelephoneNumber,
+                                                    //address,
                                                     command.CouponCode,
                                                     command.ShippingMethod,
                                                     command.PaymentMethod);
