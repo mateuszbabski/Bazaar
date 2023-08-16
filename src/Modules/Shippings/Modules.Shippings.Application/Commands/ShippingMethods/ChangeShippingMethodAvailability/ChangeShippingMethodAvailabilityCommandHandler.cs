@@ -1,21 +1,22 @@
 ﻿using MediatR;
+using Modules.Shippings.Application.Contracts;
 using Modules.Shippings.Domain.Repositories;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Exceptions;
 
 namespace Modules.Shippings.Application.Commands.ShippingMethods.ChangeShippingMethodAvailability
 {
-    internal class ChangeShippingMethodAvailabilityCommandHandler : IRequestHandler<ChangeShippingMethodAvailabilityCommand, Unit>
+    public class ChangeShippingMethodAvailabilityCommandHandler : IRequestHandler<ChangeShippingMethodAvailabilityCommand, Unit>
     {
         private readonly IShippingMethodRepository _shippingMethodRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IShippingMethodsUnitOfWork _unitOfWork;
 
         public ChangeShippingMethodAvailabilityCommandHandler(IShippingMethodRepository shippingMethodRepository,
-                                                              IUnitOfWork unitOfWork)
+                                                              IShippingMethodsUnitOfWork unitOfWork)
         {
             _shippingMethodRepository = shippingMethodRepository;
             _unitOfWork = unitOfWork;
         }
+
         public async Task<Unit> Handle(ChangeShippingMethodAvailabilityCommand command, CancellationToken cancellationToken)
         {
             var shippingMethod = await _shippingMethodRepository.GetShippingMethodById(command.Id)

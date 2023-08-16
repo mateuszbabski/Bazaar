@@ -1,19 +1,18 @@
 ﻿using MediatR;
+using Modules.Shippings.Application.Contracts;
 using Modules.Shippings.Domain.Entities;
 using Modules.Shippings.Domain.Repositories;
-using Shared.Abstractions.UnitOfWork;
-using Shared.Abstractions.UserServices;
 using Shared.Domain.ValueObjects;
 
 namespace Modules.Shippings.Application.Commands.ShippingMethods.AddShippingMethod
 {
-    internal class AddShippingMethodCommandHandler : IRequestHandler<AddShippingMethodCommand, Guid>
+    public class AddShippingMethodCommandHandler : IRequestHandler<AddShippingMethodCommand, Guid>
     {
         private readonly IShippingMethodRepository _shippingMethodRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IShippingMethodsUnitOfWork _unitOfWork;
 
         public AddShippingMethodCommandHandler(IShippingMethodRepository shippingMethodRepository,
-                                               IUnitOfWork unitOfWork)
+                                               IShippingMethodsUnitOfWork unitOfWork)
         {
             _shippingMethodRepository = shippingMethodRepository;
             _unitOfWork = unitOfWork;

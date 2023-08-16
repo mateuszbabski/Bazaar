@@ -1,17 +1,17 @@
 ﻿using MediatR;
+using Modules.Shippings.Application.Contracts;
 using Modules.Shippings.Domain.Repositories;
-using Shared.Abstractions.UnitOfWork;
 using Shared.Application.Exceptions;
 
 namespace Modules.Shippings.Application.Commands.ShippingMethods.UpdateShippingMethodDetails
 {
-    internal class UpdateShippingMethodDetailsCommandHandler : IRequestHandler<UpdateShippingMethodDetailsCommand, Unit>
+    public class UpdateShippingMethodDetailsCommandHandler : IRequestHandler<UpdateShippingMethodDetailsCommand, Unit>
     {
         private readonly IShippingMethodRepository _shippingMethodRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IShippingMethodsUnitOfWork _unitOfWork;
 
         public UpdateShippingMethodDetailsCommandHandler(IShippingMethodRepository shippingMethodRepository,
-                                                         IUnitOfWork unitOfWork)
+                                                         IShippingMethodsUnitOfWork unitOfWork)
         {
             _shippingMethodRepository = shippingMethodRepository;
             _unitOfWork = unitOfWork;
