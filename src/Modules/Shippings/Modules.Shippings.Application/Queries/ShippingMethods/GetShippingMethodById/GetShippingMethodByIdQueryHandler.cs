@@ -5,7 +5,7 @@ using Shared.Application.Exceptions;
 
 namespace Modules.Shippings.Application.Queries.ShippingMethods.GetShippingMethodById
 {
-    internal class GetShippingMethodByIdQueryHandler : IRequestHandler<GetShippingMethodByIdQuery, ShippingMethodDto>
+    public class GetShippingMethodByIdQueryHandler : IRequestHandler<GetShippingMethodByIdQuery, ShippingMethodDto>
     {
         private readonly IShippingMethodRepository _shippingMethodRepository;
 
@@ -13,9 +13,9 @@ namespace Modules.Shippings.Application.Queries.ShippingMethods.GetShippingMetho
         {
             _shippingMethodRepository = shippingMethodRepository;
         }
-        public async Task<ShippingMethodDto> Handle(GetShippingMethodByIdQuery command, CancellationToken cancellationToken)
+        public async Task<ShippingMethodDto> Handle(GetShippingMethodByIdQuery query, CancellationToken cancellationToken)
         {
-            var shippingMethod = await _shippingMethodRepository.GetShippingMethodById(command.Id)
+            var shippingMethod = await _shippingMethodRepository.GetShippingMethodById(query.Id)
                 ?? throw new NotFoundException("Shipping method not found");
 
             var shippingMethodDto = ShippingMethodDto.CreateDtoFromObject(shippingMethod);
