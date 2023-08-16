@@ -22,10 +22,13 @@ namespace Bazaar.Modules.Shippings.Tests.Unit.ShippingMethods.Application
 
             var shippingMethod2 = ShippingMethod.CreateNewShippingMethod("name2", MoneyValue.Of(5, "USD"), 2);
 
+            var shippingMethod3 = ShippingMethod.CreateNewShippingMethod("name3", MoneyValue.Of(15, "USD"), 3);
+
             _shippingMethodList = new List<ShippingMethod>
             {
                 shippingMethod1,
-                shippingMethod2
+                shippingMethod2,
+                shippingMethod3
             };
         }
     }

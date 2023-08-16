@@ -33,6 +33,7 @@ namespace Bazaar.Modules.Shippings.Tests.Unit.ShippingMethods.Application
             Assert.True(shippingMethodList[0].IsAvailable);
 
             _shippingMethodRepository.GetShippingMethodById(command.Id).Returns(shippingMethodList[0]);
+
             await _sut.Handle(command, CancellationToken.None);
 
             await _shippingMethodRepository.Received().GetShippingMethodById(command.Id);
