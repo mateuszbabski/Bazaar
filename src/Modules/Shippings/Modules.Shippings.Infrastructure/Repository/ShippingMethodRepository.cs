@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Modules.Shippings.Domain.Entities;
 using Modules.Shippings.Domain.Repositories;
+using Modules.Shippings.Domain.ValueObjects;
 using Modules.Shippings.Infrastructure.Context.ShippingMethods;
 
 namespace Modules.Shippings.Infrastructure.Repository
@@ -26,9 +27,9 @@ namespace Modules.Shippings.Infrastructure.Repository
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<ShippingMethod> GetShippingMethodById(Guid id)
+        public async Task<ShippingMethod> GetShippingMethodById(ShippingMethodId id)
         {
-            return await _dbContext.ShippingMethods.FirstOrDefaultAsync(x => x.Id.Value == id);
+            return await _dbContext.ShippingMethods.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<ShippingMethod>> GetShippingMethods()
