@@ -7,12 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
     <Folder Include="Events\" />
-    <Folder Include="Exceptions\" />
     <Folder Include="Repositories\" />
     <Folder Include="Rules\" />
-    <Folder Include="ValueObjects\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shared.Domain\Shared.Domain.csproj" />
   </ItemGroup>
 
 </Project>
