@@ -35,7 +35,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
             Assert.IsType<BasketDto>(result);
             Assert.Equal(customerId, basket.CustomerId.Value);
         }
-
+        
         [Fact]
         public async void GetBasket_ThrowsException_IfCustomerDoesntHaveAny()
         {
