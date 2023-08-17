@@ -1,4 +1,6 @@
-﻿namespace Modules.Discounts.Domain.ValueObjects
+﻿using Modules.Discounts.Domain.Exceptions;
+
+namespace Modules.Discounts.Domain.ValueObjects
 {
     public record DiscountCode
     {
@@ -11,7 +13,7 @@
                 throw new InvalidDiscountCodeException();
             }
 
-            Value = value.ToString().Substring(0, 12);
+            Value = value.ToString()[..12];
         }
 
         public static implicit operator string(DiscountCode id) => id.Value;

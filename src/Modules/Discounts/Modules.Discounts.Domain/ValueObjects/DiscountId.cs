@@ -1,4 +1,6 @@
-﻿namespace Modules.Discounts.Domain.ValueObjects
+﻿using Modules.Discounts.Domain.Exceptions;
+
+namespace Modules.Discounts.Domain.ValueObjects
 {
     public record DiscountId
     {
