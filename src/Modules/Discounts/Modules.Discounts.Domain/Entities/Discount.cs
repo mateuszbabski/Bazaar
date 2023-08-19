@@ -12,46 +12,65 @@ namespace Modules.Discounts.Domain.Entities
     public class Discount : Entity, IAggregateRoot
     {
         public DiscountId Id { get; private set; }
-        public DiscountCouponId DiscountCouponId { get; private set; }
         public decimal DiscountValue { get; private set; }
         public bool IsPercentageDiscount { get; private set; }
         public Currency? Currency { get; private set; }
         public DiscountTarget DiscountTarget { get; private set; }
-        public virtual DiscountCoupon DiscountCoupon { get; private set; }
+        public virtual List<DiscountCoupon> DiscountCoupons { get; private set; }
 
         private Discount() { }
 
-        private Discount(DiscountCoupon discountCoupon,
-                         decimal discountValue,
-                         bool isPercentageDiscount,
+        private Discount(decimal discountValue,
                          DiscountTarget discountTarget,
-                         Currency currency) 
+                         Currency currency)
         {
             Id = new DiscountId(Guid.NewGuid());
-            DiscountCouponId = discountCoupon.Id;
             DiscountValue = discountValue;
-            IsPercentageDiscount = isPercentageDiscount;
+            IsPercentageDiscount = false;
             DiscountTarget = discountTarget;
             Currency = currency;
-            DiscountCoupon = discountCoupon;
+            DiscountCoupons = new List<DiscountCoupon>();
         }
 
-        public static Discount CreateDiscount(DiscountCoupon discountCoupon,
-                                              decimal discountValue,
-                                              bool isPercentageDiscount,
-                                              DiscountTarget discountTarget,
-                                              DateTimeOffset dateTimeUtcNow,
-                                              Currency currency)
+        private Discount(decimal discountValue,
+                         DiscountTarget discountTarget) 
         {
-            if (new DiscountCouponCantBeExpiredRule(discountCoupon.ExpirationDate, dateTimeUtcNow).IsBroken())
+            Id = new DiscountId(Guid.NewGuid());
+            DiscountValue = discountValue;
+            IsPercentageDiscount = true;
+            DiscountTarget = discountTarget;
+            Currency = null;
+            DiscountCoupons = new List<DiscountCoupon>();
+        }
+
+        public static Discount CreateValueDiscount(decimal discountValue,
+                                                   DiscountTarget discountTarget,
+                                                   Currency currency)
+        {
+            if (new SystemMustAcceptsCurrencyRule(currency.ToString()).IsBroken())
             {
-                throw new InvalidDiscountCouponException();
+                throw new InvalidDiscountCurrencyException();
             }
 
-            var discount = new Discount(discountCoupon, discountValue, isPercentageDiscount, discountTarget, currency);
+            var discount = new Discount(discountValue, discountTarget, currency);
             discount.AddDomainEvent(new NewDiscountCreatedDomainEvent(discount.Id));
 
             return discount;
+        }
+
+        public static Discount CreatePercentageDiscount(decimal discountValue,
+                                                        DiscountTarget discountTarget)
+        {
+            var discount = new Discount(discountValue, discountTarget);
+            discount.AddDomainEvent(new NewDiscountCreatedDomainEvent(discount.Id));
+
+            return discount;
+        }
+
+        public void AddCouponToDiscount(DiscountCoupon discountCoupon)
+        {
+            this.DiscountCoupons.Add(discountCoupon);
+            this.AddDomainEvent(new NewDiscountCouponAddedToList(discountCoupon.Id));
         }
     }
 }
