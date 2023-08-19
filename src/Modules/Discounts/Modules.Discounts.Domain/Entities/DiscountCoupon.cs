@@ -1,4 +1,6 @@
-﻿using Modules.Discounts.Domain.ValueObjects;
+﻿using Modules.Discounts.Domain.Exceptions;
+using Modules.Discounts.Domain.Rules;
+using Modules.Discounts.Domain.ValueObjects;
 using Shared.Domain;
 
 namespace Modules.Discounts.Domain.Entities
@@ -22,6 +24,11 @@ namespace Modules.Discounts.Domain.Entities
 
         public static DiscountCoupon CreateDiscountCoupon(DateTimeOffset startsAt, DateTimeOffset expirationDate)
         {
+            if (new DiscountCouponHasToStartBeforeExpirationDateRule(startsAt, expirationDate).IsBroken())
+            {
+                throw new InvalidDiscountCouponExpirationDateException();
+            }
+
             var coupon = new DiscountCoupon(startsAt, expirationDate);
             return coupon;
         }
