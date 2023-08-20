@@ -4,16 +4,16 @@ namespace Modules.Discounts.Domain.Rules
 {
     public class DiscountCouponHasToStartBeforeExpirationDateRule : IBusinessRule
     {
-        private readonly DateTimeOffset _expires;
         private readonly DateTimeOffset _starts;
+        private readonly DateTimeOffset _expires;
 
-        public DiscountCouponHasToStartBeforeExpirationDateRule(DateTimeOffset expires, DateTimeOffset starts)
+        public DiscountCouponHasToStartBeforeExpirationDateRule(DateTimeOffset starts, DateTimeOffset expires)
         {
-            _expires = expires;
             _starts = starts;
+            _expires = expires;
         }
 
-        public string Message => "Discount Coupon has expired";
+        public string Message => "Discount Coupon has to start before expiration date";
 
         public bool IsBroken()
         {
