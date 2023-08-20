@@ -41,8 +41,8 @@ namespace Modules.Discounts.Domain.Entities
         }
 
         public static Discount CreateValueDiscount(decimal discountValue,
-                                                   DiscountTarget discountTarget,
-                                                   string currency)
+                                                   string currency,
+                                                   DiscountTarget discountTarget)
         {
             if (discountValue <= 0)
             {

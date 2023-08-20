@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Modules.Discounts.Application.Contracts;
+using Shared.Abstractions.DomainEvents;
+using Shared.Infrastructure.UnitOfWork;
 
 namespace Modules.Discounts.Infrastructure.Context
 {
-    internal class DiscountsUnitOfWork
+    internal class DiscountsUnitOfWork : SqlServerUnitOfWork<DiscountsDbContext>, IDiscountsUnitOfWork
     {
+        public DiscountsUnitOfWork(DiscountsDbContext dbContext,
+                                  IDomainEventDispatcher domainEventDispatcher)
+            : base(dbContext, domainEventDispatcher)
+        {
+        }
     }
 }
