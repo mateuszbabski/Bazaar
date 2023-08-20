@@ -11,7 +11,7 @@ namespace Modules.Discounts.Domain.Entities
         public DiscountId DiscountId { get; private set; }
         public DiscountCode DiscountCode { get; private set; }
         public DateTimeOffset StartsAt { get; private set; } = DateTimeOffset.Now;
-        public DateTimeOffset ExpirationDate { get; private set; }
+        public DateTimeOffset ExpirationDate { get; private set; } = DateTimeOffset.Now.AddYears(1);
         public bool IsEnable { get; private set; } = true;
 
         private DiscountCoupon(DiscountId discountId, DateTimeOffset startsAt, DateTimeOffset expirationDate) 
@@ -22,20 +22,21 @@ namespace Modules.Discounts.Domain.Entities
             StartsAt = startsAt;
             ExpirationDate = expirationDate;
             IsEnable = true;
-        } 
+        }
 
-        public static DiscountCoupon CreateDiscountCoupon(DiscountId discountId, DateTimeOffset startsAt, DateTimeOffset expirationDate)
+        public static DiscountCoupon CreateDiscountCoupon(Discount discount, DateTimeOffset startsAt, DateTimeOffset expirationDate)
         {
             if (new DiscountCouponHasToStartBeforeExpirationDateRule(startsAt, expirationDate).IsBroken())
             {
                 throw new InvalidDiscountCouponExpirationDateException();
             }
 
-            var coupon = new DiscountCoupon(discountId, startsAt, expirationDate);
+            var coupon = new DiscountCoupon(discount.Id, startsAt, expirationDate);
+            discount.AddCouponToDiscount(coupon);
             return coupon;
         }
 
-        internal void DisableCoupon()
+        public void DisableCoupon()
         {
             this.IsEnable = false;
         }

@@ -1,20 +1,17 @@
 ﻿using Modules.Discounts.Domain.Events;
 using Modules.Discounts.Domain.Exceptions;
-using Modules.Discounts.Domain.Rules;
 using Modules.Discounts.Domain.ValueObjects;
 using Shared.Domain;
-using Shared.Domain.Exceptions;
 using Shared.Domain.Rules;
-using Shared.Domain.ValueObjects;
 
 namespace Modules.Discounts.Domain.Entities
-{
+{ // TODO: think about putting discount target logic into discount entity to omit pack logic in handlers
     public class Discount : Entity, IAggregateRoot
     {
         public DiscountId Id { get; private set; }
         public decimal DiscountValue { get; private set; }
         public bool IsPercentageDiscount { get; private set; }
-        public Currency? Currency { get; private set; }
+        public string? Currency { get; private set; } = string.Empty;
         public DiscountTarget DiscountTarget { get; private set; }
         public virtual List<DiscountCoupon> DiscountCoupons { get; private set; }
 
@@ -22,7 +19,7 @@ namespace Modules.Discounts.Domain.Entities
 
         private Discount(decimal discountValue,
                          DiscountTarget discountTarget,
-                         Currency currency)
+                         string currency)
         {
             Id = new DiscountId(Guid.NewGuid());
             DiscountValue = discountValue;
@@ -34,7 +31,7 @@ namespace Modules.Discounts.Domain.Entities
 
         private Discount(decimal discountValue,
                          DiscountTarget discountTarget) 
-        {
+        {            
             Id = new DiscountId(Guid.NewGuid());
             DiscountValue = discountValue;
             IsPercentageDiscount = true;
@@ -45,13 +42,18 @@ namespace Modules.Discounts.Domain.Entities
 
         public static Discount CreateValueDiscount(decimal discountValue,
                                                    DiscountTarget discountTarget,
-                                                   Currency currency)
+                                                   string currency)
         {
-            if (new SystemMustAcceptsCurrencyRule(currency.ToString()).IsBroken())
+            if (discountValue <= 0)
+            {
+                throw new InvalidDiscountValueException();
+            }
+
+            if (new SystemMustAcceptsCurrencyRule(currency).IsBroken())
             {
                 throw new InvalidDiscountCurrencyException();
             }
-
+            //var discountTarget = DiscountTarget.CreateDiscountTarget(discountType, targetId);
             var discount = new Discount(discountValue, discountTarget, currency);
             discount.AddDomainEvent(new NewDiscountCreatedDomainEvent(discount.Id));
 
@@ -61,16 +63,29 @@ namespace Modules.Discounts.Domain.Entities
         public static Discount CreatePercentageDiscount(decimal discountValue,
                                                         DiscountTarget discountTarget)
         {
+            if (discountValue <= 0)
+            {
+                throw new InvalidDiscountValueException();
+            }
+            //var discountTarget = DiscountTarget.CreateDiscountTarget(discountType, targetId);
             var discount = new Discount(discountValue, discountTarget);
             discount.AddDomainEvent(new NewDiscountCreatedDomainEvent(discount.Id));
 
             return discount;
         }
 
-        public void AddCouponToDiscount(DiscountCoupon discountCoupon)
+        internal void AddCouponToDiscount(DiscountCoupon discountCoupon)
         {
             this.DiscountCoupons.Add(discountCoupon);
             this.AddDomainEvent(new NewDiscountCouponAddedToList(discountCoupon.Id));
+        }
+
+        internal void DisableAllCoupons()
+        {
+            foreach(var coupon in this.DiscountCoupons)
+            {
+                coupon.DisableCoupon();
+            }
         }
     }
 }
