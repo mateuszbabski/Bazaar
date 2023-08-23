@@ -19,7 +19,7 @@ namespace Bazaar.Modules.Shippings.Tests.Unit.ShippingMethods.Application
         {
             _sut = new GetAllShippingMethodsQueryHandler(_shippingMethodRepository, _queryProcessor);
         }
-        // TODO: Check why test fails even Moq test works and manual testing works
+
         [Fact]
         public async Task GetAllShippingMethods_ValidQuery_ReturnsListShippingMethodDto()
         {

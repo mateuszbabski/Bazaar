@@ -2,6 +2,7 @@
 using Modules.Discounts.Domain.Rules;
 using Modules.Discounts.Domain.ValueObjects;
 using Shared.Domain;
+using System.Text.Json.Serialization;
 
 namespace Modules.Discounts.Domain.Entities
 {
@@ -13,6 +14,8 @@ namespace Modules.Discounts.Domain.Entities
         public DateTimeOffset StartsAt { get; private set; } = DateTimeOffset.Now;
         public DateTimeOffset ExpirationDate { get; private set; } = DateTimeOffset.Now.AddYears(1);
         public bool IsEnable { get; private set; } = true;
+        [JsonIgnore]
+        public virtual Discount Discount { get; private set; }
 
         private DiscountCoupon(DiscountId discountId, DateTimeOffset startsAt, DateTimeOffset expirationDate) 
         {

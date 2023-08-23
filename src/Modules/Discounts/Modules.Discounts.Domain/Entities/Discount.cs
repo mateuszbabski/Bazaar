@@ -15,8 +15,6 @@ namespace Modules.Discounts.Domain.Entities
         public DiscountTarget DiscountTarget { get; private set; }
         public virtual List<DiscountCoupon> DiscountCoupons { get; private set; }
 
-        private Discount() { }
-
         private Discount(decimal discountValue,
                          DiscountTarget discountTarget,
                          string currency)
