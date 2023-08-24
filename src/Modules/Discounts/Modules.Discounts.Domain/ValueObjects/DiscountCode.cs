@@ -13,7 +13,7 @@ namespace Modules.Discounts.Domain.ValueObjects
                 throw new InvalidDiscountCodeException();
             }
 
-            Value = value.ToString()[..12];
+            Value = value.ToString()[..8];
         }
 
         public static implicit operator string(DiscountCode id) => id.Value;

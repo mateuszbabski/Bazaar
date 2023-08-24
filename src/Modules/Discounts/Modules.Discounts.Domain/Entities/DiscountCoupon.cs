@@ -17,6 +17,7 @@ namespace Modules.Discounts.Domain.Entities
         [JsonIgnore]
         public virtual Discount Discount { get; private set; }
 
+        private DiscountCoupon() { }
         private DiscountCoupon(DiscountId discountId, DateTimeOffset startsAt, DateTimeOffset expirationDate) 
         {
             Id = new DiscountCouponId(Guid.NewGuid());

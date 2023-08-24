@@ -8,6 +8,7 @@ namespace Modules.Discounts.Domain.Entities
 { // TODO: think about putting discount target logic into discount entity to omit pack logic in handlers
     public class Discount : Entity, IAggregateRoot
     {
+        #nullable enable
         public DiscountId Id { get; private set; }
         public decimal DiscountValue { get; private set; }
         public bool IsPercentageDiscount { get; private set; }
@@ -15,6 +16,7 @@ namespace Modules.Discounts.Domain.Entities
         public DiscountTarget DiscountTarget { get; private set; }
         public virtual List<DiscountCoupon> DiscountCoupons { get; private set; }
 
+        private Discount() { }
         private Discount(decimal discountValue,
                          DiscountTarget discountTarget,
                          string currency)

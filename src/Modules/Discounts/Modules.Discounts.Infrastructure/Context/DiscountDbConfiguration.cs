@@ -13,11 +13,17 @@ namespace Modules.Discounts.Infrastructure.Context
             builder.Property(c => c.Id)
                    .HasConversion(c => c.Value, c => new DiscountId(c));
 
-            builder.Property(c => c.DiscountValue).HasColumnName("DiscountValue").IsRequired();
+            builder.Property(c => c.DiscountValue)
+                   .HasColumnName("DiscountValue")
+                   .HasPrecision(18, 2)
+                   .IsRequired();
 
-            builder.Property(c => c.IsPercentageDiscount).HasColumnName("IsPercentageDiscount");
+            builder.Property(c => c.IsPercentageDiscount)
+                   .HasColumnName("IsPercentageDiscount");
 
-            builder.Property(c => c.Currency).HasColumnName("Currency");
+            builder.Property(c => c.Currency)
+                   .HasMaxLength(3)
+                   .HasColumnName("Currency");
 
             builder.OwnsOne(c => c.DiscountTarget, mv =>
             {
