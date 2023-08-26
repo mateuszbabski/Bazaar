@@ -7,7 +7,7 @@ using Modules.Discounts.Infrastructure.Context;
 namespace Modules.Discounts.Infrastructure.Repository
 {
     internal sealed class DiscountCouponRepository : IDiscountCouponRepository
-    {
+    {// TODO: Repository for discounts
         private readonly DiscountsDbContext _dbContext;
 
         public DiscountCouponRepository(DiscountsDbContext dbContext)

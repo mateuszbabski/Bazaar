@@ -20,6 +20,11 @@ namespace Modules.Discounts.Infrastructure.Repository
             return discount;
         }
 
+        public void Delete(Discount discount)
+        {
+            _dbContext.Discounts.Remove(discount);
+        }
+
         public async Task<IEnumerable<Discount>> GetAll()
         {
             //return await _dbContext.Discounts.ToListAsync();
@@ -28,8 +33,7 @@ namespace Modules.Discounts.Infrastructure.Repository
 
         public async Task<Discount> GetDiscountById(DiscountId id)
         {
-            //return await _dbContext.Discounts.FirstOrDefaultAsync(x => x.Id == id);
-            throw new NotImplementedException();
+            return await _dbContext.Discounts.FirstOrDefaultAsync(x => x.Id == id);            
         }
     }
 }
