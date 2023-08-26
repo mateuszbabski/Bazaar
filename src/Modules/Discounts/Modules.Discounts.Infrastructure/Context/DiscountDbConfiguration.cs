@@ -13,6 +13,8 @@ namespace Modules.Discounts.Infrastructure.Context
             builder.Property(c => c.Id)
                    .HasConversion(c => c.Value, c => new DiscountId(c));
 
+            builder.Property(c => c.CreatedBy).IsRequired();
+
             builder.Property(c => c.DiscountValue)
                    .HasColumnName("DiscountValue")
                    .HasPrecision(18, 2)
