@@ -10,6 +10,7 @@ namespace Modules.Discounts.Domain.Entities
     {
         #nullable enable
         public DiscountId Id { get; private set; }
+        public Guid CreatedBy { get; private set; }
         public decimal DiscountValue { get; private set; }
         public bool IsPercentageDiscount { get; private set; }
         public string? Currency { get; private set; } = string.Empty;
@@ -17,11 +18,13 @@ namespace Modules.Discounts.Domain.Entities
         public virtual List<DiscountCoupon> DiscountCoupons { get; private set; }
 
         private Discount() { }
-        private Discount(decimal discountValue,
+        private Discount(Guid creator, 
+                         decimal discountValue,
                          DiscountTarget discountTarget,
                          string currency)
         {
             Id = new DiscountId(Guid.NewGuid());
+            CreatedBy = creator;
             DiscountValue = discountValue;
             IsPercentageDiscount = false;
             DiscountTarget = discountTarget;
@@ -29,10 +32,12 @@ namespace Modules.Discounts.Domain.Entities
             DiscountCoupons = new List<DiscountCoupon>();
         }
 
-        private Discount(decimal discountValue,
+        private Discount(Guid creator, 
+                         decimal discountValue,
                          DiscountTarget discountTarget) 
         {            
             Id = new DiscountId(Guid.NewGuid());
+            CreatedBy = creator;
             DiscountValue = discountValue;
             IsPercentageDiscount = true;
             DiscountTarget = discountTarget;
@@ -40,7 +45,8 @@ namespace Modules.Discounts.Domain.Entities
             DiscountCoupons = new List<DiscountCoupon>();
         }
 
-        public static Discount CreateValueDiscount(decimal discountValue,
+        public static Discount CreateValueDiscount(Guid creator,
+                                                   decimal discountValue,
                                                    string currency,
                                                    DiscountTarget discountTarget)
         {
@@ -54,13 +60,14 @@ namespace Modules.Discounts.Domain.Entities
                 throw new InvalidDiscountCurrencyException();
             }
             //var discountTarget = DiscountTarget.CreateDiscountTarget(discountType, targetId);
-            var discount = new Discount(discountValue, discountTarget, currency);
+            var discount = new Discount(creator, discountValue, discountTarget, currency);
             discount.AddDomainEvent(new NewDiscountCreatedDomainEvent(discount.Id));
 
             return discount;
         }
 
-        public static Discount CreatePercentageDiscount(decimal discountValue,
+        public static Discount CreatePercentageDiscount(Guid creator,
+                                                        decimal discountValue,
                                                         DiscountTarget discountTarget)
         {
             if (discountValue <= 0)
@@ -68,7 +75,7 @@ namespace Modules.Discounts.Domain.Entities
                 throw new InvalidDiscountValueException();
             }
             //var discountTarget = DiscountTarget.CreateDiscountTarget(discountType, targetId);
-            var discount = new Discount(discountValue, discountTarget);
+            var discount = new Discount(creator, discountValue, discountTarget);
             discount.AddDomainEvent(new NewDiscountCreatedDomainEvent(discount.Id));
 
             return discount;

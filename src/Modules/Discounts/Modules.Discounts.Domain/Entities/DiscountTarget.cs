@@ -1,6 +1,7 @@
 ﻿using Modules.Discounts.Domain.Exceptions;
 using Modules.Discounts.Domain.Rules;
 using Modules.Discounts.Domain.ValueObjects;
+using Shared.Domain.ValueObjects;
 
 namespace Modules.Discounts.Domain.Entities
 {
@@ -15,8 +16,14 @@ namespace Modules.Discounts.Domain.Entities
             TargetId = targetId;
         }
 
-        public static DiscountTarget CreateDiscountTarget(DiscountType discountType, Guid? targetId)
+        public static DiscountTarget CreateDiscountTarget(DiscountType discountType,
+                                                          Guid? targetId)
         {
+            //if (new DiscountCreatorMustMatchDiscountTypeRule(creatorId, creatorRole, discountType, targetId).IsBroken())
+            //{
+            //    throw new ActionForbiddenException();
+            //}
+
             if (new DiscountTargetHasToHaveTargetIdRule(discountType, targetId).IsBroken())
             {
                 throw new MissingRequiredTargetIdException();

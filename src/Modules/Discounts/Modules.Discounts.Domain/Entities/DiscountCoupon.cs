@@ -30,6 +30,7 @@ namespace Modules.Discounts.Domain.Entities
 
         public static DiscountCoupon CreateDiscountCoupon(Discount discount, DateTimeOffset startsAt, DateTimeOffset expirationDate)
         {
+            // check if creator is allowed to add coupon to this discount creator.Id == discount.CreatedBy new business rule
             if (new DiscountCouponHasToStartBeforeExpirationDateRule(startsAt, expirationDate).IsBroken())
             {
                 throw new InvalidDiscountCouponExpirationDateException();
