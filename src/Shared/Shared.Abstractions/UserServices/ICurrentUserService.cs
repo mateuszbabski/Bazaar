@@ -6,5 +6,6 @@ namespace Shared.Abstractions.UserServices
     {
         ClaimsPrincipal User { get; }
         Guid UserId { get; }
+        string UserRole { get; }
     }
 }
