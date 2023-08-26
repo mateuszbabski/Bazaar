@@ -9,7 +9,7 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Domain
         {
             var discountTarget = DiscountTarget.CreateDiscountTarget(DiscountType.AssignedToAllProducts, Guid.Empty);
 
-            var discount = Discount.CreateValueDiscount(10, "USD", discountTarget);
+            var discount = Discount.CreateValueDiscount(Guid.NewGuid(), 10, "USD", discountTarget);
 
             return discount;
         }
@@ -18,7 +18,7 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Domain
         {
             var discountTarget = DiscountTarget.CreateDiscountTarget(DiscountType.AssignedToAllProducts, null);
 
-            var discount = Discount.CreatePercentageDiscount(10, discountTarget);
+            var discount = Discount.CreatePercentageDiscount(Guid.NewGuid(), 10, discountTarget);
 
             return discount;
         }

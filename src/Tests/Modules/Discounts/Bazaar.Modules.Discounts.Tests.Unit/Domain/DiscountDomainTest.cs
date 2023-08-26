@@ -11,7 +11,7 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Domain
         {
             var discountTarget = DiscountTarget.CreateDiscountTarget(DiscountType.AssignedToAllProducts, Guid.Empty);
 
-            var discount = Discount.CreatePercentageDiscount(10, discountTarget);
+            var discount = Discount.CreatePercentageDiscount(Guid.NewGuid(), 10, discountTarget);
 
             Assert.NotNull(discount);
             Assert.IsType<Discount>(discount);
@@ -23,7 +23,7 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Domain
         {
             var discountTarget = DiscountTarget.CreateDiscountTarget(DiscountType.AssignedToAllProducts, null);
 
-            var discount = Discount.CreateValueDiscount(10, "USD", discountTarget);
+            var discount = Discount.CreateValueDiscount(Guid.NewGuid(), 10, "USD", discountTarget);
 
             Assert.NotNull(discount);
             Assert.IsType<Discount>(discount);
@@ -35,7 +35,7 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Domain
         {
             var discountTarget = DiscountTarget.CreateDiscountTarget(DiscountType.AssignedToCustomer, Guid.NewGuid());
 
-            var discount = Discount.CreatePercentageDiscount(10, discountTarget);
+            var discount = Discount.CreatePercentageDiscount(Guid.NewGuid(), 10, discountTarget);
 
             Assert.NotNull(discount);
             Assert.IsType<Discount>(discount);
@@ -47,7 +47,7 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Domain
         {
             var discountTarget = DiscountTarget.CreateDiscountTarget(DiscountType.AssignedToCustomer, Guid.NewGuid());
 
-            var discount = Discount.CreateValueDiscount(10, "USD", discountTarget);
+            var discount = Discount.CreateValueDiscount(Guid.NewGuid(), 10, "USD", discountTarget);
 
             Assert.NotNull(discount);
             Assert.IsType<Discount>(discount);
@@ -59,7 +59,7 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Domain
             var discountTarget = DiscountTarget.CreateDiscountTarget(DiscountType.AssignedToCustomer, Guid.NewGuid());
 
             var act = Assert.Throws<InvalidDiscountValueException>(() =>
-            Discount.CreateValueDiscount(0, "USD", discountTarget));
+            Discount.CreateValueDiscount(Guid.NewGuid(), 0, "USD", discountTarget));
 
             Assert.IsType<InvalidDiscountValueException>(act);
         }
@@ -121,7 +121,7 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Domain
             var discountTarget = DiscountTarget.CreateDiscountTarget(DiscountType.AssignedToCustomer, Guid.NewGuid());
 
             var act = Assert.Throws<InvalidDiscountCurrencyException>(()
-                => Discount.CreateValueDiscount(10, "PES", discountTarget));
+                => Discount.CreateValueDiscount(Guid.NewGuid(), 10, "PES", discountTarget));
 
             Assert.IsType<InvalidDiscountCurrencyException>(act);
         }
