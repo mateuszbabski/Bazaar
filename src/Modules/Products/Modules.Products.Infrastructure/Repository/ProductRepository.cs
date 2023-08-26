@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Modules.Products.Contracts.Interfaces;
 using Modules.Products.Domain.Entities;
 using Modules.Products.Domain.Repositories;
 using Modules.Products.Domain.ValueObjects;
@@ -7,7 +8,7 @@ using Shared.Domain.ValueObjects;
 
 namespace Modules.Products.Infrastructure.Repository
 {
-    internal sealed class ProductRepository : IProductRepository
+    internal sealed class ProductRepository : IProductRepository, IProductChecker
     {
         private readonly ProductsDbContext _dbContext;
 
@@ -66,6 +67,13 @@ namespace Modules.Products.Infrastructure.Repository
                                             .Where(x => maxPrice == null
                                                         || x.Price.Amount <= maxPrice)
                                             .ToListAsync();
+        }
+
+        public async Task<bool> IsProductExisting(Guid userId, Guid? discountTargetId)
+        {
+            var product = await _dbContext.Products.Where(e => e.ShopId.Value == userId)
+                                                   .FirstOrDefaultAsync(x => x.Id.Value == discountTargetId);
+            return product != null;
         }
     }
 }
