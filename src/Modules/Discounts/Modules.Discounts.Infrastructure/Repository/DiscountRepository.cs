@@ -27,8 +27,12 @@ namespace Modules.Discounts.Infrastructure.Repository
 
         public async Task<IEnumerable<Discount>> GetAll()
         {
-            //return await _dbContext.Discounts.ToListAsync();
-            throw new NotImplementedException();
+            return await _dbContext.Discounts.ToListAsync();            
+        }
+
+        public async Task<IEnumerable<Discount>> GetAllCreatorDiscounts(Guid creatorId)
+        {
+            return await _dbContext.Discounts.Where(x => x.CreatedBy == creatorId).ToListAsync();
         }
 
         public async Task<Discount> GetDiscountById(DiscountId id)
