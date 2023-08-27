@@ -21,8 +21,8 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Application
         {
             var discountTarget = DiscountTarget.CreateDiscountTarget(DiscountType.AssignedToVendors, shopId);
 
-            var discount1 = Discount.CreateValueDiscount(Guid.NewGuid(), 10, "USD", discountTarget);
-            var discount2 = Discount.CreatePercentageDiscount(Guid.NewGuid(), 10, discountTarget);
+            var discount1 = Discount.CreateValueDiscount(shopId, 10, "USD", discountTarget);
+            var discount2 = Discount.CreatePercentageDiscount(shopId, 10, discountTarget);
 
             _discountList = new List<Discount>
             {

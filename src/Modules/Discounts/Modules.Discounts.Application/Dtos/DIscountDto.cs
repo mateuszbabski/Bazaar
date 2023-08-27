@@ -34,5 +34,21 @@ namespace Modules.Discounts.Application.Dtos
 
             return discountList;
         }
+
+        internal static DiscountDto CreateDtoFromObject(Discount discount)
+        {
+            var discountDto = new DiscountDto()
+            {
+                Id = discount.Id,
+                CreatedBy = discount.CreatedBy,
+                DiscountValue = discount.DiscountValue,
+                IsPercentageDiscount = discount.IsPercentageDiscount,
+                Currency = discount.Currency,
+                DiscountType = discount.DiscountTarget.DiscountType.ToString(),
+                DiscountTarget = discount.DiscountTarget.TargetId
+            };
+
+            return discountDto;
+        }
     }
 }
