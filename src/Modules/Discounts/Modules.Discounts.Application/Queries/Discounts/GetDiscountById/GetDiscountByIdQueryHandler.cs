@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Modules.Discounts.Application.Dtos;
+using Modules.Discounts.Domain.Repositories;
+using Shared.Abstractions.UserServices;
+using Shared.Application.Exceptions;
 
 namespace Modules.Discounts.Application.Queries.Discounts.GetDiscountById
 {
-    internal class GetDiscountByIdQueryHandler
+    public class GetDiscountByIdQueryHandler : IRequestHandler<GetDiscountByIdQuery, DiscountDto>
     {
+        private readonly IDiscountRepository _discountRepository;
+
+        public GetDiscountByIdQueryHandler(IDiscountRepository discountRepository)
+        {
+            _discountRepository = discountRepository;
+        }
+        public async Task<DiscountDto> Handle(GetDiscountByIdQuery query, CancellationToken cancellationToken)
+        {
+            var discount = await _discountRepository.GetDiscountById(query.Id)
+                ?? throw new NotFoundException("Discount not found");
+
+            var discountDto = DiscountDto.CreateDtoFromObject(discount);
+
+            return discountDto;
+        }
     }
 }
