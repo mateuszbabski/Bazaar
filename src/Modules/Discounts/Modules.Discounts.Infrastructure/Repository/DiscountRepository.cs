@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using Modules.Discounts.Domain.Entities;
 using Modules.Discounts.Domain.Repositories;
 using Modules.Discounts.Domain.ValueObjects;
@@ -35,9 +36,17 @@ namespace Modules.Discounts.Infrastructure.Repository
             return await _dbContext.Discounts.Where(x => x.CreatedBy == creatorId).ToListAsync();
         }
 
-        public async Task<Discount> GetDiscountById(DiscountId id)
+        public async Task<Discount> GetDiscountById(Guid id)
         {
-            return await _dbContext.Discounts.FirstOrDefaultAsync(x => x.Id == id);            
+            return await _dbContext.Discounts.FirstOrDefaultAsync(x => x.Id.Value == id);            
+        }
+
+        public async Task<IEnumerable<Discount>> GetDiscountsByType(DiscountType discountType, Guid? discountTargetId)
+        {
+            return await _dbContext.Discounts.Where(x => x.DiscountTarget.DiscountType == discountType)
+                                             .Where(x => discountTargetId == null 
+                                                    || x.DiscountTarget.TargetId == discountTargetId)
+                                             .ToListAsync();
         }
     }
 }
