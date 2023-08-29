@@ -4,7 +4,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Discounts.Application.Commands.Discounts.CreateDiscount;
 using Modules.Discounts.Application.Commands.Discounts.DeleteDiscount;
-using Shared.Domain.ValueObjects;
+using Modules.Discounts.Application.Dtos;
+using Modules.Discounts.Application.Queries.Discounts.GetDiscountById;
+using Modules.Discounts.Application.Queries.Discounts.GetDiscounts;
+using Modules.Discounts.Application.Queries.Discounts.GetDiscountsByType;
+using Shared.Application.Queries;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Modules.Discounts.Api
@@ -43,6 +47,44 @@ namespace Modules.Discounts.Api
         {
             await _mediator.Send(command);
             return NoContent();
+        }
+
+        [HttpGet("{id}", Name = "GetDiscountById")]
+        [SwaggerOperation("Get discount by Id")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<DiscountDto>> GetDiscountById(Guid id)
+        {
+            var discount = await _mediator.Send(new GetDiscountByIdQuery()
+            {
+                Id = id
+            });
+
+            return Ok(discount);
+        }
+
+        [HttpGet("GetDiscountsByType")]
+        [SwaggerOperation("Get discounts by Type")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<DiscountDto>> GetDiscountById([FromQuery] GetDiscountsByTypeQuery query)
+        {
+            var discounts = await _mediator.Send(query);
+
+            return Ok(discounts);
+        }
+
+        [Authorize(Roles = "admin, shop")]
+        [HttpGet("GetDiscounts")]
+        [SwaggerOperation("Get discounts")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<PagedList<DiscountDto>>> GetAllShops([FromQuery] GetDiscountsQuery query)
+        {
+            var discounts = await _mediator.Send(query);
+
+            return Ok(discounts);
         }
     }
 }
