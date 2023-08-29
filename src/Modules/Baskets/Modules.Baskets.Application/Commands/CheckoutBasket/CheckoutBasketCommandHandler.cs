@@ -6,7 +6,6 @@ using Shared.Abstractions.Events;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
 using Modules.Baskets.Contracts.Events.BasketCheckedOut;
-using Shared.Domain.ValueObjects;
 
 namespace Modules.Baskets.Application.Commands.CheckoutBasket
 {
@@ -53,7 +52,7 @@ namespace Modules.Baskets.Application.Commands.CheckoutBasket
             return Unit.Value;
         }
 
-        public static BasketMapped CreateMappedBasket(Basket basket)
+        private static BasketMapped CreateMappedBasket(Basket basket)
         {
             var itemList = new List<BasketItemMapped>();
 
