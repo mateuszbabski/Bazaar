@@ -36,9 +36,9 @@ namespace Modules.Discounts.Infrastructure.Repository
             return await _dbContext.Discounts.Where(x => x.CreatedBy == creatorId).ToListAsync();
         }
 
-        public async Task<Discount> GetDiscountById(Guid id)
+        public async Task<Discount> GetDiscountById(DiscountId id)
         {
-            return await _dbContext.Discounts.FirstOrDefaultAsync(x => x.Id.Value == id);            
+            return await _dbContext.Discounts.FirstOrDefaultAsync(x => x.Id == id);            
         }
 
         public async Task<IEnumerable<Discount>> GetDiscountsByType(DiscountType discountType, Guid? discountTargetId)
