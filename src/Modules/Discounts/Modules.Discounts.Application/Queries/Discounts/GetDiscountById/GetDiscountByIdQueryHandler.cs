@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Modules.Discounts.Application.Dtos;
 using Modules.Discounts.Domain.Repositories;
-using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
 
 namespace Modules.Discounts.Application.Queries.Discounts.GetDiscountById

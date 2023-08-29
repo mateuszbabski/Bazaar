@@ -114,9 +114,9 @@ namespace Modules.Products.Api
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<PagedList<ProductDto>>> GetAllShops([FromQuery] GetAllProductsQuery query)
         {
-            var shops = await _mediator.Send(query);
+            var products = await _mediator.Send(query);
 
-            return Ok(shops);
+            return Ok(products);
         }
 
         [HttpGet("{id}", Name = "GetProductById")]

@@ -2,7 +2,7 @@
 {
     public class InvalidDiscountCurrencyException : Exception
     {
-        public InvalidDiscountCurrencyException() : base(message: "Discount has to have currency")
+        public InvalidDiscountCurrencyException() : base(message: "Discount has to have valid currency")
         {
             
         }
