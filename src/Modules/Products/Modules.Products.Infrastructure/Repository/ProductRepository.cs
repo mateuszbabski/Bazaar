@@ -71,9 +71,8 @@ namespace Modules.Products.Infrastructure.Repository
 
         public async Task<bool> IsProductExisting(Guid userId, Guid? discountTargetId)
         {
-            var product = await _dbContext.Products.Where(e => e.ShopId.Value == userId)
-                                                   .FirstOrDefaultAsync(x => x.Id.Value == discountTargetId);
-            return product != null;
+            var product = await GetById(discountTargetId);
+            return product.ShopId.Value == userId;
         }
     }
 }
