@@ -67,7 +67,7 @@ namespace Modules.Discounts.Api
         [SwaggerOperation("Get discounts by Type")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<DiscountDto>> GetDiscountById([FromQuery] GetDiscountsByTypeQuery query)
+        public async Task<ActionResult<PagedList<DiscountDto>>> GetDiscountsByType([FromQuery] GetDiscountsByTypeQuery query)
         {
             var discounts = await _mediator.Send(query);
 
