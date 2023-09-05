@@ -7,7 +7,7 @@ using Modules.Discounts.Infrastructure.Context;
 namespace Modules.Discounts.Infrastructure.Repository
 {
     internal sealed class DiscountCouponRepository : IDiscountCouponRepository
-    {// TODO: Repository for discount coupons
+    {
         private readonly DiscountsDbContext _dbContext;
 
         public DiscountCouponRepository(DiscountsDbContext dbContext)
@@ -20,16 +20,24 @@ namespace Modules.Discounts.Infrastructure.Repository
             return discountCoupon;
         }
 
-        public async Task<IEnumerable<DiscountCoupon>> GetAll()
+        public async Task<DiscountCoupon> GetDiscountCouponCode(DiscountCode couponCode)
         {
-            //return await _dbContext.DiscountCoupons.ToListAsync();
-            throw new NotImplementedException();
+            return await _dbContext.DiscountCoupons.FirstOrDefaultAsync(x => x.DiscountCode == couponCode);
         }
 
         public async Task<DiscountCoupon> GetDiscountCouponById(DiscountCouponId id)
         {
-            //return await _dbContext.DiscountCoupons.FirstOrDefaultAsync(x => x.Id == id);
-            throw new NotImplementedException();
+            return await _dbContext.DiscountCoupons.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<IEnumerable<DiscountCoupon>> GetAll()
+        {
+            return await _dbContext.DiscountCoupons.ToListAsync();
+        }
+
+        public async Task<IEnumerable<DiscountCoupon>> GetAllByDiscountId(DiscountId discountId)
+        {
+            return await _dbContext.DiscountCoupons.Where(x => x.DiscountId == discountId).ToListAsync();
         }
     }
 }
