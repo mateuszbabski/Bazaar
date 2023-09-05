@@ -1,9 +1,9 @@
-﻿using Modules.Discounts.Domain.ValueObjects;
+﻿using Modules.Discounts.Domain.Entities;
 using Shared.Domain;
 
 namespace Modules.Discounts.Domain.Events
 {
-    public record NewDiscountCreatedDomainEvent(DiscountId DiscountId) : IDomainEvent
+    public record NewDiscountCreatedDomainEvent(Discount Discount) : IDomainEvent
     {
     }
 }

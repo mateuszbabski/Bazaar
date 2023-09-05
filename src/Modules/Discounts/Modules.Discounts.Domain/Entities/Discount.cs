@@ -1,5 +1,6 @@
 ﻿using Modules.Discounts.Domain.Events;
 using Modules.Discounts.Domain.Exceptions;
+using Modules.Discounts.Domain.Rules;
 using Modules.Discounts.Domain.ValueObjects;
 using Shared.Domain;
 using Shared.Domain.Rules;
@@ -61,7 +62,7 @@ namespace Modules.Discounts.Domain.Entities
             }
             //var discountTarget = DiscountTarget.CreateDiscountTarget(discountType, targetId);
             var discount = new Discount(creator, discountValue, discountTarget, currency);
-            discount.AddDomainEvent(new NewDiscountCreatedDomainEvent(discount.Id));
+            discount.AddDomainEvent(new NewDiscountCreatedDomainEvent(discount));
 
             return discount;
         }
@@ -76,9 +77,21 @@ namespace Modules.Discounts.Domain.Entities
             }
             //var discountTarget = DiscountTarget.CreateDiscountTarget(discountType, targetId);
             var discount = new Discount(creator, discountValue, discountTarget);
-            discount.AddDomainEvent(new NewDiscountCreatedDomainEvent(discount.Id));
+            discount.AddDomainEvent(new NewDiscountCreatedDomainEvent(discount));
 
             return discount;
+        }
+
+        public DiscountCoupon CreateNewDiscountCoupon(Guid userId,
+                                                      DateTimeOffset startsAt,
+                                                      DateTimeOffset expirationDate)
+        {
+            if (new DiscountCouponCanBeAddOnlyByDiscountCreatorRule(userId, this.CreatedBy).IsBroken())
+            {
+                throw new ActionForbiddenException();
+            }
+
+            return DiscountCoupon.CreateDiscountCoupon(this, startsAt, expirationDate);
         }
 
         internal void AddCouponToDiscount(DiscountCoupon discountCoupon)
