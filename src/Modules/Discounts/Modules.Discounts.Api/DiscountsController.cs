@@ -26,7 +26,7 @@ namespace Modules.Discounts.Api
 
         [Authorize(Roles = "admin, shop")]
         [HttpPost("CreateDiscount")]
-        [SwaggerOperation("Create product")]
+        [SwaggerOperation("Create discount")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
