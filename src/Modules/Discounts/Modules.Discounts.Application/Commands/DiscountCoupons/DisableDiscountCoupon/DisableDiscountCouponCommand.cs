@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace Modules.Discounts.Application.Commands.DiscountCoupons.DisableDiscountCoupon
 {
-    internal class DisableDiscountCouponCommand
+    public class DisableDiscountCouponCommand : IRequest<Unit>
     {
+        public Guid DiscountCouponId { get; set; }
     }
 }
