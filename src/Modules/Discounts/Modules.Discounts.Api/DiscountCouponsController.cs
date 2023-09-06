@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Discounts.Application.Commands.DiscountCoupons.CreateDiscountCoupon;
 using Modules.Discounts.Application.Commands.DiscountCoupons.DisableDiscountCoupon;
-using Modules.Discounts.Application.Commands.Discounts.DeleteDiscount;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Modules.Discounts.Api

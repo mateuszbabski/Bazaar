@@ -91,21 +91,24 @@ namespace Modules.Discounts.Domain.Entities
                 throw new ActionForbiddenException();
             }
 
-            return DiscountCoupon.CreateDiscountCoupon(this, startsAt, expirationDate);
+            var discountCoupon = DiscountCoupon.CreateDiscountCoupon(this, startsAt, expirationDate);
+            AddCouponToDiscount(discountCoupon);
+            return discountCoupon;
         }
 
         internal void AddCouponToDiscount(DiscountCoupon discountCoupon)
         {
             this.DiscountCoupons.Add(discountCoupon);
-            this.AddDomainEvent(new NewDiscountCouponAddedToList(discountCoupon.Id));
+            this.AddDomainEvent(new NewDiscountCouponAddedToListDomainEvent(discountCoupon));
         }
 
         internal void DisableAllCoupons()
         {
-            foreach(var coupon in this.DiscountCoupons)
-            {
-                coupon.DisableCoupon();
-            }
+            this.DiscountCoupons.ForEach(x => x.DisableCoupon());
+            //foreach(var coupon in this.DiscountCoupons)
+            //{
+            //    coupon.DisableCoupon();
+            //}
         }
     }
 }
