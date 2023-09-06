@@ -36,7 +36,7 @@ namespace Modules.Discounts.Application.Commands.DiscountCoupons.CreateDiscountC
 
             var discountCoupon = discount.CreateNewDiscountCoupon(userId, command.StartsAt, command.ExpirationDate);
 
-            await _discountCouponRepository.Add(discountCoupon);
+            //await _discountCouponRepository.Add(discountCoupon);
             await _unitOfWork.CommitAndDispatchDomainEventsAsync(discountCoupon);
 
             return discountCoupon.Id;

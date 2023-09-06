@@ -5,7 +5,7 @@
 //namespace Modules.Baskets.Application.Events.EventHandlers
 //{
 //    public class ProductPriceChangedEventHandler : IEventHandler<ProductPriceChangedEvent>
-//    {
+//    { // TODO: check active baskets and change price of product
 //        private readonly IBasketRepository _basketRepository;
 
 //        public ProductPriceChangedEventHandler(IBasketRepository basketRepository)

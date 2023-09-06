@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Modules.Discounts.Application.Contracts;
 using Modules.Discounts.Domain.Repositories;
-using Shared.Abstractions.CurrencyConverters;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
 
@@ -11,17 +10,14 @@ namespace Modules.Discounts.Application.Commands.DiscountCoupons.DisableDiscount
     {
         private readonly ICurrentUserService _userService;
         private readonly IDiscountCouponRepository _discountCouponRepository;
-        private readonly IDiscountRepository _discountRepository;
         private readonly IDiscountsUnitOfWork _unitOfWork;
 
         public DisableDiscountCouponCommandHandler(ICurrentUserService userService,
                                                    IDiscountCouponRepository discountCouponRepository,
-                                                   IDiscountRepository discountRepository,
                                                    IDiscountsUnitOfWork unitOfWork)
         {
             _userService = userService;
             _discountCouponRepository = discountCouponRepository;
-            _discountRepository = discountRepository;
             _unitOfWork = unitOfWork;
         }
 
