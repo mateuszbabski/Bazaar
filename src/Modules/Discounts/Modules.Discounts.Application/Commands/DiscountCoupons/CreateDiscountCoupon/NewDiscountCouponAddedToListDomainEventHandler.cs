@@ -1,18 +1,29 @@
-﻿using Modules.Discounts.Domain.Events;
+﻿using Modules.Discounts.Contracts.Events;
+using Modules.Discounts.Domain.Events;
 using Shared.Abstractions.DomainEvents;
+using Shared.Abstractions.Events;
 
 namespace Modules.Discounts.Application.Commands.DiscountCoupons.CreateDiscountCoupon
 {
     internal class NewDiscountCouponAddedToListDomainEventHandler : IDomainEventHandler<NewDiscountCouponAddedToListDomainEvent>
-    { // TODO: send users email if coupon for him dont use integration event - no logic
-        public NewDiscountCouponAddedToListDomainEventHandler()
+    {
+        private readonly IEventDispatcher _eventDispatcher;
+
+        public NewDiscountCouponAddedToListDomainEventHandler(IEventDispatcher eventDispatcher)
         {
-            
+            _eventDispatcher = eventDispatcher;
         }
         public async Task Handle(NewDiscountCouponAddedToListDomainEvent notification, CancellationToken cancellationToken)
         {
-            // Contract to get customers email and send it
-            throw new NotImplementedException();
+            if(notification.DiscountTarget.DiscountType.ToString() == "customer")
+            {
+                await _eventDispatcher.PublishAsync(new DiscountCouponAddedForCustomerEvent(notification.DiscountCode,
+                                                                                            notification.DiscountTarget.TargetId),
+                                                cancellationToken);
+
+            }
+
+            await Task.CompletedTask;
         }
     }
 }
