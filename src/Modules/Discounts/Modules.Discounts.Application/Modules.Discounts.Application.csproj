@@ -13,6 +13,7 @@
     <ProjectReference Include="..\..\..\Shared\Shared.Abstractions\Shared.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\Shared\Shared.Application\Shared.Application.csproj" />
     <ProjectReference Include="..\..\Products\Modules.Products.Contracts\Modules.Products.Contracts.csproj" />
+    <ProjectReference Include="..\Modules.Discounts.Contracts\Modules.Discounts.Contracts.csproj" />
     <ProjectReference Include="..\Modules.Discounts.Domain\Modules.Discounts.Domain.csproj" />
   </ItemGroup>
 
