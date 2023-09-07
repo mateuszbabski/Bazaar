@@ -5,8 +5,6 @@ using Modules.Customers.Application.Contracts;
 using Modules.Customers.Domain.Repositories;
 using Modules.Customers.Infrastructure.Context;
 using Modules.Customers.Infrastructure.Repository;
-using Shared.Abstractions.UnitOfWork;
-using Shared.Infrastructure.UnitOfWork;
 
 namespace Modules.Customers.Infrastructure
 {

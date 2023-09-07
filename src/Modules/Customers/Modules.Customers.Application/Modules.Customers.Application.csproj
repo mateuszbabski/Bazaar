@@ -24,6 +24,7 @@
     <ProjectReference Include="..\..\..\Shared\Shared.Abstractions\Shared.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\Shared\Shared.Application\Shared.Application.csproj" />
     <ProjectReference Include="..\..\..\Shared\Shared.Domain\Shared.Domain.csproj" />
+    <ProjectReference Include="..\..\Discounts\Modules.Discounts.Contracts\Modules.Discounts.Contracts.csproj" />
     <ProjectReference Include="..\Modules.Customers.Domain\Modules.Customers.Domain.csproj" />
   </ItemGroup>
 
