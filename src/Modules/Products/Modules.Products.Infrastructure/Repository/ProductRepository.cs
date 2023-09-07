@@ -4,7 +4,6 @@ using Modules.Products.Domain.Entities;
 using Modules.Products.Domain.Repositories;
 using Modules.Products.Domain.ValueObjects;
 using Modules.Products.Infrastructure.Context;
-using Shared.Domain.ValueObjects;
 
 namespace Modules.Products.Infrastructure.Repository
 {
