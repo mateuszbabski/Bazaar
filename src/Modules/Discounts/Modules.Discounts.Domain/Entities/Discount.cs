@@ -19,6 +19,7 @@ namespace Modules.Discounts.Domain.Entities
         public virtual List<DiscountCoupon> DiscountCoupons { get; private set; }
 
         private Discount() { }
+
         private Discount(Guid creator, 
                          decimal discountValue,
                          DiscountTarget discountTarget,
@@ -99,7 +100,8 @@ namespace Modules.Discounts.Domain.Entities
         internal void AddCouponToDiscount(DiscountCoupon discountCoupon)
         {
             this.DiscountCoupons.Add(discountCoupon);
-            this.AddDomainEvent(new NewDiscountCouponAddedToListDomainEvent(discountCoupon));
+            this.AddDomainEvent(new NewDiscountCouponAddedToListDomainEvent(discountCoupon.DiscountCode,
+                                                                            this.DiscountTarget));
         }
 
         internal void DisableAllCoupons()
