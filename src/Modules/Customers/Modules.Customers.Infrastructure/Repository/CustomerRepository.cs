@@ -3,6 +3,7 @@ using Modules.Customers.Domain.Entities;
 using Modules.Customers.Domain.Repositories;
 using Modules.Customers.Domain.ValueObjects;
 using Modules.Customers.Infrastructure.Context;
+using Shared.Domain.ValueObjects;
 
 namespace Modules.Customers.Infrastructure.Repository
 {
@@ -34,6 +35,13 @@ namespace Modules.Customers.Infrastructure.Repository
         public async Task<Customer> GetCustomerById(CustomerId id)
         {
             return await _dbContext.Customers.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<Email> GetCustomersEmail(Guid id)
+        {
+            return await _dbContext.Customers.Where(c => c.Id.Value == id)
+                                             .Select(c => c.Email)
+                                             .FirstOrDefaultAsync();
         }
     }
 }
