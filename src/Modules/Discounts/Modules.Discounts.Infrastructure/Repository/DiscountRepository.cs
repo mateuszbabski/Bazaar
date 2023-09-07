@@ -1,5 +1,5 @@
-﻿using Azure.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Modules.Discounts.Contracts.Interfaces;
 using Modules.Discounts.Domain.Entities;
 using Modules.Discounts.Domain.Repositories;
 using Modules.Discounts.Domain.ValueObjects;
@@ -7,7 +7,7 @@ using Modules.Discounts.Infrastructure.Context;
 
 namespace Modules.Discounts.Infrastructure.Repository
 {
-    internal sealed class DiscountRepository : IDiscountRepository
+    internal sealed class DiscountRepository : IDiscountRepository, IDiscountChecker
     {
         private readonly DiscountsDbContext _dbContext;
 
@@ -47,6 +47,11 @@ namespace Modules.Discounts.Infrastructure.Repository
                                              .Where(x => discountTargetId == null 
                                                     || x.DiscountTarget.TargetId == discountTargetId)
                                              .ToListAsync();
+        }
+
+        public Task<bool> IsDiscountExisting(Guid discountCouponId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
