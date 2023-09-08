@@ -80,7 +80,7 @@ namespace Modules.Discounts.Api
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<PagedList<DiscountDto>>> GetAllShops([FromQuery] GetDiscountsQuery query)
+        public async Task<ActionResult<PagedList<DiscountDto>>> GetAllDiscounts([FromQuery] GetDiscountsQuery query)
         {
             var discounts = await _mediator.Send(query);
 

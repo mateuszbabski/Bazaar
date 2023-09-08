@@ -28,6 +28,5 @@ namespace Modules.Baskets.Contracts.Events.BasketCheckedOut
             this.ShippingMethod = shippingMethod;
             this.PaymentMethod = paymentMethod;
         }
-
     }
 }
