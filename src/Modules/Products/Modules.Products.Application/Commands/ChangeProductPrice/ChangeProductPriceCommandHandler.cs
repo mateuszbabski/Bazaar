@@ -26,7 +26,7 @@ namespace Modules.Products.Application.Commands.ChangeProductPrice
 
             var product = await _productRepository.GetById(command.Id);
 
-            if (product == null || product.ShopId.Value != shopId)
+            if (product == null || product.ShopId != shopId)
             {
                 throw new NotFoundException("Product not found");
             }

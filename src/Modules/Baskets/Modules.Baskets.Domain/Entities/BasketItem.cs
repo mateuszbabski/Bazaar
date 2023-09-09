@@ -9,8 +9,8 @@ namespace Modules.Baskets.Domain.Entities
     public class BasketItem : Entity
     {
         public BasketItemId Id { get; private set; }
-        public BasketProductId ProductId { get; private set; }
-        public BasketShopId ShopId { get; private set; }
+        public Guid ProductId { get; private set; }
+        public Guid ShopId { get; private set; }
         public BasketId BasketId { get; private set; }
         public int Quantity { get; private set; } = 1;
         public MoneyValue Price { get; private set; }

@@ -106,10 +106,6 @@ namespace Modules.Discounts.Domain.Entities
         internal void DisableAllCoupons()
         {
             this.DiscountCoupons.ForEach(x => x.DisableCoupon());
-            //foreach(var coupon in this.DiscountCoupons)
-            //{
-            //    coupon.DisableCoupon();
-            //}
         }
     }
 }

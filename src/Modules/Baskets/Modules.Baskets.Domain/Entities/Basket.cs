@@ -9,14 +9,14 @@ namespace Modules.Baskets.Domain.Entities
     public class Basket : Entity, IAggregateRoot
     {
         public BasketId Id { get; private set; }
-        public BasketCustomerId CustomerId { get; private set; }
+        public Guid CustomerId { get; private set; }
         public List<BasketItem> Items { get; private set; }
         public MoneyValue TotalPrice { get; private set; }
         public Weight TotalWeight { get; private set; }
 
         private Basket() { }
 
-        private Basket(BasketCustomerId customerId, string currency)
+        private Basket(Guid customerId, string currency)
         {
             Id = new BasketId(Guid.NewGuid());
             CustomerId = customerId;
@@ -25,7 +25,7 @@ namespace Modules.Baskets.Domain.Entities
             TotalWeight = new Weight(0);
         }
 
-        public static Basket CreateBasket(BasketCustomerId customerId, string currency)
+        public static Basket CreateBasket(Guid customerId, string currency)
         {
             var basket = new Basket(customerId, currency);
             basket.AddDomainEvent(new BasketCreatedDomainEvent(basket));
@@ -73,7 +73,7 @@ namespace Modules.Baskets.Domain.Entities
                                        decimal productWeight,
                                        decimal convertedPrice)
         {
-            var basketItem = Items.FirstOrDefault(x => x.ProductId.Value == productId);
+            var basketItem = Items.FirstOrDefault(x => x.ProductId == productId);
 
             if (basketItem == null)
             {

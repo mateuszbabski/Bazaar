@@ -52,10 +52,9 @@ namespace Modules.Products.Infrastructure.Repository
             return filteredProductList;
         }
 
-        public async Task<IEnumerable<Product>> GetProductsByShopId(ProductShopId shopId)
+        public async Task<IEnumerable<Product>> GetProductsByShopId(Guid shopId)
         {
-            return await _dbContext.Products.Where(x => shopId == null
-                                                        || x.ShopId == shopId)
+            return await _dbContext.Products.Where(x => x.ShopId == shopId)
                                             .ToListAsync();
         }
 
@@ -71,7 +70,7 @@ namespace Modules.Products.Infrastructure.Repository
         public async Task<bool> IsProductExisting(Guid userId, Guid? discountTargetId)
         {
             var product = await GetById(discountTargetId);
-            return product.ShopId.Value == userId;
+            return product.ShopId == userId;
         }
     }
 }

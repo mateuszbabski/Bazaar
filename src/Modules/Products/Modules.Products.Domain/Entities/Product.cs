@@ -15,7 +15,7 @@ namespace Modules.Products.Domain.Entities
         public MoneyValue Price { get; private set; }
         public Weight WeightPerUnit { get; private set; }
         public ProductUnit Unit { get; private set; }
-        public ProductShopId ShopId { get; private set; }
+        public Guid ShopId { get; private set; }
         public bool IsAvailable { get; private set; } = true;
 
         private Product() { }
@@ -25,7 +25,7 @@ namespace Modules.Products.Domain.Entities
                          Weight weightPerUnit,
                          MoneyValue price,
                          ProductUnit unit,
-                         ProductShopId shopId)
+                         Guid shopId)
         {
             Id = new ProductId(Guid.NewGuid());
             ProductName = productName;
@@ -44,7 +44,7 @@ namespace Modules.Products.Domain.Entities
                                             Weight weightPerUnit,
                                             MoneyValue price,
                                             ProductUnit unit,
-                                            ProductShopId shopId)
+                                            Guid shopId)
         {
             var product = new Product(productName,
                                       productDescription,

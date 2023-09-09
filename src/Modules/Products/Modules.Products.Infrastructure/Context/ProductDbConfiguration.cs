@@ -31,8 +31,7 @@ namespace Modules.Products.Infrastructure.Context
             builder.Property(c => c.Unit)
                    .HasConversion(c => c.Value, c => new ProductUnit(c));
 
-            builder.Property(c => c.ShopId)
-                   .HasConversion(c => c.Value, c => new ProductShopId(c));
+            builder.Property(c => c.ShopId).IsRequired();
 
             builder.Property(c => c.IsAvailable);
 

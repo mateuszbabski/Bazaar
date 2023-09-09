@@ -30,11 +30,9 @@ namespace Modules.Baskets.Infrastructure.Context
                 mv.Property(p => p.Amount).HasColumnName("BaseAmount").HasPrecision(18, 2);
             });
 
-            builder.Property(c => c.ProductId)
-                   .HasConversion(c => c.Value, c => new BasketProductId(c));
+            builder.Property(c => c.ProductId).IsRequired();
 
-            builder.Property(c => c.ShopId)
-                   .HasConversion(c => c.Value, c => new BasketShopId(c));
+            builder.Property(c => c.ShopId).IsRequired();
 
             builder.Property(c => c.BasketItemWeight)
                    .HasConversion(c => c.Value, c => new Weight(c));

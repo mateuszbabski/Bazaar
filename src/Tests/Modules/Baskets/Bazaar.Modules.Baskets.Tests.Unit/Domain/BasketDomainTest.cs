@@ -23,10 +23,10 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
             basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.WeightPerUnit, product.Price.Amount);
 
 
-            var basketItem = basket.Items.FirstOrDefault(x => x.ProductId.Value == product.Id.Value);
+            var basketItem = basket.Items.FirstOrDefault(x => x.ProductId == product.Id.Value);
 
             Assert.Equal(1, basketItem?.Quantity);
-            Assert.Equal(product.Id.Value, basketItem?.ProductId.Value);
+            Assert.Equal(product.Id.Value, basketItem?.ProductId);
             Assert.IsType<BasketItem>(basketItem);
         }
 
@@ -38,9 +38,9 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
 
             basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.WeightPerUnit, product.Price.Amount);
 
-            var basketItem = basket.Items.FirstOrDefault(x => x.ProductId.Value == product.Id.Value);
+            var basketItem = basket.Items.FirstOrDefault(x => x.ProductId == product.Id.Value);
 
-            Assert.Equal(product.Id.Value, basketItem?.ProductId.Value);
+            Assert.Equal(product.Id.Value, basketItem?.ProductId);
             Assert.IsType<BasketItem>(basketItem);
 
             basket.RemoveItemFromBasket(basketItem.Id);
@@ -58,9 +58,9 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Domain
 
             basket.AddProductToBasket(product.Id, product.ShopId, 1, product.Price, product.WeightPerUnit, product.Price.Amount);
 
-            var basketItem = basket.Items.FirstOrDefault(x => x.ProductId.Value == product.Id.Value);
+            var basketItem = basket.Items.FirstOrDefault(x => x.ProductId == product.Id.Value);
 
-            Assert.Equal(product.Id.Value, basketItem?.ProductId.Value);
+            Assert.Equal(product.Id.Value, basketItem?.ProductId);
             Assert.Equal(1, basketItem?.Quantity);
             Assert.IsType<BasketItem>(basketItem);
 

@@ -20,8 +20,7 @@ namespace Modules.Shippings.Infrastructure.Context.Shippings
                 mv.Property(p => p.Amount).HasColumnName("Amount").HasPrecision(18, 2);
             });
 
-            builder.Property(c => c.OrderId)
-                   .HasConversion(c => c.Value, c => new ShippingOrderId(c));
+            builder.Property(c => c.OrderId).IsRequired();
 
             builder.Property(c => c.ShippingMethodId)
                    .HasConversion(c => c.Value, c => new ShippingMethodId(c));
