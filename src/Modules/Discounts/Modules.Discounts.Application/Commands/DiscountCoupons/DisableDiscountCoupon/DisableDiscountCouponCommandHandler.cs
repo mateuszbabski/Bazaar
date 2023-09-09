@@ -25,8 +25,7 @@ namespace Modules.Discounts.Application.Commands.DiscountCoupons.DisableDiscount
         {
             var userId = _userService.UserId;
             var discountCoupon = await _discountCouponRepository.GetDiscountCouponById(command.DiscountCouponId);
-
-            if (discountCoupon == null || discountCoupon.Discount.CreatedBy != userId) 
+            if (discountCoupon == null || discountCoupon.CreatedBy != userId)
             {
                 throw new ForbidException("You are unable to proceed this action");
             }

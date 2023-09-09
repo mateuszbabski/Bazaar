@@ -2,7 +2,9 @@
 
 namespace Modules.Discounts.Contracts.Events
 {
-    public record DiscountCouponAddedForCustomerEvent(string DiscountCode, Guid? TargetId) : IEvent
+    public sealed record DiscountCouponAddedForCustomerEvent(string DiscountCode,
+                                                             Guid? TargetId) 
+        : IEvent
     {
     }
 }

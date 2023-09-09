@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Modules.Discounts.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using Modules.Discounts.Infrastructure.Context;
 namespace Modules.Discounts.Infrastructure.Migrations
 {
     [DbContext(typeof(DiscountsDbContext))]
-    partial class DiscountsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230909092414_AddedCreatedByField")]
+    partial class AddedCreatedByField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
