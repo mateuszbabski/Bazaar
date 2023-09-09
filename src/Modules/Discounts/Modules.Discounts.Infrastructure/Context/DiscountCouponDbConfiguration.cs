@@ -16,6 +16,8 @@ namespace Modules.Discounts.Infrastructure.Context
             builder.Property(c => c.DiscountId)
                    .HasConversion(c => c.Value, c => new DiscountId(c));
 
+            builder.Property(c => c.CreatedBy).IsRequired();
+
             builder.HasOne<Discount>(c => c.Discount)
                    .WithMany(p => p.DiscountCoupons)
                    .HasForeignKey(c => c.DiscountId);

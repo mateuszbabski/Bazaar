@@ -5,7 +5,7 @@ namespace Modules.Discounts.Application.Commands.DiscountCoupons.CreateDiscountC
     public class CreateDiscountCouponCommand : IRequest<Guid>
     {
         public Guid DiscountId { get; set; }
-        public DateTimeOffset StartsAt { get; private set; } = DateTimeOffset.Now;
-        public DateTimeOffset ExpirationDate { get; private set; } = DateTimeOffset.Now.AddYears(1);
+        public DateTimeOffset StartsAt { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset ExpirationDate { get; set; } = DateTimeOffset.Now.AddYears(1);
     }
 }
