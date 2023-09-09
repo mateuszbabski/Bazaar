@@ -1,7 +1,6 @@
 ﻿using Modules.Discounts.Domain.Exceptions;
 using Modules.Discounts.Domain.Rules;
 using Modules.Discounts.Domain.ValueObjects;
-using Shared.Domain.ValueObjects;
 
 namespace Modules.Discounts.Domain.Entities
 {

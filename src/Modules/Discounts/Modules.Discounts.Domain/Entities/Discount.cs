@@ -9,7 +9,6 @@ namespace Modules.Discounts.Domain.Entities
 { // TODO: think about putting discount target logic into discount entity to omit pack logic in handlers
     public class Discount : Entity, IAggregateRoot
     {
-        #nullable enable
         public DiscountId Id { get; private set; }
         public Guid CreatedBy { get; private set; }
         public decimal DiscountValue { get; private set; }
