@@ -6,7 +6,7 @@ namespace Modules.Baskets.Domain.Repositories
     public interface IBasketRepository
     {
         Task<Basket> CreateBasket(Basket basket);
-        Task<Basket> GetBasketByCustomerId(BasketCustomerId customerId);
+        Task<Basket> GetBasketByCustomerId(Guid customerId);
         Task RemoveItem(Basket basket, BasketItemId basketItemId);
         void DeleteBasket(Basket basket);
     }

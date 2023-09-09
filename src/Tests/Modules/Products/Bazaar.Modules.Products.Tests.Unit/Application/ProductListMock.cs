@@ -21,7 +21,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
                                                 1,
                                                 MoneyValue.Of(10, "USD"),
                                                 "pieces",
-                                                new ProductShopId(shop.Id));
+                                                shop.Id);
 
             var product2 = Product.CreateProduct("productName2",
                                                  "productDescription2",
@@ -29,7 +29,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
                                                  1,
                                                  MoneyValue.Of(20, "USD"),
                                                  "pieces",
-                                                 new ProductShopId(shop.Id));
+                                                 shop.Id);
 
             _productList = new List<Product>
             {

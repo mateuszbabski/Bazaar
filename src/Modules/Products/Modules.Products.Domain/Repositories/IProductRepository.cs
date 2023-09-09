@@ -10,7 +10,7 @@ namespace Modules.Products.Domain.Repositories
         Task<IEnumerable<Product>> GetAllProducts();
         Task<IEnumerable<Product>> GetProductsByName(string name);
         Task<IEnumerable<Product>> GetProductsByCategory(string category);
-        Task<IEnumerable<Product>> GetProductsByShopId(ProductShopId shopId);
+        Task<IEnumerable<Product>> GetProductsByShopId(Guid shopId);
         Task<IEnumerable<Product>> GetProductsByPriceRange(decimal? minPrice, decimal? maxPrice);
     }
 }
