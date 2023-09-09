@@ -4,7 +4,6 @@ using Modules.Discounts.Domain.Entities;
 using Modules.Discounts.Domain.Repositories;
 using Modules.Discounts.Domain.ValueObjects;
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 using Shared.Abstractions.UserServices;
 using Shared.Application.Exceptions;
 

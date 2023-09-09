@@ -130,9 +130,9 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Domain
         public void CreateDiscountCoupon_ReturnsDiscountCouponWithValidParams()
         {
             var discount = DiscountFactory.GetValueDiscount();
-            var discountCoupon = DiscountCoupon.CreateDiscountCoupon(discount,
-                                                                     DateTimeOffset.UtcNow,
-                                                                     DateTimeOffset.UtcNow.AddDays(7));
+            var discountCoupon = discount.CreateNewDiscountCoupon(discount.CreatedBy,
+                                                                  DateTimeOffset.UtcNow,
+                                                                  DateTimeOffset.UtcNow.AddDays(7));
 
             Assert.IsType<DiscountCoupon>(discountCoupon);
         }
@@ -142,9 +142,9 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Domain
         {
             var discount = DiscountFactory.GetValueDiscount();
             var act = Assert.Throws<InvalidDiscountCouponExpirationDateException>(() 
-                => DiscountCoupon.CreateDiscountCoupon(discount,
-                                                       DateTimeOffset.UtcNow.AddDays(7),
-                                                       DateTimeOffset.UtcNow.AddDays(1)));
+                => discount.CreateNewDiscountCoupon(discount.CreatedBy,
+                                                    DateTimeOffset.UtcNow.AddDays(7),
+                                                    DateTimeOffset.UtcNow.AddDays(1)));
 
             Assert.IsType<InvalidDiscountCouponExpirationDateException>(act);
         }
@@ -153,9 +153,9 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Domain
         public void DisableDiscountCoupon_DisablesCouponProperly()
         {
             var discount = DiscountFactory.GetValueDiscount();
-            var discountCoupon = DiscountCoupon.CreateDiscountCoupon(discount,
-                                                                     DateTimeOffset.UtcNow,
-                                                                     DateTimeOffset.UtcNow.AddDays(7));
+            var discountCoupon = discount.CreateNewDiscountCoupon(discount.CreatedBy,
+                                                                  DateTimeOffset.UtcNow,
+                                                                  DateTimeOffset.UtcNow.AddDays(7));
 
             Assert.IsType<DiscountCoupon>(discountCoupon);
             Assert.True(discountCoupon.IsEnable);
