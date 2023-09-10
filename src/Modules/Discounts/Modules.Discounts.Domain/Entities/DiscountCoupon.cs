@@ -38,7 +38,6 @@ namespace Modules.Discounts.Domain.Entities
             }
 
             var coupon = new DiscountCoupon(discount.Id, discount.CreatedBy, startsAt, expirationDate);
-            discount.AddCouponToDiscount(coupon);
             return coupon;
         }
 
