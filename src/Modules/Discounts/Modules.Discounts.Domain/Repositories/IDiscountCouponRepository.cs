@@ -9,6 +9,8 @@ namespace Modules.Discounts.Domain.Repositories
         Task<DiscountCoupon> GetDiscountCouponById(DiscountCouponId id);
         Task<DiscountCoupon> GetDiscountCouponCode(DiscountCode couponCode);
         Task<IEnumerable<DiscountCoupon>> GetAll();
+        Task<IEnumerable<DiscountCoupon>> GetAllByCreator(Guid id);
+        Task<IEnumerable<DiscountCoupon>> GetAllTargetedForCustomer(Guid id);
         Task<IEnumerable<DiscountCoupon>> GetAllByDiscountId(DiscountId discountId);
     }
 }

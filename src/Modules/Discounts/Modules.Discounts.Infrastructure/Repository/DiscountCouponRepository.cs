@@ -35,9 +35,23 @@ namespace Modules.Discounts.Infrastructure.Repository
             return await _dbContext.DiscountCoupons.ToListAsync();
         }
 
+        public async Task<IEnumerable<DiscountCoupon>> GetAllByCreator(Guid id)
+        {
+            return await _dbContext.DiscountCoupons.Where(x => x.CreatedBy == id).ToListAsync();
+        }
+
         public async Task<IEnumerable<DiscountCoupon>> GetAllByDiscountId(DiscountId discountId)
         {
             return await _dbContext.DiscountCoupons.Where(x => x.DiscountId == discountId).ToListAsync();
+        }
+
+        public async Task<IEnumerable<DiscountCoupon>> GetAllTargetedForCustomer(Guid customerId)
+        {
+            var discountCoupons = await _dbContext.Discounts.Include(x => x.DiscountCoupons)
+                                                            .Where(x => x.DiscountTarget.TargetId == customerId)
+                                                            .SelectMany(x => x.DiscountCoupons)
+                                                            .ToListAsync();
+            return discountCoupons;
         }
     }
 }
