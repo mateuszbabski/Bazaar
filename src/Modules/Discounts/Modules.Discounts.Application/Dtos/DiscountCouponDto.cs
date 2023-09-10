@@ -10,6 +10,7 @@ namespace Modules.Discounts.Application.Dtos
         public DateTimeOffset StartsAt { get; init; }
         public DateTimeOffset ExpirationDate { get; init; }
         public bool IsEnable { get; init; }
+        public Discount Discount { get; init; }
 
         internal static IEnumerable<DiscountCouponDto> CreateDtoFromObjects(List<DiscountCoupon> discountCoupons)
         {

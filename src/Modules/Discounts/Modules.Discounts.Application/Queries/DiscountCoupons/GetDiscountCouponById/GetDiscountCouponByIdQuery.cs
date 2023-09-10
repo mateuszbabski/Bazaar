@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Modules.Discounts.Application.Dtos;
 
 namespace Modules.Discounts.Application.Queries.DiscountCoupons.GetDiscountCouponById
 {
-    internal class GetDiscountCouponByIdQuery
+    public class GetDiscountCouponByIdQuery : IRequest<DiscountCouponDto>
     {
+        public Guid Id { get; set; }
     }
 }
