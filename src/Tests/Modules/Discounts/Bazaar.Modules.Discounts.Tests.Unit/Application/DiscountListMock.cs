@@ -1,11 +1,5 @@
 ﻿using Modules.Discounts.Domain.Entities;
 using Modules.Discounts.Domain.ValueObjects;
-using Shared.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bazaar.Modules.Discounts.Tests.Unit.Application
 {
