@@ -20,14 +20,16 @@ namespace Modules.Discounts.Infrastructure.Repository
             return discountCoupon;
         }
 
-        public async Task<DiscountCoupon> GetDiscountCouponCode(DiscountCode couponCode)
+        public async Task<DiscountCoupon> GetDiscountByCouponCode(DiscountCode couponCode)
         {
-            return await _dbContext.DiscountCoupons.Include(x => x.Discount).FirstOrDefaultAsync(x => x.DiscountCode == couponCode);
+            return await _dbContext.DiscountCoupons.Include(x => x.Discount)
+                                                   .FirstOrDefaultAsync(x => x.DiscountCode == couponCode);
         }
 
         public async Task<DiscountCoupon> GetDiscountCouponById(DiscountCouponId id)
         {
-            return await _dbContext.DiscountCoupons.Include(x => x.Discount).FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.DiscountCoupons.Include(x => x.Discount)
+                                                   .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<DiscountCoupon>> GetAll()
@@ -37,12 +39,14 @@ namespace Modules.Discounts.Infrastructure.Repository
 
         public async Task<IEnumerable<DiscountCoupon>> GetAllByCreator(Guid id)
         {
-            return await _dbContext.DiscountCoupons.Where(x => x.CreatedBy == id).ToListAsync();
+            return await _dbContext.DiscountCoupons.Where(x => x.CreatedBy == id)
+                                                   .ToListAsync();
         }
 
         public async Task<IEnumerable<DiscountCoupon>> GetAllByDiscountId(DiscountId discountId)
         {
-            return await _dbContext.DiscountCoupons.Where(x => x.DiscountId == discountId).ToListAsync();
+            return await _dbContext.DiscountCoupons.Where(x => x.DiscountId == discountId)
+                                                   .ToListAsync();
         }
 
         public async Task<IEnumerable<DiscountCoupon>> GetAllTargetedForCustomer(Guid customerId)

@@ -33,7 +33,14 @@ namespace Modules.Discounts.Infrastructure.Repository
 
         public async Task<IEnumerable<Discount>> GetAllCreatorDiscounts(Guid creatorId)
         {
-            return await _dbContext.Discounts.Where(x => x.CreatedBy == creatorId).ToListAsync();
+            return await _dbContext.Discounts.Where(x => x.CreatedBy == creatorId)
+                                             .ToListAsync();
+        }
+
+        public async Task<Discount> GetDiscountByCouponCode(string couponCode)
+        {
+            return await _dbContext.Discounts.Include(x => x.DiscountCoupons.SingleOrDefault(c => c.DiscountCode == couponCode))
+                                             .FirstOrDefaultAsync();
         }
 
         public async Task<Discount> GetDiscountById(DiscountId id)
