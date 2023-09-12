@@ -14,7 +14,7 @@ namespace Modules.Discounts.Application.Queries.Discounts.GetDiscountById
             _discountRepository = discountRepository;
         }
         public async Task<DiscountDto> Handle(GetDiscountByIdQuery query, CancellationToken cancellationToken)
-        {
+        { // role conditions
             var discount = await _discountRepository.GetDiscountById(query.Id)
                 ?? throw new NotFoundException("Discount not found");
 
