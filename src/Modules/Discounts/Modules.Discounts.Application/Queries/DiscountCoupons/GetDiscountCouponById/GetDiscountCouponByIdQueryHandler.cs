@@ -15,9 +15,9 @@ namespace Modules.Discounts.Application.Queries.DiscountCoupons.GetDiscountCoupo
         }
 
         public async Task<DiscountCouponDto> Handle(GetDiscountCouponByIdQuery query, CancellationToken cancellationToken)
-        {
+        {   //write conditions according to role and ids for fetching coupons and discounts maybe helper/service class 
             var discountCoupon = await _discountCouponRepository.GetDiscountCouponById(query.Id)
-                ?? throw new NotFoundException("Discount Coupon doesnt exist");
+                ?? throw new NotFoundException("Discount Coupon not found");
 
             var discountCouponDto = DiscountCouponDto.CreateDtoFromObject(discountCoupon);
 

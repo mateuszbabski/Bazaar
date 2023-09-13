@@ -20,7 +20,7 @@ namespace Modules.Discounts.Application.Queries.Discounts.GetDiscountsByType
             _queryProcessor = queryProcessor;
         }
         public async Task<PagedList<DiscountDto>> Handle(GetDiscountsByTypeQuery query, CancellationToken cancellationToken)
-        { // add conditions for roles
+        {
             var baseQuery = await _discountRepository.GetDiscountsByType(query.DiscountType, query.DiscountTargetId)
                 ?? throw new NotFoundException("Discounts not found.");
 
