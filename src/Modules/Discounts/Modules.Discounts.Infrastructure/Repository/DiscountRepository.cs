@@ -39,7 +39,12 @@ namespace Modules.Discounts.Infrastructure.Repository
 
         public async Task<Discount> GetDiscountByCouponCode(string couponCode)
         {
-            return await _dbContext.Discounts.Include(x => x.DiscountCoupons.SingleOrDefault(c => c.DiscountCode == couponCode))
+            //var coupon = await _dbContext.DiscountCoupons
+            //                             .Where(x => x.DiscountCode.Value == couponCode)
+            //                             .FirstOrDefaultAsync();
+
+            //return await _dbContext.Discounts.FirstOrDefaultAsync(x => x.Id == coupon.DiscountId);
+            return await _dbContext.Discounts.Include(x => x.DiscountCoupons.Find(c => c.DiscountCode == couponCode))
                                              .FirstOrDefaultAsync();
         }
 
