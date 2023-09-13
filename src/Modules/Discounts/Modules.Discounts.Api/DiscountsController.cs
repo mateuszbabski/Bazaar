@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Modules.Discounts.Application.Commands.Discounts.CreateDiscount;
 using Modules.Discounts.Application.Commands.Discounts.DeleteDiscount;
 using Modules.Discounts.Application.Dtos;
+using Modules.Discounts.Application.Queries.Discounts.GetDiscountByCouponCode;
 using Modules.Discounts.Application.Queries.Discounts.GetDiscountById;
 using Modules.Discounts.Application.Queries.Discounts.GetDiscounts;
 using Modules.Discounts.Application.Queries.Discounts.GetDiscountsByType;
@@ -49,9 +50,11 @@ namespace Modules.Discounts.Api
             return NoContent();
         }
 
+        [Authorize(Roles = "admin, shop, customer")]
         [HttpGet("{id}", Name = "GetDiscountById")]
         [SwaggerOperation("Get discount by Id")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<DiscountDto>> GetDiscountById(Guid id)
         {
@@ -63,9 +66,27 @@ namespace Modules.Discounts.Api
             return Ok(discount);
         }
 
+        [Authorize(Roles = "admin, shop, customer")]
+        [HttpGet("GetDiscountByCode")]
+        [SwaggerOperation("Get discount by code")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<DiscountDto>> GetDiscountByCouponCode(string couponCode)
+        {
+            var discount = await _mediator.Send(new GetDiscountByCouponCodeQuery()
+            {
+                CouponCode = couponCode
+            });
+
+            return Ok(discount);
+        }
+
+        [Authorize(Roles = "admin, shop")]
         [HttpGet("GetDiscountsByType")]
         [SwaggerOperation("Get discounts by Type")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<PagedList<DiscountDto>>> GetDiscountsByType([FromQuery] GetDiscountsByTypeQuery query)
         {
