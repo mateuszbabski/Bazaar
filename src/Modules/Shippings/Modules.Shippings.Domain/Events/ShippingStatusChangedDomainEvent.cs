@@ -2,7 +2,7 @@
 
 namespace Modules.Shippings.Domain.Events
 {
-    public record ShippingStatusChangedDomainEvent(Guid Id) : IDomainEvent
+    public sealed record ShippingStatusChangedDomainEvent(Guid Id) : IDomainEvent
     {
     }
 }

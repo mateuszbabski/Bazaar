@@ -33,7 +33,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
 
             Assert.NotNull(result);
             Assert.IsType<BasketDto>(result);
-            Assert.Equal(customerId, basket.CustomerId.Value);
+            Assert.Equal(customerId, basket.CustomerId);
         }
         
         [Fact]

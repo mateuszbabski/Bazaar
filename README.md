@@ -83,7 +83,7 @@ $ dotnet run
 - Checkout basket
 - Change basket currency
 
-- ### Shippings module:
+### Shippings module:
 - Adding, updating, deleting shipping methods
 - Querying for available shipping methods
 - Create shipping from order

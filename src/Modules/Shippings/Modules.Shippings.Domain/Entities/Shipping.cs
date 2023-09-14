@@ -8,7 +8,7 @@ namespace Modules.Shippings.Domain.Entities
     public class Shipping : Entity, IAggregateRoot
     {
         public ShippingId Id { get; private set; }
-        public ShippingOrderId OrderId { get; private set; }
+        public Guid OrderId { get; private set; }
         public ShippingMethodId ShippingMethodId { get; private set; }
         public TrackingNumber TrackingNumber { get; private set; }
         public ShippingStatus Status { get; private set; }
@@ -22,7 +22,7 @@ namespace Modules.Shippings.Domain.Entities
             
         }
 
-        internal Shipping(ShippingOrderId orderId,
+        internal Shipping(Guid orderId,
                           ShippingMethodId methodId,
                           DateTimeOffset createdOn,
                           decimal weight,
@@ -39,7 +39,7 @@ namespace Modules.Shippings.Domain.Entities
             TotalPrice = CalculateTotalPrice(weight, baseShippingPrice);
         }
 
-        public static Shipping CreateShipping(ShippingOrderId orderId,
+        public static Shipping CreateShipping(Guid orderId,
                                               ShippingMethodId methodId,
                                               DateTimeOffset createdOn,
                                               decimal weight,

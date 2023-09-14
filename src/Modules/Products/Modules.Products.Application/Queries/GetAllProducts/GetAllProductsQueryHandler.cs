@@ -18,6 +18,7 @@ namespace Modules.Products.Application.Queries.GetAllProducts
             _productRepository = productRepository;
             _queryProcessor = queryProcessor;
         }
+
         public async Task<PagedList<ProductDto>> Handle(GetAllProductsQuery query, CancellationToken cancellationToken)
         {
             var baseQuery = await _productRepository.GetAllProducts()

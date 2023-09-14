@@ -3,7 +3,7 @@ using Modules.Shops.Domain.Entities;
 
 namespace Modules.Shops.Infrastructure.Context
 {
-    public class ShopsDbContext : DbContext
+    internal class ShopsDbContext : DbContext
     {
         public DbSet<Shop> Shops { get; set; } 
 

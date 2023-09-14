@@ -32,7 +32,7 @@ namespace Bazaar.Modules.Products.Tests.Unit.Application
                 ShopId = shop.Id,
             };
 
-            var filteredShopList = productList.Where(x => x.ShopId.Value == query.ShopId);
+            var filteredShopList = productList.Where(x => x.ShopId == query.ShopId);
 
             _productRepositoryMock.Setup(x => x.GetProductsByShopId(query.ShopId))
                                .ReturnsAsync(filteredShopList)

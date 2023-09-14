@@ -15,7 +15,7 @@ namespace Modules.Customers.Domain.Entities
         public Address Address { get; private set; }
         public TelephoneNumber TelephoneNumber { get; private set; }
         public Roles Role { get; private set; } = Roles.customer;
-        // TODO: Remove address and other data informations customer module
+        // TODO: simplify all value objects except ID to guid/string etc
         private Customer() { }
         
         internal Customer(Email email,

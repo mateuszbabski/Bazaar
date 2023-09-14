@@ -20,9 +20,6 @@ namespace Modules.Products.Infrastructure.Context
             builder.Property(c => c.ProductDescription)
                    .HasConversion(c => c.Value, c => new ProductDescription(c));
 
-            //builder.Property(c => c.ProductCategory)
-            //       .HasConversion(c => c.CategoryName, c => ProductCategory.Create(c));
-
             builder.OwnsOne(c => c.ProductCategory, mv =>
             {
                 mv.Property(p => p.CategoryName).HasColumnName("ProductCategory").IsRequired();
@@ -34,8 +31,7 @@ namespace Modules.Products.Infrastructure.Context
             builder.Property(c => c.Unit)
                    .HasConversion(c => c.Value, c => new ProductUnit(c));
 
-            builder.Property(c => c.ShopId)
-                   .HasConversion(c => c.Value, c => new ProductShopId(c));
+            builder.Property(c => c.ShopId).IsRequired();
 
             builder.Property(c => c.IsAvailable);
 

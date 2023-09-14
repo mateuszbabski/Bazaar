@@ -14,8 +14,7 @@ namespace Modules.Baskets.Infrastructure.Context
             builder.Property(c => c.Id)
                    .HasConversion(c => c.Value, c => new BasketId(c));
 
-            builder.Property(c => c.CustomerId)
-                   .HasConversion(c => c.Value, c => new BasketCustomerId(c));
+            builder.Property(c => c.CustomerId).IsRequired();
 
             builder.OwnsOne(c => c.TotalPrice, mv =>
             {

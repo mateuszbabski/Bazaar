@@ -26,7 +26,7 @@ namespace Modules.Baskets.Infrastructure.Repository
             _dbContext.Baskets.Remove(basket);
         }
 
-        public async Task<Basket> GetBasketByCustomerId(BasketCustomerId customerId)
+        public async Task<Basket> GetBasketByCustomerId(Guid customerId)
         {
             return await _dbContext.Baskets.Include(x => x.Items)
                                            .FirstOrDefaultAsync(x => x.CustomerId == customerId);
