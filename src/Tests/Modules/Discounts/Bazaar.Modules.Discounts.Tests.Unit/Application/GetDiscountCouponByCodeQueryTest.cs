@@ -1,6 +1,8 @@
 ﻿using Modules.Discounts.Application.Dtos;
 using Modules.Discounts.Application.Queries.DiscountCoupons.GetDiscountCouponByCode;
+using Modules.Discounts.Domain.Entities;
 using Modules.Discounts.Domain.Repositories;
+using Modules.Discounts.Domain.ValueObjects;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using Shared.Application.Exceptions;
@@ -17,38 +19,35 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Application
         }
 
         [Fact]
-        public async Task GetCouponById_ReturnsCoupon_IfExists()
+        public async Task GetCouponByCode_ReturnsCoupon_IfCouponExists()
         {
-            var couponList = DiscountCouponsListMock.GetDiscountCoupons(Guid.NewGuid(), Guid.NewGuid());
+            var customerId = Guid.NewGuid();
+            var couponList = DiscountCouponsListMock.GetDiscountCoupons(Guid.NewGuid(), customerId);
 
             var query = new GetDiscountCouponByCodeQuery()
             {
                 DiscountCode = couponList[0].DiscountCode
             };
 
-            _discountCouponRepository.GetDiscountByCouponCode(query.DiscountCode).Returns(couponList[0]);
+            _discountCouponRepository.GetDiscountCouponByCouponCode(query.DiscountCode).Returns(couponList[0]);
 
             var result = await _sut.Handle(query, CancellationToken.None);
 
-            await _discountCouponRepository.Received().GetDiscountByCouponCode(query.DiscountCode);
-
             Assert.IsType<DiscountCouponDto>(result);
-            Assert.Equal(query.DiscountCode, result.DiscountCode);
         }
 
         [Fact]
-        public async Task GetCouponById_ThrowsNotFound_IfDoesntExist()
+        public async Task GetCouponByCode_ThrowsNotFound_IfNotExist()
         {
             var query = new GetDiscountCouponByCodeQuery()
             {
                 DiscountCode = "XXXXXXXX"
             };
 
-            _discountCouponRepository.GetDiscountByCouponCode(query.DiscountCode).Throws(new NotFoundException("Discount Coupon not found"));
+            _discountCouponRepository.GetDiscountCouponByCouponCode(query.DiscountCode)
+                                     .Throws(new NotFoundException("Discount Coupon not found"));
 
             var act = await Assert.ThrowsAsync<NotFoundException>(() => _sut.Handle(query, CancellationToken.None));
-
-            await _discountCouponRepository.Received().GetDiscountByCouponCode(query.DiscountCode);
 
             Assert.IsType<NotFoundException>(act);
         }

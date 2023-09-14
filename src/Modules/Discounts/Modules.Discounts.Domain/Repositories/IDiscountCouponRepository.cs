@@ -7,7 +7,7 @@ namespace Modules.Discounts.Domain.Repositories
     {
         Task<DiscountCoupon> Add(DiscountCoupon discountCoupon);
         Task<DiscountCoupon> GetDiscountCouponById(DiscountCouponId id);
-        Task<DiscountCoupon> GetDiscountByCouponCode(DiscountCode couponCode);
+        Task<DiscountCoupon> GetDiscountCouponByCouponCode(string couponCode);
         Task<IEnumerable<DiscountCoupon>> GetAll();
         Task<IEnumerable<DiscountCoupon>> GetAllByCreator(Guid id);
         Task<IEnumerable<DiscountCoupon>> GetAllTargetedForCustomer(Guid id);
