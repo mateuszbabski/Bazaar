@@ -16,7 +16,7 @@ namespace Modules.Discounts.Application.Queries.DiscountCoupons.GetDiscountCoupo
 
         public async Task<DiscountCouponDto> Handle(GetDiscountCouponByCodeQuery query, CancellationToken cancellationToken)
         {
-            var discountCoupon = await _discountCouponRepository.GetDiscountByCouponCode(query.DiscountCode)
+            var discountCoupon = await _discountCouponRepository.GetDiscountCouponByCouponCode(query.DiscountCode)
                 ?? throw new NotFoundException("Discount Coupon not found");
 
             var discountCouponDto = DiscountCouponDto.CreateDtoFromObject(discountCoupon);
