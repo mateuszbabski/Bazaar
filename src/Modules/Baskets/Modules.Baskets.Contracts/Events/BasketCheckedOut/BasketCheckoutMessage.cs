@@ -11,11 +11,11 @@ namespace Modules.Baskets.Contracts.Events.BasketCheckedOut
         public MoneyValue TotalPrice { get; }
         public List<BasketItemMapped> BasketItems { get; }
         public string CouponCode { get; }
-        public int ShippingMethod { get; }
+        public string ShippingMethod { get; }
         public int PaymentMethod { get; }
         public BasketCheckoutMessage(BasketMapped basketMapped,
                                      string couponCode,
-                                     int shippingMethod,
+                                     string shippingMethod,
                                      int paymentMethod)
         {
             this.Id = Guid.NewGuid();

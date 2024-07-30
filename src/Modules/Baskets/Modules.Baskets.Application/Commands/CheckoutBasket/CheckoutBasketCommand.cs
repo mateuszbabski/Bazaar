@@ -10,7 +10,7 @@ namespace Modules.Baskets.Application.Commands.CheckoutBasket
         //public string Street { get; set; }
         //public string PostalCode { get; set; }
         public string CouponCode { get; set; }
-        public int ShippingMethod { get; set; }
+        public string ShippingMethod { get; set; }
         public int PaymentMethod { get; set; }
     }
 }
