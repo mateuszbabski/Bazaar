@@ -6,4 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shared.Application\Shared.Application.csproj" />
+    <ProjectReference Include="..\..\Baskets\Modules.Baskets.Contracts\Modules.Baskets.Contracts.csproj" />
+    <ProjectReference Include="..\..\Discounts\Modules.Discounts.Contracts\Modules.Discounts.Contracts.csproj" />
+    <ProjectReference Include="..\..\Shippings\Modules.Shippings.Contracts\Modules.Shippings.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
