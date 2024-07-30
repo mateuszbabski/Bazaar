@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Modules.Shippings.Domain\Modules.Shippings.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
