@@ -6,7 +6,7 @@ using Shared.Domain;
 using Shared.Domain.Rules;
 
 namespace Modules.Discounts.Domain.Entities
-{ // TODO: think about putting discount target logic into discount entity to omit pack logic in handlers
+{ 
     public class Discount : Entity, IAggregateRoot
     {
         public DiscountId Id { get; private set; }
@@ -71,7 +71,7 @@ namespace Modules.Discounts.Domain.Entities
                                                         decimal discountValue,
                                                         DiscountTarget discountTarget)
         {
-            if (discountValue <= 0)
+            if (discountValue <= 0 || discountValue >= 100)
             {
                 throw new InvalidDiscountValueException();
             }

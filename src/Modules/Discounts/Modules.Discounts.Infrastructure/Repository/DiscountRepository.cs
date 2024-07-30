@@ -61,9 +61,9 @@ namespace Modules.Discounts.Infrastructure.Repository
                                              .ToListAsync();
         }
 
-        public Task<bool> IsDiscountExisting(Guid discountCouponId)
+        public async Task<Discount> GetDiscountByCouponCodeToProcess(string couponCode)
         {
-            throw new NotImplementedException();
+            return await GetDiscountByCouponCode(couponCode);
         }
     }
 }

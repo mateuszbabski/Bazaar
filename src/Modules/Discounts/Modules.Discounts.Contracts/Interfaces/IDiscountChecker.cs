@@ -1,7 +1,9 @@
-﻿namespace Modules.Discounts.Contracts.Interfaces
+﻿using Modules.Discounts.Domain.Entities;
+
+namespace Modules.Discounts.Contracts.Interfaces
 {
     public interface IDiscountChecker
     {
-        Task<bool> IsDiscountExisting(Guid discountCouponId);
+        Task<Discount> GetDiscountByCouponCodeToProcess(string couponCode);
     }
 }
