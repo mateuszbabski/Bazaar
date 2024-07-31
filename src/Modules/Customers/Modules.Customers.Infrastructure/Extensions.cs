@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Customers.Application.Contracts;
+using Modules.Customers.Contracts;
 using Modules.Customers.Domain.Repositories;
 using Modules.Customers.Infrastructure.Context;
 using Modules.Customers.Infrastructure.Repository;
@@ -19,6 +20,7 @@ namespace Modules.Customers.Infrastructure
 
             services.AddScoped<ICustomersUnitOfWork, CustomersUnitOfWork>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerChecker, CustomerRepository>();
 
             return services;
         }
