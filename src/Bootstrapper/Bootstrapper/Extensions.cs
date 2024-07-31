@@ -8,6 +8,7 @@ using System.Reflection;
 using Modules.Baskets.Api;
 using Modules.Shippings.Api;
 using Modules.Discounts.Api;
+using Modules.Orders.Api;
 
 namespace Bootstrapper
 {
@@ -30,6 +31,7 @@ namespace Bootstrapper
             services.AddBasketsModule(configuration);
             services.AddShippingsModule(configuration);
             services.AddDiscountsModule(configuration);
+            services.AddOrdersModule(configuration);
 
             return services;
         }
