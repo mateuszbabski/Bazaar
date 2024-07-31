@@ -1,6 +1,7 @@
 ﻿using Modules.Orders.Domain.ValueObjects;
 using Shared.Domain;
 using Shared.Domain.ValueObjects;
+using System.Text.Json.Serialization;
 
 namespace Modules.Orders.Domain.Entities
 {
@@ -12,6 +13,8 @@ namespace Modules.Orders.Domain.Entities
         public OrderId OrderId { get; private set; }
         public int Quantity { get; private set; } = 1;
         public MoneyValue Price { get; private set; }
+        [JsonIgnore]
+        public virtual Order Order { get; set; }
 
         private OrderItem() { }
 

@@ -56,8 +56,7 @@ namespace Modules.Orders.Application.Events.EventHandlers
         }
 
         private async Task<Order> ProcessDiscount(Guid newOrderId, Discount discount, BasketCheckoutMessage message, ShippingMethod shippingMethod)
-        {
-            // check discout type, use switch method to process discount across the basket, update price          
+        {        
             if (discount == null)
             {
                 return 

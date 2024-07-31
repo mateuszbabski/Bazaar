@@ -17,10 +17,10 @@ namespace Modules.Orders.Infrastructure.Context
             return await base.SaveChangesAsync();
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.ApplyConfiguration(new BasketDbConfiguration());
-        //    modelBuilder.ApplyConfiguration(new BasketItemDbConfiguration());
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new OrderDbConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderItemDbConfiguration());
+        }
     }
 }
