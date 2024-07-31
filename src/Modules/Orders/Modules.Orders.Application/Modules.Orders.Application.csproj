@@ -9,8 +9,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.Application\Shared.Application.csproj" />
     <ProjectReference Include="..\..\Baskets\Modules.Baskets.Contracts\Modules.Baskets.Contracts.csproj" />
+    <ProjectReference Include="..\..\Customers\Modules.Customers.Contracts\Modules.Customers.Contracts.csproj" />
     <ProjectReference Include="..\..\Discounts\Modules.Discounts.Contracts\Modules.Discounts.Contracts.csproj" />
     <ProjectReference Include="..\..\Shippings\Modules.Shippings.Contracts\Modules.Shippings.Contracts.csproj" />
+    <ProjectReference Include="..\Modules.Orders.Domain\Modules.Orders.Domain.csproj" />
   </ItemGroup>
 
 </Project>
