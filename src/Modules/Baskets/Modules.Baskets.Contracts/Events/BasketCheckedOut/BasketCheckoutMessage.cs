@@ -10,6 +10,7 @@ namespace Modules.Baskets.Contracts.Events.BasketCheckedOut
         public Guid CustomerId { get; }
         public MoneyValue TotalPrice { get; }
         public List<BasketItemMapped> BasketItems { get; }
+        public Weight Weight { get; }
         public string CouponCode { get; }
         public string ShippingMethod { get; }
         public int PaymentMethod { get; }
@@ -24,6 +25,7 @@ namespace Modules.Baskets.Contracts.Events.BasketCheckedOut
             this.CustomerId = basketMapped.CustomerId;
             this.TotalPrice = basketMapped.TotalPrice;
             this.BasketItems = basketMapped.Items;
+            this.Weight = basketMapped.Weight;
             this.CouponCode = couponCode;
             this.ShippingMethod = shippingMethod;
             this.PaymentMethod = paymentMethod;

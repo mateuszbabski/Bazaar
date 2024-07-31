@@ -79,7 +79,8 @@ namespace Modules.Baskets.Application.Commands.CheckoutBasket
                 Id = basket.Id,
                 CustomerId = basket.CustomerId,
                 TotalPrice = basket.TotalPrice,
-                Items = itemList
+                Items = itemList,
+                Weight = basket.TotalWeight
             };            
 
             return basketMapped;
