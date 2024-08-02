@@ -35,7 +35,7 @@ namespace Modules.Orders.Infrastructure.Context
             builder.OwnsOne(c => c.TotalPrice, mv =>
             {
                 mv.Property(p => p.Currency).HasMaxLength(3).HasColumnName("Currency");
-                mv.Property(p => p.Amount).HasColumnName("Amount").HasPrecision(18, 2);
+                mv.Property(p => p.Amount).HasColumnName("TotalPrice").HasPrecision(18, 2);
             });
 
             builder.Property(c => c.TotalWeight)

@@ -30,7 +30,7 @@ namespace Modules.Orders.Domain.Entities
             OrderId = orderId;
             ShopId = shopId;
             Quantity = quantity;
-            Price = CountOrderItemPrice(quantity, productPrice.Amount, productPrice.Currency);
+            Price = SetCountItemPrice(productPrice.Amount, productPrice.Currency);
         }
 
         public static OrderItem CreateOrderItemFromProduct(
@@ -43,9 +43,9 @@ namespace Modules.Orders.Domain.Entities
             return new OrderItem(productId, shopId, orderId, quantity, productPrice);
         }
 
-        private static MoneyValue CountOrderItemPrice(int quantity, decimal price, string currency)
+        private static MoneyValue SetCountItemPrice(decimal price, string currency)
         {
-            return MoneyValue.Of(quantity * price, currency);
+            return MoneyValue.Of(price, currency);
         }
     }
 }

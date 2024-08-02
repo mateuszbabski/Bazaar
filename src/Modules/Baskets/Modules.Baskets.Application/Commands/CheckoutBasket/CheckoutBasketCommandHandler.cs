@@ -34,13 +34,8 @@ namespace Modules.Baskets.Application.Commands.CheckoutBasket
                 ?? throw new NotFoundException("Basket not found.");                       
             
             var basketMapped = CreateMappedBasket(basket);
-            //var address = Address.CreateAddress(command.Country, command.City, command.Street, command.PostalCode);
-            // TODO: after changing customer module
-            // TODO: fetch customer address and phone number
 
             var message = new BasketCheckoutMessage(basketMapped,
-                                                    //command.TelephoneNumber,
-                                                    //address,
                                                     command.CouponCode,
                                                     command.ShippingMethod,
                                                     command.PaymentMethod);

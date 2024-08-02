@@ -8,6 +8,7 @@ using Modules.Orders.Domain.Repositories;
 using Modules.Shippings.Contracts;
 using Modules.Shippings.Domain.Entities;
 using Modules.Shippings.Domain.ValueObjects;
+using Shared.Abstractions.CurrencyConverters;
 using Shared.Abstractions.Events;
 using Shared.Application.Exceptions;
 
@@ -20,13 +21,15 @@ namespace Modules.Orders.Application.Events.EventHandlers
         private readonly IShippingMethodChecker _shippingMethodChecker;
         private readonly ICustomerChecker _customerChecker;
         private readonly IOrderRepository _orderRepository;
+        private readonly ICurrencyConverter _currencyConverter;
         private readonly IOrdersUnitOfWork _unitOfWork;
 
         public BasketCheckedOutEventHandler(IDiscountChecker discountChecker, 
                                             IDiscountCouponChecker discountCouponChecker,
                                             IShippingMethodChecker shippingMethodChecker,
                                             ICustomerChecker customerChecker,
-                                            IOrderRepository orderRepository,
+                                            IOrderRepository orderRepository, 
+                                            ICurrencyConverter currencyConverter,
                                             IOrdersUnitOfWork unitOfWork)
         {
             _discountChecker = discountChecker;
@@ -34,6 +37,7 @@ namespace Modules.Orders.Application.Events.EventHandlers
             _shippingMethodChecker = shippingMethodChecker;
             _customerChecker = customerChecker;
             _orderRepository = orderRepository;
+            _currencyConverter = currencyConverter;
             _unitOfWork = unitOfWork;
         }
 
@@ -72,8 +76,8 @@ namespace Modules.Orders.Application.Events.EventHandlers
                 Order.CreateOrder(
                     newOrderId,
                     await CreateReceiverFromBasket(message.CustomerId), 
-                    CreateOrderItemsFromBasketItems(message.BasketItems, newOrderId), 
-                    CreateOrderShippingMethodFromBasketShippingMethod(shippingMethod),
+                    CreateOrderItemsFromBasketItems(message.BasketItems, newOrderId),
+                    await CreateOrderShippingMethodFromBasketShippingMethod(shippingMethod, message.TotalPrice.Currency),
                     message.Weight
                     );
 
@@ -85,19 +89,7 @@ namespace Modules.Orders.Application.Events.EventHandlers
         }
 
         private async Task<Order> ProcessDiscount(Guid newOrderId, Discount discount, BasketCheckoutMessage message, ShippingMethod shippingMethod)
-        {        
-            if (discount == null)
-            {
-                return 
-                    Order.CreateOrder(
-                        newOrderId,
-                        await CreateReceiverFromBasket(message.CustomerId), 
-                        CreateOrderItemsFromBasketItems(message.BasketItems, newOrderId), 
-                        CreateOrderShippingMethodFromBasketShippingMethod(shippingMethod),
-                        message.Weight
-                        );
-            }
-
+        { 
             switch (discount.DiscountTarget.DiscountType.ToString())
             {
                 case "AssignedToOrderTotal":
@@ -118,7 +110,7 @@ namespace Modules.Orders.Application.Events.EventHandlers
                             newOrderId,
                             await CreateReceiverFromBasket(message.CustomerId), 
                             CreateOrderItemsFromBasketItems(message.BasketItems, newOrderId), 
-                            CreateOrderShippingMethodFromBasketShippingMethod(shippingMethod),
+                            await CreateOrderShippingMethodFromBasketShippingMethod(shippingMethod, message.TotalPrice.Currency),
                             message.Weight
                             );
             }
@@ -195,8 +187,20 @@ namespace Modules.Orders.Application.Events.EventHandlers
             return itemList;
         }
 
-        private OrderShippingMethod CreateOrderShippingMethodFromBasketShippingMethod(ShippingMethod shippingMethod)
+        private async Task<OrderShippingMethod> CreateOrderShippingMethodFromBasketShippingMethod(ShippingMethod shippingMethod, string currency)
         {
+            if (shippingMethod.BasePrice.Currency != currency)
+            {
+                var convertedPrice = await _currencyConverter.GetConvertedPrice(shippingMethod.BasePrice.Amount, shippingMethod.BasePrice.Currency, currency);
+
+                return OrderShippingMethod.CreateNewShippingMethod(
+                                                                    shippingMethod.Id,
+                                                                    shippingMethod.Name,
+                                                                    convertedPrice,
+                                                                    currency
+                                                                    );
+            }
+
             var orderShippingMethod = 
                 OrderShippingMethod.CreateNewShippingMethod(
                     shippingMethod.Id,
