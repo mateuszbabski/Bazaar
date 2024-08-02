@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Modules.Orders.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddOrders : Migration
+    public partial class OrdersDb1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,7 +28,7 @@ namespace Modules.Orders.Infrastructure.Migrations
                     Amount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Currency = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
                     TotalWeight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    OrderShippingMethod_Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ShoppingMethodProviderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ShoppingProvider = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShippingPriceAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     ShippingPriceCurrency = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true)

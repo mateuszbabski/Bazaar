@@ -14,16 +14,16 @@ namespace Modules.Orders.Domain.Entities
         {
         }
 
-        private OrderShippingMethod(Name name, MoneyValue price)
+        private OrderShippingMethod(Guid id, Name name, MoneyValue price)
         {
-            Id = Guid.NewGuid();
+            Id = id;
             Name = name;
             Price = price;
         }
 
-        public static OrderShippingMethod CreateNewShippingMethod(string name, decimal amount, string currency)
+        public static OrderShippingMethod CreateNewShippingMethod(Guid id, string name, decimal amount, string currency)
         {
-            var shippingMethod = new OrderShippingMethod(name, MoneyValue.Of(amount, currency));
+            var shippingMethod = new OrderShippingMethod(id, name, MoneyValue.Of(amount, currency));
 
             return shippingMethod;
         }

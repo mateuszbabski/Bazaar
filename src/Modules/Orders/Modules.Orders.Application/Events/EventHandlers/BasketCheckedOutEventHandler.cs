@@ -37,7 +37,7 @@ namespace Modules.Orders.Application.Events.EventHandlers
         public async Task Handle(BasketCheckedOutEvent notification, CancellationToken cancellationToken)
         {
             var shippingMethod = await _shippingMethodChecker.GetShippingMethodByItsName(notification.Message.ShippingMethod);
-            if (shippingMethod == null)
+            if (shippingMethod == null || !shippingMethod.IsAvailable)
             {
                 throw new NotFoundException(notification.Message.ShippingMethod);
             }
@@ -46,6 +46,12 @@ namespace Modules.Orders.Application.Events.EventHandlers
 
             var discount = await _discountChecker.GetDiscountByCouponCodeToProcess(notification.Message.CouponCode);
 
+            if (discount == null)
+            {
+                await ProcessAndCreateOrderWithoutDiscount(newOrderId, notification.Message, shippingMethod);
+                return;
+            }
+
             var newOrder = await ProcessDiscount(newOrderId, discount, notification.Message, shippingMethod);
             
             await _orderRepository.Add(newOrder);
@@ -53,6 +59,24 @@ namespace Modules.Orders.Application.Events.EventHandlers
             await _unitOfWork.CommitAndDispatchDomainEventsAsync(newOrder);
 
             // mock paymentmethod until module is done
+        }
+
+        private async Task<Order> ProcessAndCreateOrderWithoutDiscount(Guid newOrderId, BasketCheckoutMessage message, ShippingMethod shippingMethod)
+        {
+            var newOrder = 
+                Order.CreateOrder(
+                    newOrderId,
+                    await CreateReceiverFromBasket(message.CustomerId), 
+                    CreateOrderItemsFromBasketItems(message.BasketItems, newOrderId), 
+                    CreateOrderShippingMethodFromBasketShippingMethod(shippingMethod),
+                    message.Weight
+                    );
+
+            await _orderRepository.Add(newOrder);
+
+            await _unitOfWork.CommitAndDispatchDomainEventsAsync(newOrder);
+
+            return newOrder;
         }
 
         private async Task<Order> ProcessDiscount(Guid newOrderId, Discount discount, BasketCheckoutMessage message, ShippingMethod shippingMethod)
@@ -170,6 +194,7 @@ namespace Modules.Orders.Application.Events.EventHandlers
         {
             var orderShippingMethod = 
                 OrderShippingMethod.CreateNewShippingMethod(
+                    shippingMethod.Id,
                     shippingMethod.Name, 
                     shippingMethod.BasePrice.Amount, 
                     shippingMethod.BasePrice.Currency

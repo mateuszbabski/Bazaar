@@ -15,7 +15,7 @@ namespace Modules.Discounts.Domain.Entities
         public bool IsPercentageDiscount { get; private set; }
         public string? Currency { get; private set; } = string.Empty;
         public DiscountTarget DiscountTarget { get; private set; }
-        public virtual List<DiscountCoupon> DiscountCoupons { get; private set; }
+        public List<DiscountCoupon> DiscountCoupons { get; private set; }
 
         private Discount() { }
 
@@ -92,11 +92,11 @@ namespace Modules.Discounts.Domain.Entities
             }
 
             var discountCoupon = DiscountCoupon.CreateDiscountCoupon(this, startsAt, expirationDate);
-            AddCouponToDiscount(discountCoupon);
+            //AddCouponToDiscount(discountCoupon);
             return discountCoupon;
         }
 
-        internal void AddCouponToDiscount(DiscountCoupon discountCoupon)
+        public void AddCouponToDiscount(DiscountCoupon discountCoupon)
         {
             this.DiscountCoupons.Add(discountCoupon);
             this.AddDomainEvent(new NewDiscountCouponAddedToListDomainEvent(discountCoupon.DiscountCode,

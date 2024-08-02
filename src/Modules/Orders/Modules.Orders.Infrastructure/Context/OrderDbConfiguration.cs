@@ -50,8 +50,9 @@ namespace Modules.Orders.Infrastructure.Context
             builder.OwnsOne(c => c.OrderShippingMethod, mv =>
             {                
                 mv.Property(c => c.Name).IsRequired().HasColumnName("ShoppingProvider");
+                mv.Property(c => c.Id).IsRequired().HasColumnName("ShoppingMethodProviderId");
                 mv.OwnsOne(c => c.Price, mv =>
-                {
+                {                    
                     mv.Property(p => p.Currency).HasMaxLength(3).HasColumnName("ShippingPriceCurrency");
                     mv.Property(p => p.Amount).HasColumnName("ShippingPriceAmount").HasPrecision(18, 2);
                 });

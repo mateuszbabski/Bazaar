@@ -94,7 +94,8 @@ namespace Modules.Orders.Infrastructure.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<Guid>("Id")
-                                .HasColumnType("uniqueidentifier");
+                                .HasColumnType("uniqueidentifier")
+                                .HasColumnName("ShoppingMethodProviderId");
 
                             b1.Property<string>("Name")
                                 .IsRequired()

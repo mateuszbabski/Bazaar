@@ -9,14 +9,17 @@ namespace Modules.Discounts.Application.Commands.DiscountCoupons.CreateDiscountC
     public class CreateDiscountCouponCommandHandler : IRequestHandler<CreateDiscountCouponCommand, Guid>
     {
         private readonly ICurrentUserService _userService;
+        private readonly IDiscountCouponRepository _discountCouponRepository;
         private readonly IDiscountRepository _discountRepository;
         private readonly IDiscountsUnitOfWork _unitOfWork;
 
-        public CreateDiscountCouponCommandHandler(ICurrentUserService userService,
+        public CreateDiscountCouponCommandHandler(ICurrentUserService userService, 
+                                                  IDiscountCouponRepository discountCouponRepository,
                                                   IDiscountRepository discountRepository,
                                                   IDiscountsUnitOfWork unitOfWork)
         {
             _userService = userService;
+            _discountCouponRepository = discountCouponRepository;
             _discountRepository = discountRepository;
             _unitOfWork = unitOfWork;
         }
@@ -32,6 +35,10 @@ namespace Modules.Discounts.Application.Commands.DiscountCoupons.CreateDiscountC
             }
 
             var discountCoupon = discount.CreateNewDiscountCoupon(userId, command.StartsAt, command.ExpirationDate);
+
+            await _discountCouponRepository.Add(discountCoupon);
+
+            discount.AddCouponToDiscount(discountCoupon);
 
             await _unitOfWork.CommitAndDispatchDomainEventsAsync(discountCoupon);
 

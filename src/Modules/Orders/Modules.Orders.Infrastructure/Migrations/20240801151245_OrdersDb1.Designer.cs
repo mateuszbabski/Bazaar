@@ -12,8 +12,8 @@ using Modules.Orders.Infrastructure.Context;
 namespace Modules.Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(OrdersDbContext))]
-    [Migration("20240731162612_AddOrders")]
-    partial class AddOrders
+    [Migration("20240801151245_OrdersDb1")]
+    partial class OrdersDb1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,7 +97,8 @@ namespace Modules.Orders.Infrastructure.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<Guid>("Id")
-                                .HasColumnType("uniqueidentifier");
+                                .HasColumnType("uniqueidentifier")
+                                .HasColumnName("ShoppingMethodProviderId");
 
                             b1.Property<string>("Name")
                                 .IsRequired()

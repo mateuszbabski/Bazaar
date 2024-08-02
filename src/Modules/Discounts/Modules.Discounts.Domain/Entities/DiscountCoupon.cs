@@ -19,15 +19,16 @@ namespace Modules.Discounts.Domain.Entities
         public virtual Discount Discount { get; private set; }
 
         private DiscountCoupon() { }
-        private DiscountCoupon(DiscountId discountId, Guid createdBy, DateTimeOffset startsAt, DateTimeOffset expirationDate) 
+        private DiscountCoupon(Discount discount, DateTimeOffset startsAt, DateTimeOffset expirationDate) 
         {
             Id = new DiscountCouponId(Guid.NewGuid());
-            CreatedBy = createdBy;
-            DiscountId = discountId;
+            CreatedBy = discount.CreatedBy;
+            DiscountId = discount.Id;
             DiscountCode = new DiscountCode(Guid.NewGuid());
             StartsAt = startsAt;
             ExpirationDate = expirationDate;
             IsEnable = true;
+            Discount = discount;
         }
 
         internal static DiscountCoupon CreateDiscountCoupon(Discount discount, DateTimeOffset startsAt, DateTimeOffset expirationDate)
@@ -37,7 +38,7 @@ namespace Modules.Discounts.Domain.Entities
                 throw new InvalidDiscountCouponExpirationDateException();
             }
 
-            var coupon = new DiscountCoupon(discount.Id, discount.CreatedBy, startsAt, expirationDate);
+            var coupon = new DiscountCoupon(discount, startsAt, expirationDate);
             return coupon;
         }
 
