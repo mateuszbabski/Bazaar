@@ -47,7 +47,7 @@ namespace Modules.Baskets.Application.Commands.CheckoutBasket
 
             await _eventDispatcher.PublishAsync(new BasketCheckedOutEvent(message), cancellationToken);
 
-            //_basketRepository.DeleteBasket(basket);
+            _basketRepository.DeleteBasket(basket);
 
             await _unitOfWork.CommitAndDispatchDomainEventsAsync(basket);
 

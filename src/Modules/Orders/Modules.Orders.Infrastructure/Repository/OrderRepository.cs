@@ -17,6 +17,6 @@ namespace Modules.Orders.Infrastructure.Repository
             await _dbContext.Orders.AddAsync(order);
 
             return order;
-        }
+        }        
     }
 }

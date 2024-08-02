@@ -92,7 +92,6 @@ namespace Modules.Discounts.Domain.Entities
             }
 
             var discountCoupon = DiscountCoupon.CreateDiscountCoupon(this, startsAt, expirationDate);
-            //AddCouponToDiscount(discountCoupon);
             return discountCoupon;
         }
 

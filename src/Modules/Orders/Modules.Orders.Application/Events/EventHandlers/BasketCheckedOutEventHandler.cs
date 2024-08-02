@@ -16,18 +16,21 @@ namespace Modules.Orders.Application.Events.EventHandlers
     public class BasketCheckedOutEventHandler : IEventHandler<BasketCheckedOutEvent>
     {
         private readonly IDiscountChecker _discountChecker;
+        private readonly IDiscountCouponChecker _discountCouponChecker;
         private readonly IShippingMethodChecker _shippingMethodChecker;
         private readonly ICustomerChecker _customerChecker;
         private readonly IOrderRepository _orderRepository;
         private readonly IOrdersUnitOfWork _unitOfWork;
 
         public BasketCheckedOutEventHandler(IDiscountChecker discountChecker, 
+                                            IDiscountCouponChecker discountCouponChecker,
                                             IShippingMethodChecker shippingMethodChecker,
                                             ICustomerChecker customerChecker,
                                             IOrderRepository orderRepository,
                                             IOrdersUnitOfWork unitOfWork)
         {
             _discountChecker = discountChecker;
+            _discountCouponChecker = discountCouponChecker;
             _shippingMethodChecker = shippingMethodChecker;
             _customerChecker = customerChecker;
             _orderRepository = orderRepository;
@@ -44,13 +47,15 @@ namespace Modules.Orders.Application.Events.EventHandlers
 
             var newOrderId = Guid.NewGuid();
 
-            var discount = await _discountChecker.GetDiscountByCouponCodeToProcess(notification.Message.CouponCode);
+            var discountCoupon = await _discountCouponChecker.GetDiscountCouponByCodeToProcess(notification.Message.CouponCode);
 
-            if (discount == null)
+            if (discountCoupon == null)
             {
                 await ProcessAndCreateOrderWithoutDiscount(newOrderId, notification.Message, shippingMethod);
                 return;
             }
+
+            var discount = await _discountChecker.GetDiscountByIdToProcess(discountCoupon.DiscountId);
 
             var newOrder = await ProcessDiscount(newOrderId, discount, notification.Message, shippingMethod);
             

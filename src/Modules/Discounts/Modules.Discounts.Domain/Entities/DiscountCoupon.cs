@@ -11,7 +11,7 @@ namespace Modules.Discounts.Domain.Entities
         public DiscountCouponId Id { get; private set; }
         public DiscountId DiscountId { get; private set; }
         public Guid CreatedBy { get; private set; }
-        public DiscountCode DiscountCode { get; private set; }
+        public string DiscountCode { get; private set; }
         public DateTimeOffset StartsAt { get; private set; } = DateTimeOffset.Now;
         public DateTimeOffset ExpirationDate { get; private set; } = DateTimeOffset.Now.AddYears(1);
         public bool IsEnable { get; private set; } = true;
@@ -24,7 +24,7 @@ namespace Modules.Discounts.Domain.Entities
             Id = new DiscountCouponId(Guid.NewGuid());
             CreatedBy = discount.CreatedBy;
             DiscountId = discount.Id;
-            DiscountCode = new DiscountCode(Guid.NewGuid());
+            DiscountCode = SetDiscountCode(Guid.NewGuid());
             StartsAt = startsAt;
             ExpirationDate = expirationDate;
             IsEnable = true;
@@ -45,6 +45,18 @@ namespace Modules.Discounts.Domain.Entities
         public void DisableCoupon()
         {
             this.IsEnable = false;
+        }
+
+        private string SetDiscountCode(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                throw new InvalidDiscountCodeException();
+            }
+
+            var discountCode = id.ToString()[..8];
+
+            return discountCode;
         }
     }
 }

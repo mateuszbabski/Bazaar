@@ -6,7 +6,7 @@ using Modules.Discounts.Domain.ValueObjects;
 using Modules.Discounts.Infrastructure.Context;
 
 namespace Modules.Discounts.Infrastructure.Repository
-{ //TODO: Check discount repository why there are errors
+{
     internal sealed class DiscountRepository : IDiscountRepository, IDiscountChecker
     {
         private readonly DiscountsDbContext _dbContext;
@@ -39,7 +39,7 @@ namespace Modules.Discounts.Infrastructure.Repository
 
         public async Task<Discount> GetDiscountByCouponCode(string couponCode)
         {
-            var discountCoupon = await _dbContext.DiscountCoupons.FirstAsync(x => x.DiscountCode.ToString() == couponCode);
+            var discountCoupon = await _dbContext.DiscountCoupons.FirstAsync(x => x.DiscountCode == couponCode);
             if (discountCoupon == null) 
             {
                 return null;
@@ -61,11 +61,9 @@ namespace Modules.Discounts.Infrastructure.Repository
                                              .ToListAsync();
         }
 
-        public async Task<Discount> GetDiscountByCouponCodeToProcess(string couponCode)
+        public async Task<Discount> GetDiscountByIdToProcess(DiscountId id)
         {
-            var discount = await GetDiscountByCouponCode(couponCode);
-
-            return discount ?? null;
+            return await GetDiscountById(id);
         }
     }
 }

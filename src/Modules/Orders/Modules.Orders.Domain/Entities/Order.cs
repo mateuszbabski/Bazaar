@@ -38,7 +38,7 @@ namespace Modules.Orders.Domain.Entities
             decimal allProductsPrice = items.Sum(x => x.Price.Amount);
             decimal shippingPrice = shippingMethod.Price.Amount;
 
-            return new MoneyValue(allProductsPrice + shippingPrice, TotalPrice.Currency);
+            return new MoneyValue(allProductsPrice + shippingPrice, items.First().Price.Currency);
         }
     }
 }

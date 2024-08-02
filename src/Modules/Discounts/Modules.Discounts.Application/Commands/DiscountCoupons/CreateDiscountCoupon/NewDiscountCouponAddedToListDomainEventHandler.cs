@@ -15,7 +15,6 @@ namespace Modules.Discounts.Application.Commands.DiscountCoupons.CreateDiscountC
         }
         public async Task Handle(NewDiscountCouponAddedToListDomainEvent notification, CancellationToken cancellationToken)
         {
-            // TODO: check if works
             if(notification.DiscountTarget.DiscountType.ToString() == "customer")
             {
                 await _eventDispatcher.PublishAsync(new DiscountCouponAddedForCustomerEvent(notification.DiscountCode,

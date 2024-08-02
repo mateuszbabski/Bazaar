@@ -4,7 +4,7 @@ using Shared.Domain;
 
 namespace Modules.Discounts.Domain.Events
 {
-    public sealed record NewDiscountCouponAddedToListDomainEvent(DiscountCode DiscountCode, DiscountTarget DiscountTarget) 
+    public sealed record NewDiscountCouponAddedToListDomainEvent(string DiscountCode, DiscountTarget DiscountTarget) 
         : IDomainEvent
     {
     }
