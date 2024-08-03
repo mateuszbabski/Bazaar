@@ -17,10 +17,11 @@ namespace Bazaar.Modules.Discounts.Tests.Unit.Application
         private readonly CreateDiscountCouponCommandHandler _sut;
         private readonly IDiscountRepository _discountRepository = Substitute.For<IDiscountRepository>();
         private readonly IDiscountsUnitOfWork _unitOfWork = Substitute.For<IDiscountsUnitOfWork>();
+        private readonly IDiscountCouponRepository _discountCouponRepository = Substitute.For<IDiscountCouponRepository>();
         private readonly ICurrentUserService _userService = Substitute.For<ICurrentUserService>();
         public CreateDiscountCouponCommandTest()
         {
-            _sut = new CreateDiscountCouponCommandHandler(_userService, _discountRepository, _unitOfWork);
+            _sut = new CreateDiscountCouponCommandHandler(_userService, _discountCouponRepository, _discountRepository, _unitOfWork);
         }
 
         [Fact]
