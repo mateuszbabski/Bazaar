@@ -56,8 +56,12 @@ namespace Modules.Orders.Infrastructure.Context
                     mv.Property(p => p.Currency).HasMaxLength(3).HasColumnName("ShippingPriceCurrency");
                     mv.Property(p => p.Amount).HasColumnName("ShippingPriceAmount").HasPrecision(18, 2);
                 });
-            });            
-            
+            });
+
+            builder.Property(c => c.OrderStatus).HasColumnName("OrderStatus");
+            builder.Property(c => c.CreatedDate).HasColumnName("CreatedDate");
+            builder.Property(c => c.LastUpdateDate).HasColumnName("LastUpdatedDate");
+
             builder.ToTable("Orders");
         }
     }

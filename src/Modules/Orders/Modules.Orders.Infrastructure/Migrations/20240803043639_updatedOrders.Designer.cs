@@ -12,8 +12,8 @@ using Modules.Orders.Infrastructure.Context;
 namespace Modules.Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(OrdersDbContext))]
-    [Migration("20240801151245_OrdersDb1")]
-    partial class OrdersDb1
+    [Migration("20240803043639_updatedOrders")]
+    partial class updatedOrders
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,18 @@ namespace Modules.Orders.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTimeOffset>("LastUpdateDate")
+                        .HasColumnType("datetimeoffset")
+                        .HasColumnName("LastUpdatedDate");
+
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("int")
+                        .HasColumnName("OrderStatus");
 
                     b.Property<decimal>("TotalWeight")
                         .HasColumnType("decimal(18,2)")
@@ -76,7 +88,7 @@ namespace Modules.Orders.Infrastructure.Migrations
                             b1.Property<decimal>("Amount")
                                 .HasPrecision(18, 2)
                                 .HasColumnType("decimal(18,2)")
-                                .HasColumnName("Amount");
+                                .HasColumnName("TotalPrice");
 
                             b1.Property<string>("Currency")
                                 .HasMaxLength(3)

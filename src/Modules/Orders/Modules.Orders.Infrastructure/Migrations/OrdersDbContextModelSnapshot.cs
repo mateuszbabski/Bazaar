@@ -27,6 +27,18 @@ namespace Modules.Orders.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTimeOffset>("LastUpdateDate")
+                        .HasColumnType("datetimeoffset")
+                        .HasColumnName("LastUpdatedDate");
+
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("int")
+                        .HasColumnName("OrderStatus");
+
                     b.Property<decimal>("TotalWeight")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("TotalWeight");
@@ -73,7 +85,7 @@ namespace Modules.Orders.Infrastructure.Migrations
                             b1.Property<decimal>("Amount")
                                 .HasPrecision(18, 2)
                                 .HasColumnType("decimal(18,2)")
-                                .HasColumnName("Amount");
+                                .HasColumnName("TotalPrice");
 
                             b1.Property<string>("Currency")
                                 .HasMaxLength(3)

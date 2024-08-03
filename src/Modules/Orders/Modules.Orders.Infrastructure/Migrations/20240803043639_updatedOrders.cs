@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Modules.Orders.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class OrdersDb1 : Migration
+    public partial class updatedOrders : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,13 +25,16 @@ namespace Modules.Orders.Infrastructure.Migrations
                     ReceiverStreet = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReceiverPostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReceiverPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Currency = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
                     TotalWeight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ShoppingMethodProviderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ShoppingProvider = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShippingPriceAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    ShippingPriceCurrency = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true)
+                    ShippingPriceCurrency = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
+                    OrderStatus = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    LastUpdatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {

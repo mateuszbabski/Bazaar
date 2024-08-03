@@ -13,6 +13,9 @@ namespace Modules.Orders.Domain.Entities
         public MoneyValue TotalPrice { get; private set; }
         public Weight TotalWeight { get; private set; }
         public OrderShippingMethod OrderShippingMethod { get; private set; }
+        public OrderStatus OrderStatus { get; private set; }
+        public DateTimeOffset CreatedDate { get; private set; } = DateTimeOffset.Now;
+        public DateTimeOffset LastUpdateDate { get; private set; } = DateTimeOffset.Now;
 
         private Order() { }
         private Order(Guid orderId, Receiver receiver, List<OrderItem> orderItems, OrderShippingMethod orderShippingMethod, Weight weight)
@@ -23,6 +26,9 @@ namespace Modules.Orders.Domain.Entities
             TotalPrice = CountTotalPrice(Items, orderShippingMethod);
             TotalWeight = weight;
             OrderShippingMethod = orderShippingMethod;
+            OrderStatus = OrderStatus.Created;
+            CreatedDate = DateTimeOffset.Now;
+            LastUpdateDate = DateTimeOffset.Now;
         }
 
         public static Order CreateOrder(Guid orderId, Receiver receiver, List<OrderItem> orderItems, OrderShippingMethod orderShippingMethod, Weight weight)
