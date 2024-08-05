@@ -39,7 +39,7 @@ namespace Modules.Orders.Domain.Entities
             return order;
         }
 
-        private MoneyValue CountTotalPrice(List<OrderItem> items, OrderShippingMethod shippingMethod)
+        private static MoneyValue CountTotalPrice(List<OrderItem> items, OrderShippingMethod shippingMethod)
         {
             decimal allProductsPrice = items.Sum(x => x.Price.Amount);
             decimal shippingPrice = shippingMethod.Price.Amount;

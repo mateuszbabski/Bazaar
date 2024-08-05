@@ -6,18 +6,18 @@ using Shared.Application.Exceptions;
 
 namespace Modules.Baskets.Application.Queries.GetBasketByCustomerId
 {
-    public class GetBasketByCustomerIdCommandHandler : IRequestHandler<GetBasketByCustomerIdCommand, BasketDto>
+    public class GetBasketByCustomerIdQueryHandler : IRequestHandler<GetBasketByCustomerIdQuery, BasketDto>
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IBasketRepository _basketRepository;
 
-        public GetBasketByCustomerIdCommandHandler(ICurrentUserService currentUserService,
+        public GetBasketByCustomerIdQueryHandler(ICurrentUserService currentUserService,
                                                    IBasketRepository basketRepository)
         {
             _currentUserService = currentUserService;
             _basketRepository = basketRepository;
         }
-        public async Task<BasketDto> Handle(GetBasketByCustomerIdCommand command, CancellationToken cancellationToken)
+        public async Task<BasketDto> Handle(GetBasketByCustomerIdQuery command, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
 

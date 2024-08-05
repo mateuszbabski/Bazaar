@@ -18,7 +18,6 @@
   <ItemGroup>
     <Folder Include="Commands\CancelOrder\" />
     <Folder Include="Commands\CompleteOrder\" />
-    <Folder Include="Queries\GetOrderById\" />
     <Folder Include="Queries\GetOrders\" />
     <Folder Include="Queries\GetOrdersForCustomer\" />
     <Folder Include="Queries\GetOrdersForShop\" />

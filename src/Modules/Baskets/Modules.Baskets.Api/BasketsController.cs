@@ -98,7 +98,7 @@ namespace Modules.Baskets.Api
         [SwaggerOperation("Get basket by customer Id")]
         public async Task<ActionResult<BasketDto>> GetBasketForCustomer()
         {
-            var basket = await _mediator.Send(new GetBasketByCustomerIdCommand());
+            var basket = await _mediator.Send(new GetBasketByCustomerIdQuery());
 
             return Ok(basket);
         }

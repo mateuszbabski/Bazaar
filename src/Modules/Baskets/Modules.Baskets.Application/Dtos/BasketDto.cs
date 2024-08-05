@@ -3,7 +3,7 @@ using Shared.Domain.ValueObjects;
 
 namespace Modules.Baskets.Application.Dtos
 {
-    public class BasketDto
+    public record BasketDto
     {
         public Guid Id { get; init; }
         public Guid CustomerId { get; init; }
