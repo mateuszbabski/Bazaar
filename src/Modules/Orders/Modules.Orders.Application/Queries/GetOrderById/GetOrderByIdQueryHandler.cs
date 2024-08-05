@@ -25,7 +25,7 @@ namespace Modules.Orders.Application.Queries.GetOrderById
             var order = await _orderRepository.GetOrderById(request.Id)
                 ?? throw new NotFoundException("Order not found.");
 
-            if (userRole == "customer" && order.Receiver.Id.Value != userId)
+            if (userRole == "customer" && order.Receiver.Id.Value != userId || userRole == "shop")
             {
                 throw new ForbidException("You are not authorized to view this order.");
             }
