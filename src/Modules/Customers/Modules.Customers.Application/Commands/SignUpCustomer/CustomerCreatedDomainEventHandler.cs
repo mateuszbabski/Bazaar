@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Modules.Customers.Domain.Events;
+﻿using Modules.Customers.Domain.Events;
 using Serilog;
 using Shared.Abstractions.DomainEvents;
 using Shared.Abstractions.Time;

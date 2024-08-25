@@ -9,5 +9,6 @@ namespace Modules.Shippings.Domain.Repositories
         Task DeleteShippingMethod(ShippingMethod shippingMethod);
         Task<ShippingMethod> GetShippingMethodById(ShippingMethodId id);
         Task<IEnumerable<ShippingMethod>> GetShippingMethods();
+        Task<ShippingMethod> GetShippingMethodByName(ShippingMethodName methodName);
     }
 }

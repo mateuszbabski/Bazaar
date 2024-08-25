@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Shippings.Application.Contracts;
+using Modules.Shippings.Contracts;
 using Modules.Shippings.Domain.Repositories;
 using Modules.Shippings.Infrastructure.Context.ShippingMethods;
 using Modules.Shippings.Infrastructure.Context.Shippings;
@@ -28,6 +29,7 @@ namespace Modules.Shippings.Infrastructure
 
             services.AddScoped<IShippingMethodsUnitOfWork, ShippingMethodsUnitOfWork>();
             services.AddScoped<IShippingMethodRepository, ShippingMethodRepository>();
+            services.AddScoped<IShippingMethodChecker, ShippingMethodRepository>();
 
             return services;
         }

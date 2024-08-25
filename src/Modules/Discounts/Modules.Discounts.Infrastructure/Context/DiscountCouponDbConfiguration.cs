@@ -22,8 +22,7 @@ namespace Modules.Discounts.Infrastructure.Context
                    .WithMany(p => p.DiscountCoupons)
                    .HasForeignKey(c => c.DiscountId);
 
-            builder.Property(c => c.DiscountCode)
-                   .HasConversion(c => c.Value, c => new DiscountCode(Guid.Parse(c)));
+            builder.Property(c => c.DiscountCode).HasColumnName("DiscountCode").IsRequired();
 
             builder.Property(c => c.StartsAt).HasColumnName("StartsAt");
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Modules.Discounts.Contracts.Interfaces;
 using Modules.Discounts.Domain.Entities;
 using Modules.Discounts.Domain.Repositories;
 using Modules.Discounts.Domain.ValueObjects;
@@ -6,7 +7,7 @@ using Modules.Discounts.Infrastructure.Context;
 
 namespace Modules.Discounts.Infrastructure.Repository
 {
-    internal sealed class DiscountCouponRepository : IDiscountCouponRepository
+    internal sealed class DiscountCouponRepository : IDiscountCouponRepository, IDiscountCouponChecker
     {
         private readonly DiscountsDbContext _dbContext;
 
@@ -22,7 +23,11 @@ namespace Modules.Discounts.Infrastructure.Repository
 
         public async Task<DiscountCoupon> GetDiscountCouponByCouponCode(string couponCode)
         {
-            return await _dbContext.DiscountCoupons.FirstOrDefaultAsync(x => x.DiscountCode == couponCode);
+            var coupons = await _dbContext.DiscountCoupons.ToListAsync();
+
+            var discountCoupon = coupons.FirstOrDefault(x => x.DiscountCode == couponCode);
+            
+            return discountCoupon;
         }
 
         public async Task<DiscountCoupon> GetDiscountCouponById(DiscountCouponId id)
@@ -54,6 +59,11 @@ namespace Modules.Discounts.Infrastructure.Repository
                                                             .SelectMany(x => x.DiscountCoupons)
                                                             .ToListAsync();
             return discountCoupons;
+        }
+
+        public async Task<DiscountCoupon> GetDiscountCouponByCodeToProcess(string couponCode)
+        {
+            return await GetDiscountCouponByCouponCode(couponCode);
         }
     }
 }

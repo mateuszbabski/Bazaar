@@ -6,7 +6,7 @@ using Shared.Domain;
 using Shared.Domain.Rules;
 
 namespace Modules.Discounts.Domain.Entities
-{ // TODO: think about putting discount target logic into discount entity to omit pack logic in handlers
+{ 
     public class Discount : Entity, IAggregateRoot
     {
         public DiscountId Id { get; private set; }
@@ -15,7 +15,7 @@ namespace Modules.Discounts.Domain.Entities
         public bool IsPercentageDiscount { get; private set; }
         public string? Currency { get; private set; } = string.Empty;
         public DiscountTarget DiscountTarget { get; private set; }
-        public virtual List<DiscountCoupon> DiscountCoupons { get; private set; }
+        public List<DiscountCoupon> DiscountCoupons { get; private set; }
 
         private Discount() { }
 
@@ -71,7 +71,7 @@ namespace Modules.Discounts.Domain.Entities
                                                         decimal discountValue,
                                                         DiscountTarget discountTarget)
         {
-            if (discountValue <= 0)
+            if (discountValue <= 0 || discountValue >= 100)
             {
                 throw new InvalidDiscountValueException();
             }
@@ -92,11 +92,10 @@ namespace Modules.Discounts.Domain.Entities
             }
 
             var discountCoupon = DiscountCoupon.CreateDiscountCoupon(this, startsAt, expirationDate);
-            AddCouponToDiscount(discountCoupon);
             return discountCoupon;
         }
 
-        internal void AddCouponToDiscount(DiscountCoupon discountCoupon)
+        public void AddCouponToDiscount(DiscountCoupon discountCoupon)
         {
             this.DiscountCoupons.Add(discountCoupon);
             this.AddDomainEvent(new NewDiscountCouponAddedToListDomainEvent(discountCoupon.DiscountCode,

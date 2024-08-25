@@ -34,18 +34,15 @@ namespace Modules.Baskets.Application.Commands.CheckoutBasket
                 ?? throw new NotFoundException("Basket not found.");                       
             
             var basketMapped = CreateMappedBasket(basket);
-            //var address = Address.CreateAddress(command.Country, command.City, command.Street, command.PostalCode);
-            // TODO: after changing customer module
+
             var message = new BasketCheckoutMessage(basketMapped,
-                                                    //command.TelephoneNumber,
-                                                    //address,
                                                     command.CouponCode,
                                                     command.ShippingMethod,
                                                     command.PaymentMethod);
 
             await _eventDispatcher.PublishAsync(new BasketCheckedOutEvent(message), cancellationToken);
 
-            //_basketRepository.DeleteBasket(basket);
+            _basketRepository.DeleteBasket(basket);
 
             await _unitOfWork.CommitAndDispatchDomainEventsAsync(basket);
 
@@ -77,7 +74,8 @@ namespace Modules.Baskets.Application.Commands.CheckoutBasket
                 Id = basket.Id,
                 CustomerId = basket.CustomerId,
                 TotalPrice = basket.TotalPrice,
-                Items = itemList
+                Items = itemList,
+                Weight = basket.TotalWeight
             };            
 
             return basketMapped;

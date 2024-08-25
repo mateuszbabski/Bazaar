@@ -11,12 +11,12 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
 {
     public class GetBasketByCustomerIdQueryTest
     {
-        private readonly GetBasketByCustomerIdCommandHandler _sut;
+        private readonly GetBasketByCustomerIdQueryHandler _sut;
         private readonly Mock<ICurrentUserService> _userService = new();
         private readonly Mock<IBasketRepository> _basketRepository = new();
         public GetBasketByCustomerIdQueryTest()
         {
-            _sut = new GetBasketByCustomerIdCommandHandler(_userService.Object,
+            _sut = new GetBasketByCustomerIdQueryHandler(_userService.Object,
                                                                  _basketRepository.Object);
         }
 
@@ -29,7 +29,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
             _userService.Setup(x => x.UserId).Returns(customerId);
             _basketRepository.Setup(x => x.GetBasketByCustomerId(customerId)).ReturnsAsync(basket);
 
-            var result = await _sut.Handle(new GetBasketByCustomerIdCommand(), CancellationToken.None);
+            var result = await _sut.Handle(new GetBasketByCustomerIdQuery(), CancellationToken.None);
 
             Assert.NotNull(result);
             Assert.IsType<BasketDto>(result);
@@ -45,7 +45,7 @@ namespace Bazaar.Modules.Baskets.Tests.Unit.Application
             _basketRepository.Setup(x => x.GetBasketByCustomerId(customerId))
                 .ThrowsAsync(new NotFoundException("Basket not found."));
 
-            var result = await Assert.ThrowsAsync<NotFoundException>(() => _sut.Handle(new GetBasketByCustomerIdCommand(),
+            var result = await Assert.ThrowsAsync<NotFoundException>(() => _sut.Handle(new GetBasketByCustomerIdQuery(),
                                                                                       CancellationToken.None));
 
             Assert.IsType<NotFoundException>(result);

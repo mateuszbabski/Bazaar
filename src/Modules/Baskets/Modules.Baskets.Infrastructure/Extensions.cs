@@ -5,8 +5,6 @@ using Modules.Baskets.Application.Contracts;
 using Modules.Baskets.Domain.Repositories;
 using Modules.Baskets.Infrastructure.Context;
 using Modules.Baskets.Infrastructure.Repository;
-using Shared.Abstractions.UnitOfWork;
-using Shared.Infrastructure.UnitOfWork;
 
 namespace Modules.Baskets.Infrastructure
 {

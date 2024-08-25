@@ -8,5 +8,6 @@ namespace Modules.Baskets.Contracts.Events.BasketCheckedOut
         public Guid CustomerId { get; set; }
         public List<BasketItemMapped> Items { get; set; }
         public MoneyValue TotalPrice { get; set; }
+        public Weight Weight { get; set; }
     }
 }

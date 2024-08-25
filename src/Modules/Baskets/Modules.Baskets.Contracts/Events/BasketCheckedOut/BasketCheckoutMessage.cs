@@ -10,12 +10,13 @@ namespace Modules.Baskets.Contracts.Events.BasketCheckedOut
         public Guid CustomerId { get; }
         public MoneyValue TotalPrice { get; }
         public List<BasketItemMapped> BasketItems { get; }
+        public Weight Weight { get; }
         public string CouponCode { get; }
-        public int ShippingMethod { get; }
+        public string ShippingMethod { get; }
         public int PaymentMethod { get; }
         public BasketCheckoutMessage(BasketMapped basketMapped,
                                      string couponCode,
-                                     int shippingMethod,
+                                     string shippingMethod,
                                      int paymentMethod)
         {
             this.Id = Guid.NewGuid();
@@ -24,6 +25,7 @@ namespace Modules.Baskets.Contracts.Events.BasketCheckedOut
             this.CustomerId = basketMapped.CustomerId;
             this.TotalPrice = basketMapped.TotalPrice;
             this.BasketItems = basketMapped.Items;
+            this.Weight = basketMapped.Weight;
             this.CouponCode = couponCode;
             this.ShippingMethod = shippingMethod;
             this.PaymentMethod = paymentMethod;

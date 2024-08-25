@@ -39,13 +39,13 @@ namespace Modules.Discounts.Infrastructure.Repository
 
         public async Task<Discount> GetDiscountByCouponCode(string couponCode)
         {
-            //var coupon = await _dbContext.DiscountCoupons
-            //                             .Where(x => x.DiscountCode.Value == couponCode)
-            //                             .FirstOrDefaultAsync();
+            var discountCoupon = await _dbContext.DiscountCoupons.FirstAsync(x => x.DiscountCode == couponCode);
+            if (discountCoupon == null) 
+            {
+                return null;
+            }
 
-            //return await _dbContext.Discounts.FirstOrDefaultAsync(x => x.Id == coupon.DiscountId);
-            return await _dbContext.Discounts.Include(x => x.DiscountCoupons.Find(c => c.DiscountCode == couponCode))
-                                             .FirstOrDefaultAsync();
+            return await _dbContext.Discounts.FirstOrDefaultAsync(x => x.Id == discountCoupon.DiscountId);
         }
 
         public async Task<Discount> GetDiscountById(DiscountId id)
@@ -61,9 +61,9 @@ namespace Modules.Discounts.Infrastructure.Repository
                                              .ToListAsync();
         }
 
-        public Task<bool> IsDiscountExisting(Guid discountCouponId)
+        public async Task<Discount> GetDiscountByIdToProcess(DiscountId id)
         {
-            throw new NotImplementedException();
+            return await GetDiscountById(id);
         }
     }
 }

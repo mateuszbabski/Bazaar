@@ -22,6 +22,7 @@ namespace Modules.Discounts.Infrastructure
             services.AddScoped<IDiscountRepository, DiscountRepository>();
             services.AddScoped<IDiscountChecker, DiscountRepository>();
             services.AddScoped<IDiscountCouponRepository, DiscountCouponRepository>();
+            services.AddScoped<IDiscountCouponChecker, DiscountCouponRepository>();
 
             return services;
         }
